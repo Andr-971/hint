@@ -1,0 +1,71 @@
+/*? КАРТОЧКИ на float, inline-block;*/
+.card-product__wrapper {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -40px;
+    font-size: 0; /* Уменшаем пробелы до нуля для inline-block*/
+    text-align: center; /* Если display: inline-block; у дочернего элемента*/
+}
+/** нужен только когда float: left; */
+/* .card-product__wrapper::after { 
+    content: "";
+    clear: both;
+    display: block;
+} */
+.card-product {
+    /* float: left; */ /* Но не по центру */
+    display: inline-block; /* Теперь по центру с условием у родителя  text-align: center;*/
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 40px;
+    font-size: 16px; /* Востаналиваем font-size*/
+}
+/*? КАРТОЧКИ на flex-box*/
+.card-product__wrapper {
+    /* Ни какой ширины */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Не работает не на всех Safary */
+    column-gap: 30px;
+    row-gap: 40px;
+    /* Если не используем gap */
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -40px;
+}
+
+.card-product {
+    /* Если не используем gap */
+    /* width: s.colWidth(3); ширина в кононках */
+    box-sizing: border-box;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 40px;
+}
+/*? КАРТОЧКИ на grid*/
+.card-product__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(48.8%, 1fr)); /* Можно в пикселях или подобрать в % в зависимости от полотна */
+    grid-auto-rows: minmax(410px, 520px); /* Можно в пикселях или подобрать в % в зависимости от полотна */
+    /* grid-auto-rows: 1fr */
+    justify-content: center;
+    column-gap: 30px;
+    row-gap: 40px;
+    /* Или */
+    gap: 40px 30px;
+    @media (max-width: 1200px) and (min-widht: 900px) {
+        &::after {
+            content: "";
+            order: 1;
+        }
+    }
+}
+.card-product__item {
+    order: 1;
+    &:last-child {
+        @media (max-width: 1200px) and (min-widht: 900px) {
+            order: 2;
+        }
+    }
+}

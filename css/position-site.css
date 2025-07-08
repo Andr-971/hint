@@ -1,0 +1,38 @@
+
+/*? Позиционирование основных блоков сайта с помощю flex */
+/* Обёртка всего сайта */
+.wrapper { 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* Шапка сайта */
+.header {
+    /* Не для всех сайтов */
+    position: sticky;
+    /* Для некоторых IE */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+/* Средина сайта */
+.page {
+    /* Вариант на средину */
+    flex-grow: 1;
+}
+/* Подвал сайта */
+.footer {
+    /* Вариант на footer */
+    margin-top: auto;
+}
+/*? Позиционирование основных блоков сайта с помощю grid */
+/* Обёртка всего сайта */
+.wrapper {
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}

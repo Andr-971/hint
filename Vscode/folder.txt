@@ -1,0 +1,19 @@
+
+"material-icon-theme.folders.customClones": [
+  {
+    "name": "users-admin",
+    "base": "admin",
+    "color": "light-green-500",
+    "lightColor": "light-green-700",
+    "folderNames": ["users"],
+    "rootFolderNames": ["users"]
+  },
+  {
+    "name": "roles-admin", // название папки
+    "base": "admin", // Базовая папка
+    "color": "purple-400", // Цвет значка
+    "iconPath": "D:/icons/red-folder.svg" // Путь к значку папки
+    "folderNames": ["roles"], // Имена папок связанные с новым значком
+    "rootFolderNames": ["users"] // Имена корневых папок связанные с новым значком
+  }
+]

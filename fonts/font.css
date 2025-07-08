@@ -1,0 +1,23 @@
+/*? Вот толщины в названии шрифтов */
+
+/*!         НАЗВАНИЕ		    font-weight */
+/* *        Thin / Hair	              100 */	
+/* *        Extra Light	              200 */	
+/* *        Light	                  300 */	
+/* *        Regular	                  400 */	
+/* *        Medium	                  500 */	
+/* *        Semi Bold	              600 */	
+/* *        Bold	                  700 */	
+/* *        Extra Bold	              800 */	
+/* *        Black / Heavy / Ultra	  900 */	
+
+/*? Подключение шрифтов в css  */
+body { font-family: roboto, sans-serif; }
+@font-face {
+    font-family: 'Font Name';
+    src: local('Font Name'),
+	url('/fonts/font.woff2') format('woff2'), 
+	url('/fonts/font.woff') format('woff'),
+	url('/fonts/font.ttf') format('ttf'),
+	url('/fonts/font.eot') format('eot');
+}

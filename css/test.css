@@ -1,0 +1,48 @@
+
+
+.active {
+    color: red;
+}
+.title__h1 {
+    width: 100%;
+    font-size: calc(22px + (36 - 22) * (100vw - var(--minScrinPx)) / (var(--maxScrin) - var(--minScrin)));
+    /* font-size: 36px; */
+    font-weight: 600;
+    text-align: center;
+}
+.block {
+    width: calc(290px + (500 - 290) * (100vw - var(--minScrinPx)) / (var(--maxScrin) - var(--minScrin)));
+    height: auto;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 5px 3px 5px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #000;
+    display: grid;
+    place-items: center;
+}
+.output {
+    display: flex;
+    flex-direction: column;
+}
+.item {
+    font-size: 20px;
+    .key {
+        color: #c0c0c0;
+    }
+    .value {
+        color: green;
+    }
+}
+.number {
+    color: tomato;
+}
+.square-brackets {
+    color: blue;
+}
+.curly-brackets {
+    color: gold;
+}
+.bool {
+    color: #2a7d72;
+}

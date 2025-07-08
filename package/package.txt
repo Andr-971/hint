@@ -1,0 +1,193 @@
+
+⁡⁣⁢⁢ПОЛНЫЙ СПРАВОЧНИК ПО package.json⁡
+Создание файла сразу: npm init -y
+⁡⁣⁢⁢ОСНОВНЫЕ НАСТРОЙКИ⁡
+// 🔳 ⁡⁢⁣⁣ИДЕНТИФИКАЦИЯ ПАКЕТА⁡
+{
+  "name": "my-package",          // Название пакета (обязательно)
+  "version": "1.0.0",            // Версия пакета (обязательно)
+  "description": "Описание пакета", // Краткое описание
+  "keywords": ["keyword1", "keyword2"], // Ключевые слова для поиска
+  "homepage": "https://example.com", // Домашняя страница
+  "bugs": {                       // Информация об ошибках
+    "url": "https://example.com/bugs",
+    "email": "bugs@example.com"
+  },
+  "license": "MIT",               // Лицензия
+  "author": "Имя Автора <email@example.com>", // Автор
+  "contributors": [               // Список контрибьюторов
+    "Имя Контрибьютора <email@example.com>"
+  ],
+  "funding": {                    // Финансирование
+    "type": "individual",
+    "url": "https://example.com/donate"
+  }
+}
+// 🔳 ⁡⁢⁣⁣ФАЙЛЫ ПАКЕТА⁡
+{
+  "files": ["dist/**/*", "lib/**/*"], // Включаемые файлы в публикацию
+  "main": "lib/index.js",            // Основная точка входа
+  "browser": "browser/index.js",     // Точка входа для браузера
+  "module": "esm/index.js",          // Точка входа для ES модулей
+  "types": "types/index.d.ts",       // Точка входа для TypeScript
+  "bin": {                          // Исполняемые файлы
+    "my-app": "bin/cli.js"
+  },
+  "man": "./man/doc.1",             // Man-страницы
+  "directories": {                  // Каталоги
+    "lib": "lib",                   // Каталог с исходным кодом
+    "bin": "bin",                   // Каталог с исполняемыми файлами
+    "man": "man",                   // Каталог с man-страницами
+    "doc": "doc",                   // Каталог с документацией
+    "example": "examples",          // Каталог с примерами
+    "test": "test"                  // Каталог с тестами
+  }
+}
+// 🔳 ⁡⁢⁣⁣ЗАВИСИМОСТИ⁡
+{
+  "dependencies": {                // Производственные зависимости
+    "package1": "^1.0.0"
+  },
+  "devDependencies": {             // Зависимости для разработки
+    "package2": "^2.0.0"
+  },
+  "peerDependencies": {            // Peer-зависимости
+    "package3": "^3.0.0"
+  },
+  "peerDependenciesMeta": {        // Метаданные peer-зависимостей
+    "package3": {
+      "optional": true             // Опциональная peer-зависимость
+    }
+  },
+  "optionalDependencies": {        // Опциональные зависимости
+    "package4": "^4.0.0"
+  },
+  "bundledDependencies": ["package5"], // Включаемые зависимости
+  "overrides": {                   // Переопределения зависимостей
+    "package6": "6.0.0"
+  },
+  "resolutions": {                 // Принудительные версии (для Yarn)
+    "package7": "7.0.0"
+  }
+}
+// 🔳 ⁡⁢⁣⁣КОНФИГУРАЦИЯ СКРИПТОВ⁡
+{
+  "scripts": {                     // NPM-скрипты
+    "start": "node index.js",
+    "test": "jest",
+    "build": "webpack",
+    "prepublish": "npm run build", // Хуки
+    "postinstall": "node setup.js"
+  },
+  "config": {                      // Конфигурация для скриптов
+    "port": "8080"
+  },
+  "husky": {                       // Git-хуки (через husky)
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {                 // Конфигурация lint-staged
+    "*.js": ["eslint --fix", "git add"]
+  }
+}
+// 🔳 ⁡⁢⁣⁣ПУБЛИКАЦИЯ ПАКЕТА⁡
+{
+  "private": true,                 // Запрет публикации
+  "publishConfig": {               // Конфигурация публикации
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"             // или "restricted"
+  },
+  "repository": {                  // Репозиторий
+    "type": "git",
+    "url": "https://github.com/user/repo.git"
+  },
+  "os": ["darwin", "linux"],       // Поддерживаемые ОС
+  "cpu": ["x64", "arm64"],         // Поддерживаемые архитектуры
+  "engines": {                     // Требования к среде
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
+// 🔳 ⁡⁢⁣⁣СОВМЕСТИМОСТЬ И МОДУЛИ⁡
+{
+  "type": "module",                // Тип модуля (commonjs или module)
+  "exports": {                     // Современный exports
+    ".": {
+      "import": "./esm/index.js",  // Для импорта
+      "require": "./cjs/index.js", // Для require
+      "types": "./types/index.d.ts" // Для TypeScript
+    },
+    "./feature": "./feature.js"    // Subpath exports
+  },
+  "imports": {                     // Private imports
+    "#internal": "./src/internal.js"
+  }
+}
+// 🔳 ⁡⁢⁣⁣СОВРЕМЕННЫЕ ВОЗМОЖНОСТИ (jest, browserslist)⁡
+{
+  "workspaces": ["packages/*"],    // Monorepo (для Yarn/npm 7+)
+  "sideEffects": false,            // Для tree-shaking
+  "unpkg": "dist/bundle.js",       // CDN-бандл (для unpkg.com)
+  "jsdelivr": "dist/bundle.js",    // CDN-бандл (для jsdelivr.com)
+  "eslintConfig": {                // Конфигурация ESLint
+    "extends": "eslint:recommended"
+  },
+  "browserslist": [                // Поддерживаемые браузеры
+    "> 1%",
+    "last 2 versions"
+  ],
+  "jest": {                        // Конфигурация Jest
+    "testEnvironment": "node"
+  }
+}
+// 🔳 ⁡⁢⁣⁣TYPESCRIPT ПОДДЕРЖКА⁡
+{
+  "types": "dist/index.d.ts",      // Основной файл типов
+  "typings": "dist/index.d.ts",    // Альтернатива types
+  "tsconfig": "tsconfig.json",     // Конфигурация TypeScript
+  "typesVersions": {               // Версии типов
+    ">=3.1": { "*": ["ts3.1/*"] }
+  }
+}
+// 🔳 ⁡⁢⁣⁣СОВМЕСТИМОСТЬ С ИНСТРУМЕНТАМИ⁡
+{
+  "prettier": {                    // Конфигурация Prettier
+    "semi": false,
+    "singleQuote": true
+  },
+  "stylelint": {                   // Конфигурация Stylelint
+    "extends": "stylelint-config-standard"
+  },
+  "babel": {                       // Конфигурация Babel
+    "presets": ["@babel/preset-env"]
+  },
+  "webpack": {                     // Конфигурация Webpack
+    "entry": "./src/index.js"
+  },
+  "rollup": {                      // Конфигурация Rollup
+    "input": "src/index.js"
+  }
+}
+// 🔳 ⁡⁢⁣⁣ДОПОЛНИТЕЛЬНЫЕ МЕТАДАННЫЕ⁡
+{
+  "icon": "path/to/icon.png",      // Иконка пакета
+  "logo": "path/to/logo.png",      // Логотип пакета
+  "badges": [                      // Бейджи для README
+    {
+      "url": "https://npmjs.com/package/my-package",
+      "description": "npm version"
+    }
+  ],
+  "gypfile": true,                 // Наличие binding.gyp
+  "tap": {                         // Конфигурация тестов (для TAP)
+    "check-coverage": true
+  }
+}
+// 🔳 ⁡⁢⁣⁣ПРИМЕЧАНИЯ⁡
+{
+    //🔹 ⁡⁣⁢⁢Не все поля являются официальными - некоторые используются конкретными инструментами (например, 𝘦𝘴𝘭𝘪𝘯𝘵𝘊𝘰𝘯𝘧𝘪𝘨, 𝘱𝘳𝘦𝘵𝘵𝘪𝘦𝘳).⁡
+    // 🔹 ⁡⁣⁢⁢Некоторые поля дублируют функциональность (𝘵𝘺𝘱𝘦𝘴 и 𝘵𝘺𝘱𝘪𝘯𝘨𝘴).⁡
+    // 🔹 ⁡⁣⁢⁢Для новых проектов рекомендуется использовать exports вместо main/module/browser.⁡
+    // 🔹 ⁡⁣⁢⁢Поля dependencies, devDependencies и peerDependencies являются наиболее важными для управления зависимостями.⁡
+}

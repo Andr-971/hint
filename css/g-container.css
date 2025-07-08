@@ -1,0 +1,12 @@
+
+.g-container {
+    width: clamp(300px, 90vw, 1320px); 
+    margin: 0px auto;
+}
+
+/*! Использование функций min() max() clamp() calc() */ 
+
+.test {
+    height: calc(100vh - 80px - 70px);
+    width: min();
+}

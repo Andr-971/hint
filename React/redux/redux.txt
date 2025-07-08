@@ -1,0 +1,25 @@
+// Установка пакетов
+npm add @reduxjs/toolkit // Сам reduxjs/toolkit
+npm add react-redux // Привязка к React
+
+// Импорт провайдера
+import { Provider } from 'react-redux';
+import store from './store'; // Импорт хранилища
+// Обернуть в провайдер приложение и пропс хранилища
+    <React.StrictMode>
+        <Provider store={store}> // Передать объект {store}
+            <App />
+        </Provider>
+    </React.StrictMode>
+
+// Импорт диспечера
+import { useDispatch } from "react-redux";
+
+// Импорт метода
+import { removeTodo } from "./store/todoSlice";
+
+// Инициализация диспечера
+const dispatch = useDispatch();
+
+// Вызов метода
+dispatch(removeTodo({ id }))

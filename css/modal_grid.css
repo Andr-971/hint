@@ -1,0 +1,61 @@
+
+/*! ROOT VAR */
+:root {
+    --maxScrin: 1920;
+    --canvasPx: 1320px;
+    --minScrin: 320;
+    --minScrinPx: 320px;
+    --col: 12;
+    --offset: 20px;
+    --heightHeader: 70px;
+
+    --xxlg: 1500.98px;
+    --xlg: 1366.98px;
+    --lg: 1280.98px;
+    --md: 1024.98px;
+    --sm: 768.98px;
+    --xs: 560.98px;
+    --xxs: 390.98px;
+
+    --white255: rgb(255, 255, 255);
+    --black000: rgb(0, 0, 0);
+}
+/*! КАРТОЧКИ В КОЛОНКАХ */
+/** Обложка карточек  */
+.test-card__block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -20px;
+}
+/** Карточка с шириной в 3 колонки значит в 4 ряда  */
+.test__card { 
+    width: calc(100% / var(--col) * 3 - var(--offset));
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+/*! МЕДИАЗАПРОСЫ ДЛЯ КОЛОНОК В МОДУЛЬНОЙ СЕТКЕ  */
+@media screen and (max-width: 1500.98px) {
+    .test__card {
+        width: calc(100% / var(--col) * 4 - var(--offset));
+    }
+} 
+@media screen and (max-width: 1024.98px) {
+    .test__card {
+        width: calc(100% / var(--col) * 6 - var(--offset));
+    }
+} 
+@media screen and (max-width: 768.98px) {
+    .test__card {
+        width: calc(100% / var(--col) * 12 - var(--offset));
+    }
+}
+@media screen and (min-width: 560.98px) and (max-width: 1024.98px) {
+    
+}

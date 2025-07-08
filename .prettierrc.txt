@@ -1,0 +1,35 @@
+
+установить: npm install --save-dev prettier
+package.json "scripts": {
+  "format": "prettier --write ."
+}
+
+// Файл настройки: .prettierrc
+{
+    "semi": true, 
+    "singleQuote": false, 
+    "jsxSingleQuote": true, 
+    "bracketSpacing": true, 
+    "trailingComma": "all",
+    "printWidth": 80,
+    "tabWidth": 4,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    }
+  ] 
+}
+
+// ⁡⁢⁢⁢"semi":⁡ true, // точки с запятой в конце строки
+// ⁡⁢⁢⁢"singleQuote":⁡ true, // Одинарные кавычки
+// ⁡⁢⁢⁢"jsxSingleQuote":⁡ false, // Для jsx двойные кавычки
+// ⁡⁢⁢⁢"bracketSpacing":⁡ true, // Отступы в фигурных скобках
+// ⁡⁢⁢⁢"trailingComma":⁡ "all", // Перенос после запятых
+// ⁡⁢⁢⁢"printWidth":⁡ 80, // колличество символов в строке
+// ⁡⁢⁢⁢"tabWidth":⁡ 4, // Табуляция 4
+// ⁡⁢⁢⁢"arrowParens":⁡ "always", // Скобки в стрелочных функциях да, avoid нет
+// ⁡⁢⁢⁢"endOfLine":⁡ "lf" // Для windows окончание строк
+

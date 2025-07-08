@@ -1,0 +1,11 @@
+/*! ВЫРАВНИВАВНИЕ ПО ЦЕНТРУ С АБСОЛЮТНЫМ ПОЗИЦИОНИРОВАНИЕМ  */
+.wrapper {
+    position: relative;
+}
+.element {
+    position: absolute;
+	top: 50%;
+	left: 50%;
+	/* коррекция положения элемента */
+	transform: translate(-50%, -50%);
+}
