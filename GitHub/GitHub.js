@@ -63,7 +63,8 @@
 		{
 			// bash
 			// cd /path/to/repo
-			// git remote set-url origin git@github.com-account1:username1/repo.git
+			// git remote set-url origin git@github.com-Andr-971:Andr-971/hint.git
+			// git remote set-url origin git@github.com-Andr-137:Andr-137/hint.git
 		}
 	}
 	// 🔳 ⁡⁢⁣⁣НАСТРОЙКА ЛОКАЛЬНЫХ GIT-КОНФИГОВ (ВАЖНО!)⁡

@@ -1,5 +1,6 @@
 
 C:\Program Files\VSCodium\resources\app
+C:\Users\andre\AppData\Roaming\VSCodium\User\snippets
 product.json
 Настройка плеймаркета vscode
 "extensionsGallery": {
