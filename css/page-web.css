@@ -9,6 +9,8 @@
 
     --white255: rgb(255, 255, 255);
     --black000: rgb(0, 0, 0);
+    --blact100: SlateGray;
+    --blue100: DeepSkyBlue;
 }
 body { font-family: roboto, sans-serif; }
 .wrapper {
@@ -22,7 +24,7 @@ body { font-family: roboto, sans-serif; }
     top: 0;
     width: 100%;
     height: var(--heightHeader);
-    background-color: DeepSkyBlue;
+    background-color: var(--blue100);
 }
 .main {
     margin-top: var(--heightHeader);
@@ -33,7 +35,7 @@ body { font-family: roboto, sans-serif; }
 .footer {
     width: 100%;
     height: 70px;
-    background-color: SlateGray;
+    background-color: var(--blact100);
     position: fixed;
     bottom: 0px;
 }
