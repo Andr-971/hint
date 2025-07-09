@@ -6,23 +6,23 @@ desktop.ini                 # Windows - настройки папки
 .vscode/                    # Настройки VS Code
 *.suo                       # Пользовательские настройки Visual Studio
 *.user                      # Файлы пользователя Visual Studio
-# JavaScript/Node.js #
+# JAVASCRIPT/NODE.JS #
 node_modules/               # Зависимости npm/yarn
 npm-debug.log*              # Логи npm
 yarn-error.log*             # Логи Yarn
-dist/                       # Собранные проекты (Webpack/Vite/etc.)
-build/                      # Артефакты сборки
+dist/*                       # Собранные проекты (Webpack/Vite/etc.)
+build/*                      # Артефакты сборки
 js/js_test/test.js
 js/js_test/test_ts.js
 TS/main.ts
-TS/TS_tests/
-js/time_test.js
+TS/TS_tests/*
+time_test.js
 # СИСТЕМЫ СБОРКИ #
 *.log                       # Общий шаблон для лог-файлов
 *.tmp                       # Временные файлы
 *.bak                       # Файлы резервных копий
 # ДОКУМЕНТАЦИЯ И ТЕСТЫ #
-site/                       # Генерация документации (Sphinx, Jekyll)
+site/*                       # Генерация документации (Sphinx, Jekyll)
 .coverage                   # Отчеты о покрытии кода (Python coverage)
 test-results.xml            # Результаты тестов
 # ROOT #
