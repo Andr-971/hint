@@ -17,6 +17,7 @@ js/js_test/test_ts.js
 TS/main.ts
 TS/TS_tests/*
 time_test.js
+GitHub/myCommander.js
 # СИСТЕМЫ СБОРКИ #
 *.log                       # Общий шаблон для лог-файлов
 *.tmp                       # Временные файлы
