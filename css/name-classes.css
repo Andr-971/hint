@@ -1,3 +1,18 @@
+
+/*? ОСНОВНЫЕ СТИЛИ НАПИСАНИЯ (НОТАЦИИ) С ПРИМЕРАМИ */
+/*#region*/
+/** CamelCase (верблюжий регистр)  */
+/* ⁡⁣⁢⁢Lower CamelCase (первая буква маленькая)⁡: ⁡⁢⁢⁢myVariableName, calculateTotalPrice, userFirstName⁡ */
+/* ⁡⁣⁢⁢Upper CamelCase (PascalCase, первая буква заглавная)⁡: ⁡⁢⁢⁢MyClassName, HttpResponse, UserAccount⁡ */
+/** Snake_case (змеиный регистр)  */
+/* ⁡⁢⁢⁢my_variable_name, calculate_total_price, user_first_name⁡ */
+/** kebab-case (кебаб-регистр)  */
+/* ⁡⁢⁢⁢my-variable-name, calculate-total-price, user-first-name ⁡*/
+/** UPPER_CASE_SNAKE (константы)  */
+/* ⁡⁢⁢⁢MAX_SIZE, DEFAULT_TIMEOUT, API_ENDPOINT⁡ */
+/** Train-Case (разновидность kebab с заглавными) */
+/* ⁡⁢⁢⁢My-Variable-Name, Project-Config⁡ */
+/*#endregion*/
 /*? СЛОВА, ЧАСТО ИСПОЛЬЗУЕМЫЕ В CSS-классах */
 /** Раскладка */
 /*#region*/
