@@ -5,9 +5,9 @@
 	{
 		// bash
 		// ⁡⁢⁢⁢# Для первого аккаунта⁡
-		// ssh-keygen -t ed25519 -C "email1@example.com" -f ~/.ssh/id_ed25519_account1
+		// ssh-keygen -t ed25519 -C "andrei.ryabov2020@gmail.com" -f ~/.ssh/id_ed25519_Andr-971
 		// ⁡⁢⁢⁢# Для второго аккаунта⁡
-		// ssh-keygen -t ed25519 -C "email2@example.com" -f ~/.ssh/id_ed25519_account2
+		// ssh-keygen -t ed25519 -C "andrei.ryabov2020@gmail.com" -f ~/.ssh/id_ed25519_Andr-137
 		// 🔹 ⁡⁣⁢⁢Замените email1@example.com и email2@example.com на email ваших аккаунтов GitHub⁡
 		// 🔹 ⁡⁣⁢⁢При запросе пароля нажмите Enter (оставьте пустым).⁡
 	}
@@ -17,8 +17,8 @@
 		// ⁡⁢⁢⁢# Запустите ssh-agent⁡
 		// eval $(ssh-agent -s)
 		// ⁡⁢⁢⁢# Добавьте ключи⁡
-		// ssh-add ~/.ssh/id_ed25519_account1
-		// ssh-add ~/.ssh/id_ed25519_account2
+		// ssh-add ~/.ssh/id_ed25519_Andr-971
+		// ssh-add ~/.ssh/id_ed25519_Andr-137
 	}
 	// 🔳 ⁡⁢⁣⁣НАСТРОЙКА ФАЙЛА ~/.ssh/config⁡
 	{
@@ -40,8 +40,8 @@
 		// 🔹 ⁡⁣⁢⁢Скопируйте содержимое ключей⁡
 		{
 			// bash
-			// cat ~/.ssh/id_ed25519_account1.pub
-			// cat ~/.ssh/id_ed25519_account2.pub
+			// cat ~/.ssh/id_ed25519_Andr-971.pub
+			// cat ~/.ssh/id_ed25519_Andr-137.pub
 		}
 		// 🔹 ⁡⁣⁢⁢Для каждого аккаунта GitHub⁡
 		{
