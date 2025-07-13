@@ -39,7 +39,7 @@ body { font-family: roboto, sans-serif; }
     position: fixed;
     bottom: 0px;
 }
-.g-container {
+.g_container {
     width: clamp(var(--minScrinPx), 90vw, var(--canvasPx));
     margin: 0px auto;
 }
