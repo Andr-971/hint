@@ -12,6 +12,7 @@ npm-debug.log*              # Логи npm
 yarn-error.log*             # Логи Yarn
 /dist/*                       # Собранные проекты (Webpack/Vite/etc.)
 /build/*                      # Артефакты сборки
+/.gitignore
 js/js_test/test.js
 js/js_test/test_ts.js
 /TS/main.ts
