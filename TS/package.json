@@ -1,0 +1,11 @@
+{
+  "name": "ts_tests",
+  "version": "0.1.0",
+  "description": "",
+  "main": "js/test_ts.js.js",
+  "type": "module",
+
+  "keywords": [],
+  "author": "Андрей Рябов",
+  "license": "ISC"
+}

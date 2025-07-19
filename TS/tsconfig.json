@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "es2022",
+		"removeComments": false,
+		"outDir": "js",
+		"sourceMap": true,
+		"noEmitOnError": true,
+		"alwaysStrict": true,
+		"allowUnreachableCode": false
+	}
+}
