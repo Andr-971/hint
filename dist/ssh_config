@@ -1,0 +1,8 @@
+Host 77.222.61.25
+  HostName 77.222.61.25
+
+Host 77.222.61.25
+  HostName portfolio
+  User andreiryab
+  IdentityFile ~/.ssh/id_ed25519
+  Port 22

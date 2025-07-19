@@ -10,7 +10,7 @@ desktop.ini                 # Windows - настройки папки
 node_modules/               # Зависимости npm/yarn
 npm-debug.log*              # Логи npm
 yarn-error.log*             # Логи Yarn
-dist/*                       # Собранные проекты (Webpack/Vite/etc.)
+dist/                       # Собранные проекты (Webpack/Vite/etc.)
 build/*                      # Артефакты сборки
 js/js_test/test.js
 js/js_test/test_ts.js
