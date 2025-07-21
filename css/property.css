@@ -25,7 +25,7 @@
 	--xs: 	 560.98px;
 	--xxs: 	 390.98px;
 }⁡
-.g-container {
+.g_container {
     width: clamp(var(--minScrinPx), 90vw, var(--canvasPx)); 
     margin: 0px auto;
 }

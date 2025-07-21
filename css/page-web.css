@@ -43,3 +43,7 @@ body { font-family: roboto, sans-serif; }
     width: clamp(var(--minScrinPx), 90vw, var(--canvasPx));
     margin: 0px auto;
 }
+.title__h1 {
+    text-align: center;
+    font-size: calc(22px + (32 - 22) * (100vw - var(--minScrinPx)) / (var(--maxScrin) - var(--minScrin)));
+}
