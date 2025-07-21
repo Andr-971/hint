@@ -9,6 +9,8 @@
     --canvasPx: 1320px;
     --minScrin: 320;
     --minScrinPx: 320px;
+    --col: 12;
+    --offset: 20px;
     --heightHeader: 70px;
 
     --white255: rgb(255, 255, 255);
