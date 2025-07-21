@@ -27,9 +27,10 @@
     width: clamp(var(--minScrinPx), 90vw, var(--canvasPx)); 
     margin: 0px auto;
 }
-/** АДАПТИВНЫЙ РАЗМЕР*/
+/** АДАПТИВНЫЙ РАЗМЕР, ШИРИНА В КОЛОНКАХ МОДУЛЬНОЙ СЕТКИ В CSS*/
 .test {
     font-size: calc(18px + (28 - 18) * (100vw - var(--minScrinPx)) / (var(--maxScrin) - var(--minScrin)));
+    width: calc(100% / var(--col) * 3 - var(--offset));
 }
 /** СВОЙСТВА */
 /*? ИЗМЕНЕНИЕ РАЗМЕРА БЛОКА ПОЛЬЗОВАТЕЛЕМ */
