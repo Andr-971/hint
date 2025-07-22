@@ -34,7 +34,6 @@
     margin-right: -15px;
     margin-top: -40px;
 }
-
 .card-product {
     /* Если не используем gap */
     /* width: s.colWidth(3); ширина в кононках */
@@ -42,6 +41,20 @@
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 40px;
+}
+/* Ещё один вариант */
+.card-product__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+.card-product {
+    margin: 30px;
+    width: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
 }
 /*? КАРТОЧКИ на grid*/
 .card-product__wrapper {
