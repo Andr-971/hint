@@ -61,17 +61,17 @@
     display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-    margin-left: -12px;
-	margin-right: -12px;
-	margin-bottom: -24px;
+    margin-left: calc(-1 * (var(--offset) / 2));
+	margin-right: calc(-1 * (var(--offset) / 2));
+	margin-bottom: calc(-1 * var(--offset));
 }
 .card-product {
-    flex: 1 1 calc(100% - 24px);
+    flex: 1 1 calc(100% - var(--offset));
 	max-width: 300px;
 	box-sizing: border-box;
-    margin-left: 12px;
-    margin-right: 12px;
-    margin-bottom: 24px;;
+    margin-left: calc(var(--offset) / 2);
+	margin-right: calc(var(--offset) / 2);
+	margin-bottom: var(--offset);
 }
 /*? КАРТОЧКИ на grid*/
 .card-product__wrapper {
