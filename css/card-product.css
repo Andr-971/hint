@@ -56,6 +56,23 @@
     max-height: 200px;
     position: relative;
 }
+/* Резиновая адаптация карточек */
+.card-product__wrapper {
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    margin-left: -12px;
+	margin-right: -12px;
+	margin-bottom: -24px;
+}
+.card-product {
+    flex: 1 1 calc(100% - 24px);
+	max-width: 300px;
+	box-sizing: border-box;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 24px;;
+}
 /*? КАРТОЧКИ на grid*/
 .card-product__wrapper {
     display: grid;
