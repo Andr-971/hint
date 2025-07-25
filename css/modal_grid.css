@@ -8,7 +8,11 @@
     --col: 12;
     --offset: 20px;
     --heightHeader: 70px;
-
+    
+    --white255: rgb(255, 255, 255);
+    --black000: rgb(0, 0, 0);
+}
+.media {
     --xxlg: 1500.98px;
     --xlg: 1366.98px;
     --lg: 1280.98px;
@@ -16,11 +20,8 @@
     --sm: 768.98px;
     --xs: 560.98px;
     --xxs: 390.98px;
-
-    --white255: rgb(255, 255, 255);
-    --black000: rgb(0, 0, 0);
 }
-/*! КАРТОЧКИ В КОЛОНКАХ */
+/*! КАРТОЧКИ В КОЛОНКАХ FLEX BOX С МОДУЛЬНОЙ СЕТКОЙ */
 /** Обложка карточек  */
 .test-card__block {
     display: flex;
@@ -40,7 +41,7 @@
     margin-right: 10px;
     margin-top: 20px;
 }
-/*! МЕДИАЗАПРОСЫ ДЛЯ КОЛОНОК В МОДУЛЬНОЙ СЕТКЕ  */
+/** Mедиазапросы для колонок в модульной сетке  */
 @media screen and (max-width: 1500.98px) {
     .test__card {
         width: calc(100% / var(--col) * 4 - var(--offset));
@@ -56,6 +57,40 @@
         width: calc(100% / var(--col) * 12 - var(--offset));
     }
 }
-@media screen and (min-width: 560.98px) and (max-width: 1024.98px) {
-    
+/*! РЕЗИНОВАЯ АДАПТАЦИЯ КАРТОЧЕК FLEX BOX С МОДУЛЬНОЙ СЕТКОЙ */
+/** Обложка карточек  */
+.card-product__wrapper {
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    margin-left: calc(-1 * (var(--offset) / 2));
+	margin-right: calc(-1 * (var(--offset) / 2));
+	margin-bottom: calc(-1 * var(--offset));
+}
+/** Карточка продукта */
+.card-product {
+    flex: 1 1 calc(100% - var(--offset));
+	max-width: 300px;
+	box-sizing: border-box;
+    margin-left: calc(var(--offset) / 2);
+	margin-right: calc(var(--offset) / 2);
+	margin-bottom: var(--offset);
+}
+/*! КАРТОЧКИ НА GRID */
+/** Обложка карточек  */
+.card-product__wrapper {
+    display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 24px;
+}
+/** Дополнительные контрольные точки с медиазапросами */
+@media (max-width: 480.98px) {
+  .card-product__block {
+    grid-template-columns: 1fr; /* 1 колонка на мобильных */
+  }
+}
+@media (min-width: 1600.98px) {
+  .card-product__block {
+    grid-template-columns: repeat(4, 1fr); /* 4 - 5 колонок на широких экранах */
+  }
 }
