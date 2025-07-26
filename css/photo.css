@@ -34,7 +34,7 @@
 	max-width: 100%;
 	height: auto;
 }
-/*? Свойство object-fit (карточек/галерей) */
+/*? СВОЙСТВО object-fit (карточек/галерей) */
 /** <div class="container"> <img src="image.jpg" alt="Example" class="responsive-img"> <div/>  */
 .container {
 	width: 100%;
@@ -45,7 +45,7 @@
 	height: 100%;
 	object-fit: cover; /* или contain */
 }
-/*? Фоновое изображение + background-size (Для фоновых баннеров) */
+/*? ФОНОВОЕ ИЗОБРАЖЕНИЕ + background-size (Для фоновых баннеров) */
 /** <div class="bg-image"></div> */
 .bg-image {
 	width: 100%;
@@ -55,20 +55,20 @@
 	background-size: cover;
 	background-position: center;
 }
-/*? Элемент <picture> + srcset */
+/*? ЭЛЕМЕНТ <picture> + srcset */
 /** <picture> 
 /**    <source srcset="image-1.jpg" media="(min-width: 600px)" /> 
 /**    <source srcset="image-2.jpg" media="(min-width: * * 1000px)" /> 
 /**    <img src="image-3.jpg" alt="Example" /> 
 /** </picture> */
-/*? CSS Viewport Units (vw/vh) (Для полного экрана) */
+/*? CSS VIEWPORT UNITS (vw/vh) (Для полного экрана) */
 /** <img src="image-3.jpg" alt="Example" class="responsive-img"/> */
 .responsive-img {
 	width: 100vw;
 	height: auto;
 	max-height: 80vh;
 }
-/*? Универсальное решение */
+/*? УНИВЕРСАЛЬНОЕ РЕШЕНИЕ */
 .responsive-img {
 	width: 100%;
 	height: auto;
