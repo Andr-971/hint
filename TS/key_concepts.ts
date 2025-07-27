@@ -306,11 +306,24 @@
 		}
 	}
 	// ⁡⁢⁣⁣1. ТИПЫ И ИНТЕРФЕЙСЫ⁡
+	// ⁡⁢⁢⁢Структура типов⁡
+	{
+		// ⁡⁢⁢⁡⁣⁣⁢⁡⁢⁢⁢union(обеденение)(A | B) или то или другое⁡
+		// ⁡⁢⁢⁢intersection(пересечение)(A & B) и то и другое⁡
+		// | ⁡⁣⁣⁢generic types⁡ || ⁡⁣⁣⁢Литералы("red"|"green")⁡ || ⁡⁣⁣⁢union(обеденение)/intersection(пересечение)(A|B, A&B)⁡ |
+		// | ⁡⁣⁣⁢Примитивы⁡ | 				| ⁡⁢⁣⁢ТИПЫ⁡ |             | ⁡⁢⁣⁡⁣⁣⁡⁣⁣⁢специальные типы(any, unknown, never)⁡⁡ |
+		// 		| ⁡⁣⁣⁢Составные типы(Composite types) объекты, массивы, функции, классы⁡⁡ |
+	}
 	// ⁡⁢⁢⁢Примитивные типы:⁡
 	{
-		let isDone: boolean = false;
-		let count: number = 10;
 		let name: string = "TypeScript";
+		let count: number = 10;
+		let bigint: bigint = 123n;
+		let isDone: boolean = false;
+		// let null: null = null;
+		// let undefined: undefined = undefined;
+		let simbol: symbol = Symbol("id");
+	
 		// Примитивные типы
 		type ID = string | number;
 		type Status = "active" | "inactive";
@@ -326,6 +339,13 @@
 		}
 		// Расширение type
 		type SuperAdmin = Admin & { level: number };
+	}
+	// ⁡⁢⁢⁢Специальные типы⁡
+	{
+		let any: any = "Hello";
+		let unknown: unknown = "Hello";
+		let never: never;
+		// let void: void = "Hello";
 	}
 	// ⁡⁢⁢⁢Интерфейсы:⁡
 	{
