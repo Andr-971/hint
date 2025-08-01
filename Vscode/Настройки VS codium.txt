@@ -1,17 +1,38 @@
 
+
 C:\Program Files\VSCodium\resources\app
 C:\Users\andre\AppData\Roaming\VSCodium\User\snippets
 product.json
-Настройка плеймаркета vscode
+⁡⁣⁣⁢НАСТРОЙКА ПЛЕЙМАРКЕТА VSCODE⁡
 "extensionsGallery": {
     "serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
     "itemUrl": "https://marketplace.visualstudio.com/items",
     "cacheUrl": "https://vscode.blob.core.windows.net/gallery/index"
 }
-Настройка своего плеймаркета
+⁡⁣⁣⁢НАСТРОЙКА СВОЕГО ПЛЕЙМАРКЕТА⁡
 "extensionsGallery": {
     "serviceUrl": "https://open-vsx.org/vscode/gallery",
     "itemUrl": "https://open-vsx.org/vscode/item",
     "extensionUrlTemplate": "https://open-vsx.org/vscode/gallery/{publisher}/{name}/latest",
     "controlUrl": "https://raw.githubusercontent.com/EclipseFdn/publish-extensions/refs/heads/master/extension-control/extensions.json"
 },
+⁡⁣⁢⁡⁣⁣⁢ЗАГРУЗКА РАСШИРЕНИЙ В РУЧНУЮ⁡
+⁡⁢⁣⁣ШАГ 1: СКАЧАТЬ ФАЙЛ РАСШИРЕНИЯ:⁡
+Посетить Marketplace Visual Studio Code в веб-браузере.
+Найти расширение, которое нужно установить.
+Нажать на расширение, чтобы открыть страницу его детали.
+Прокрутить раздел «Ресурсы» и нажать на ссылку «Скачать расширение». Расширение будет загружено в формате .vsix, который подходит для Codium.
+
+Если ссылка «Скачать расширение» не доступна, можно добавить ?preview=true к URL страницы детали расширения и нажать Enter — это часто раскрывает ссылку на загрузку. 
+⁡⁢⁣⁣ШАГ 2: УСТАНОВИТЬ РАСШИРЕНИЕ В CODIUM:⁡
+Открыть Codium.
+Нажать на значок просмотра расширений на боковой панели (или нажать Ctrl+Shift+X на клавиатуре).
+В просмотре расширений нажать на меню из трёх точек в правом верхнем углу.
+Выбрать «Установить из VSIX...» из выпадающего меню.
+Перейти в папку, где был загружен файл .vsix, выбрать его и нажать «Открыть».
+
+⁡⁢⁣⁣ШАГ 3: ПРОВЕРИТЬ УСТАНОВКУ:⁡
+В просмотре расширений (Ctrl+Shift+X) ввести имя установленного расширения в строке поиска.
+Если расширение появляется в списке с кнопкой «Удалить» или «Отключить», оно установлено успешно.
+
+Совет: вручную установленные расширения не получают автоматических обновлений — чтобы обновить их, нужно скачать и установить новую версию вручную.

@@ -22,6 +22,22 @@ module.exports = {
 					dark: "#b45309",
 				},
 			},
+			colors(theme) {
+				return {
+					...theme("colors"),
+					primary: "#3b82f6",
+					secondary: {
+						100: "#e0f2fe",
+						500: "#0ea5e9",
+						900: "#0c4a6e",
+					},
+					brand: {
+						light: "#fde68a",
+						DEFAULT: "#f59e0b",
+						dark: "#b45309",
+					},
+				};
+			},
 
 			// Пользовательские шрифты
 			fontFamily: {
