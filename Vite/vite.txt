@@ -1,6 +1,6 @@
 
 // Создание проекта на vite
-npm create vite@latest
+npm create vite@latest .
 
 // ⁡⁣⁣⁢Плагин для инспекции⁡
 npm i -D vite-plugin-inspect
