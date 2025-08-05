@@ -1,0 +1,32 @@
+
+⁡⁢⁣⁢СТРУКТУРА ПРОЕКТА Vite⁡
+{
+    my-app/
+    ├── node_modules/
+    ├── public/
+    │   └── vite.svg
+    ├── src/
+    │   ├── assets/           # Статические ресурсы
+    │   ├── components/       # Компоненты
+    │   │   ├── ui/
+    │   │   │   ├── Button.tsx
+    │   │   │   └── Card.tsx
+    │   │   └── layout/
+    │   │       └── Header.tsx
+    │   ├── hooks/            # Кастомные хуки
+    │   ├── pages/            # Страницы
+    │   │   ├── Home.tsx
+    │   │   └── About.tsx
+    │   ├── styles/           # Глобальные стили
+    │   ├── utils/            # Вспомогательные функции
+    │   ├── App.tsx
+    │   ├── main.tsx          # Точка входа
+    │   └── vite-env.d.ts     # Типы Vite
+    ├── .gitignore
+    ├── index.html
+    ├── package.json
+    ├── tailwind.config.js    # Конфиг Tailwind
+    ├── postcss.config.js     # Конфиг PostCSS (автосоздан)
+    ├── tsconfig.json         # Конфиг TypeScript
+    └── vite.config.ts        # Конфиг Vite
+}

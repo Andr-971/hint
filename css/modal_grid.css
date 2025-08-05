@@ -29,7 +29,7 @@
     justify-content: center;
     margin-left: -10px;
     margin-right: -10px;
-    margin-top: -20px;
+    margin-bottom: -20px;
 }
 /** Карточка с шириной в 3 колонки значит в 4 ряда  */
 .test__card { 
@@ -39,7 +39,7 @@
     box-sizing: border-box;
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 /** Mедиазапросы для колонок в модульной сетке  */
 @media screen and (max-width: 1500.98px) {
