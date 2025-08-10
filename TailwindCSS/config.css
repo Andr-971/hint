@@ -34,8 +34,6 @@
 	--breakpoint-b-sm: 560.98px;
 	--breakpoint-b-xs: 390.98px;
 	--breakpoint-b-xxs: 320.98px;
-	--color-mint-500: oklch(0.72 0.11 178);
-	--container-col-3: calc(100% / var(--col) * 3 - var(--offset));
 	--text-h1: calc(
 		26px + (36 - 26) * (100vw - var(--minScrinPx)) / (var(--maxScrin) - var(--minScrin))
 	);
