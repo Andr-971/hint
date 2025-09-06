@@ -25,15 +25,15 @@
 		// 🔹 ⁡⁣⁢⁢Путь⁡ C:\Program Files\Git\etc\ssh
 		// config
 		// # Первый аккаунт
-		// Host github.com-account1
+		// Host github.com-Andr-971
 		// HostName github.com
 		// User git
-		// IdentityFile ~/.ssh/id_ed25519_account1
+		// IdentityFile ~/.ssh/id_ed25519_Andr-971
 		// # Второй аккаунт
-		// Host github.com-account2
+		// Host github.com-Andr-137
 		// HostName github.com
 		// User git
-		// IdentityFile ~/.ssh/id_ed25519_account2
+		// IdentityFile ~/.ssh/id_ed25519_Andr-971
 	}
 	// 🔳 ⁡⁢⁣⁣ДОБАВЛЕНИЕ ПУБЛИЧНЫХ КЛЮЧЕЙ В GITHUB⁡
 	{
@@ -73,13 +73,13 @@
 		{
 			// bash
 			// ⁡⁢⁢⁢# Для репозиториев первого аккаунта⁡
-			// cd /path/to/repo_account1
-			// git config user.email "email1@example.com"
-			// git config user.name "Account1 Name"
+			// cd /path/to/Andr-971
+			// git config user.email "andrei.ryabov2020@gmail.com"
+			// git config user.name "Andr-971"
 			// ⁡⁢⁢⁢# Для репозиториев второго аккаунта⁡
-			// cd /path/to/repo_account2
-			// git config user.email "email2@example.com"
-			// git config user.name "Account2 Name"
+			// cd /path/to/Andr-137
+			// git config user.email "andrei.ryabov2020@gmail.com"
+			// git config user.name "Andr-137"
 		}
 	}
 	// 🔳 ⁡⁢⁣⁣ПРОВЕРКА ПОДКЛЮЧЕНИЯ⁡
