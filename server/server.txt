@@ -1,7 +1,9 @@
 // ⁡⁣⁣⁢Установка для разработки в проект объединения запуска двух серверов ⁡
 ⁡⁣⁢⁢npm i -D concurrently⁡
+// npm i -D concurrently
 // ⁡⁣⁣⁢Установка для разработки в проект json-server⁡
 ⁡⁣⁢⁢npm install -g json-server@0.17.4⁡
+// npm i json-server@0.17.4
 // ⁡⁣⁣⁢Для работы json-server создать папку и файл в корне проекта server/db.json⁡
 // ⁡⁣⁣⁢Объединение запуска двух серверов в данном случае React и json-server в package.json⁡
 ⁡⁣⁢⁢"scripts":⁡ {
