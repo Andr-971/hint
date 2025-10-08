@@ -78,7 +78,7 @@
 		// --eslint — добавляет ESLint
 		// --app — включает новую структуру App Router (Next.js 13+)
 
-		// npm install -D prettier prettier-plugin-tailwindcss
+		// npm install -D prettier prettier-plugin-tailwindcss autoprefixer
 		// Комментарии:
 		// Prettier для форматирования кода
 		// Плагин для правильного порядка классов в Tailwind
