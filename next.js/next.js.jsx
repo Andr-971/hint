@@ -92,6 +92,29 @@ MY_SECRET=12345;
 // Вызвать
 const API_KEY = process.env.MY_SECRET; // 12345
 
+// ☑️ ⁡⁣⁢⁢ЗАПРОС НА СТОРОНИЙ СЕРВЕР⁡
+{
+    // Получение
+    // export async function getTariffs(revalidateTime?: number): Promise<Types.Tariffs[]> {
+    //     const res = await fetch('https://t-core.fit-hub.pro/Test/GetTariffs', {
+            // next.revalidate — задаёт время в секундах для Incremental Static Regeneration (ISR)
+    //         next: { revalidate: revalidateTime ?? 3600 }, // по умолчанию — 1 час
+    //     });
+    //     if (!res.ok) {
+    //         throw new Error('Не удалось загрузить тарифы');
+    //     }
+    //     return res.json();
+    // }
+    // Использование
+    // export default async function Home() {
+    //     const tariffs = await getTariffs(60); // обновлять данные каждые 60 секунд
+    //     return (
+    //         <>
+    //         </>
+    //     )
+    // }
+}
+
 // ОТПРАВКА ДАННЫХ НА СЕРВЕР И ПОЛУЧЕНИЕ ОТВЕТА
 
 'use client'

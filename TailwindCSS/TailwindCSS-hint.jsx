@@ -123,9 +123,12 @@
 		// ⁡⁣⁣⁢КЛАСС	                                        ОПИСАНИЕ⁡
 		// flex-row / flex-col	                            Направление (row/column)
 		// flex-wrap	                                    Перенос элементов
+		// flex-nowrap 										flex-wrap: nowrap;
+		// flex-wrap-reverse 								flex-wrap: wrap-reverse;
 		// justify-start/center/end/between/around	        Выравнивание по главной оси
 		// items-start/center/end/stretch	                Выравнивание по поперечной оси
 		// gap-{size}	                                    Отступы между элементами (0-96)
+		// grow grow-[3]									flex-grow: 1; увеличивается пропорционально родителю, 0 не увеличивается
 	}
 	// 🔳 ⁡⁢⁣⁣ GRID⁡
 	{
@@ -145,11 +148,15 @@
 		// font-{weight}	                                Жирность (thin, normal, medium, light, bold...)
 		// text-{color}	                                    Цвет текста (slate-500, red-400...)
 		// text-left/center/right/justify	                Выравнивание текста
-		// underline / line-through	                        Декорации
+		// align-text-bottom, align-bottom	                Выравнивание текста
+		// underline 										text-decoration-line: underline; — подчёркивание;
+		// overline 										text-decoration-line: overline; — линия над текстом;
+		// line-through 									text-decoration-line: line-through; - перечёркивание;
+		// no-underline 									text-decoration-line: none; — отменяет все эффекты (по умолчанию).
 		// italic / not-italic	                            Курсив
 		// uppercase / lowercase / capitalize	            Регистр
 		// leading-{size}	                                Высота строки (3-10)
-		// tracking-{size}	                                Кернинг (tighter, wide...)
+		// tracking-{size}	                                Межбуквенный интервал
 	}
 	// 📏 ⁡⁢⁣⁣ SPACING (ОТСТУПЫ)⁡
 	{
@@ -192,6 +199,13 @@
 		// shadow-{size}	                                Тень (sm, md, lg, xl, 2xl, none)
 		// opacity-{value}	                                Прозрачность (0-100)
 		// mix-blend-{mode}	                                Режим наложения
+		// cursor-pointer                                   cursor: pointer;
+		// box-border                                       box-sizing: border-box;
+		// box-content                                      box-sizing: content-box;
+		// translate-full 									translate: 100% 100%;
+		// -translate-full 									translate: -100% -100%;
+		// translate-x-[-1px] 								transform: 'translateX(-1px)
+		// translate-y-[-1px] 								transform: 'translateY(-1px)
 	}
 	// 🖌️ ⁡⁢⁣⁣ FILTERS (ФИЛЬТРЫ)
 	{
