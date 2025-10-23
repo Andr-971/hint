@@ -19,6 +19,13 @@
 }
 // ⁡⁢⁣⁣2. VITE — СУПЕРБЫСТРАЯ АЛЬТЕРНАТИВА CRA⁡
 {
+	// Команды для установки React и необходимых плагинов
+	// npm create vite@latest . -- --template react-ts // Установка в эту папку в которой находишься
+	// npm install
+	// npm install -D tailwindcss postcss autoprefixer
+	//// npx tailwindcss init -p
+	// npm install -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react-hooks eslint-plugin-react-refresh
+	//---------------------------------------------------------------------------------------------------------
 	// npm create vite@latest . // Установка в эту папку в которой находишься
 	// npm create vite@latest react_app-1 react_app-1 // Установка в созданную(react_app-1) дочернюю папку
 	// cd my-react-app
