@@ -7,8 +7,8 @@
 	--offset: 20px;
 	--heightHeader: 70px;
 
-	--white255: rgb(255, 255, 255);
-	--black000: rgb(0, 0, 0);
+	--white255: rgb(255, 255, 255, 1);
+	--black000: rgb(0, 0, 0, 1);
 
 	--breack-2xl: 1536.98px;
 	--breack-xxl: 1366.98px;
@@ -18,12 +18,12 @@
 	--breack-sm: 560.98px;
 	--breack-xs: 390.98px;
 
-	--fields-xl: 80px; 
-	--fields-lg: 60px; 
-	--fields-md: 40px; 
-	--fields-sm: 20px; 
-	--fields-xs: 10px; 
-	--fields-xxs: 10px; 
+	--fields-xl: 80px;
+	--fields-lg: 60px;
+	--fields-md: 40px;
+	--fields-sm: 20px;
+	--fields-xs: 10px;
+	--fields-xxs: 10px;
 }
 @theme {
 	--breakpoint-b-2xl: 1536.98px;
@@ -42,27 +42,30 @@
 	);
 }
 .wrapper {
-	@apply flex min-h-[100vh] w-full flex-col relative;
+	@apply flex min-h-screen w-full flex-col relative;
 }
 .header {
-	@apply w-full fixed h-[var(--heightHeader)];
+	@apply w-full fixed h-(--heightHeader);
 }
 .main {
-	@apply flex-grow-1 h-fit  pt-[var(--heightHeader)];
+	@apply grow h-fit  pt-(--heightHeader);
 }
 .footer {
 	@apply w-full;
 }
 .g_container {
-    @apply mx-auto max-w-[var(--canvasPx)] px-[var(--fields-xs)] b-sm:px-[var(--fields-sm)] b-md:px-[var(--fields-md)] b-lg:px-[var(--fields-lg)] b-xl:px-[var(--fields-xl)];
+	@apply mx-auto max-w-(--canvasPx) px-(--fields-xs) b-sm:px-(--fields-sm) b-md:px-(--fields-md) b-lg:px-(--fields-lg) b-xl:px-(--fields-xl);
 	box-sizing: content-box;
 }
 .title__h1 {
-	@apply  py-2 text-center font-bold;
+	@apply py-2 text-center font-bold;
 }
 .wrap__card {
-	@apply flex flex-wrap justify-center mx-[calc(-1_*_(var(--offset)_/_2))] mb-[calc(-1_*_var(--offset))];
+	@apply flex flex-wrap justify-center mx-[calc(-1*(var(--offset)/2))] mb-[calc(-1*var(--offset))];
 }
 .card {
-	@apply mx-[calc(var(--offset)_/_2)] mb-[var(--offset)] b-2xl:w-[calc(100%_/_var(--col)_*_3_-_var(--offset))] b-lg:w-[calc(100%_/_var(--col)_*_4_-_var(--offset))] b-md:w-[calc(100%_/_var(--col)_*_6_-_var(--offset))] b-sm:w-[calc(100%_/_var(--col)_*_12_-_var(--offset))];
+	@apply mx-[calc(var(--offset)/2)] mb-(--offset) b-2xl:w-[calc(100%/var(--col)*3-var(--offset))] b-lg:w-[calc(100%/var(--col)*4-var(--offset))] b-md:w-[calc(100%/var(--col)*6-var(--offset))] b-sm:w-[calc(100%/var(--col)*12-var(--offset))] b-xs:w-[calc(100%/var(--col)*12-var(--offset))] w-[calc(100%/var(--col)*12-var(--offset))];
+}
+.wrap__center_xy {
+	@apply grid place-content-center;
 }
