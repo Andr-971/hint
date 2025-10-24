@@ -19,30 +19,178 @@
 }
 // ⁡⁢⁣⁣2. VITE — СУПЕРБЫСТРАЯ АЛЬТЕРНАТИВА CRA⁡
 {
-	// Команды для установки React и необходимых плагинов
-	// npm create vite@latest . -- --template react-ts // Установка в эту папку в которой находишься
-	// npm install
-	// npm install -D tailwindcss postcss autoprefixer
-	//// npx tailwindcss init -p
-	// npm install -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react-hooks eslint-plugin-react-refresh
-	//---------------------------------------------------------------------------------------------------------
-	// npm create vite@latest . // Установка в эту папку в которой находишься
-	// npm create vite@latest react_app-1 react_app-1 // Установка в созданную(react_app-1) дочернюю папку
-	// cd my-react-app
-	// npm install
-	// npm run dev
-	// ⁡⁣⁣⁢Плюсы:⁡
-	// ⚡ В 10-100 раз быстрее, чем CRA (мгновенный HMR)
-	// 📦 Поддержка React + TypeScript из коробки
-	// 🔧 Легко настраивается (vite.config.js)
-	// ⁡⁣⁣⁢Минусы:⁡
-	// ❌ Нет встроенного SSR (но можно добавить)
+	// ⁡⁣⁣⁢Ппошаговое руководство по настройке React-приложения с TypeScript, TailwindCSS, Prettier и ESLint⁡
+	// npm cache clean --force // Очистка кэша
+	// npm create vite@latest -- --template react-ts .
+	// npm install -D autoprefixer
+	// ⁡⁣⁣⁢Полезные плагины⁡
+	{
+		// # Роутинг
+		// npm install react-router-dom
+		// # State management
+		// npm install @reduxjs/toolkit react-redux
+		// # HTTP клиент
+		// npm install axios
+		// # UI библиотеки
+		// npm install @mui/material @emotion/react @emotion/styled
+		// # или
+		// npm install antd
+	}
+	// ⁡⁣⁣⁢Установка TailwindCSS⁡
+	{
+		// npm install -D tailwindcss
+		//------------------------------------------------------------
+		// Установка версии 3^
+		// npm install -D tailwindcss@3.4.14
+
+		// npm install -D @tailwindcss/postcss autoprefixer
+		// Это установит:
+		// tailwindcss (по умолчанию v4),
+		// postcss — необходим для обработки CSS,
+		// autoprefixer — добавляет вендорные префиксы.
+		// Создайте postcss.config.js
+		`	export default {
+			plugins: {
+				"@tailwindcss/postcss": {
+					content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+				},
+				autoprefixer: {},
+			},
+		}; ` //  src/index.css */// @import "tailwindcss";
+		// ⁡⁢⁣⁢Важно! В версии 4 не нужно писать⁡:
+		// @tailwind base;
+		// @tailwind components;
+		// @tailwind utilities;
+		// ⁡⁢⁢⁢Вместо этого — один импорт⁡: @import "tailwindcss";
+		// ⁡⁣⁣⁢Хотите добавить свой цвет или шрифт? Расширьте конфигурацию⁡:
+		// postcss.config.js
+		`	export default {
+			plugins: {
+				tailwindcss: {
+					content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+					theme: {
+						extend: {
+							colors: {
+								brand: "#6366f1", // фиолетовый от Tailwind
+							},
+							fontFamily: {
+								sans: ["Inter", "sans-serif"],
+							},
+						},
+					},
+				},
+				autoprefixer: {},
+			},
+		};	`;
+		// ⚠️ ⁡⁣⁣⁢Но помните: глубокая кастомизация в версии 4 пока ограничена. Для сложных тем лучше использовать версию 3.⁡
+		//---------------------------------------------------------------------------------------------------------
+		// npm create vite@latest . // Установка в эту папку в которой находишься
+		// npm create vite@latest react_app-1 react_app-1 // Установка в созданную(react_app-1) дочернюю папку
+		// cd my-react-app
+		// npm install
+		// npm run dev
+		// ⁡⁣⁣⁢Плюсы:⁡
+		// ⚡ В 10-100 раз быстрее, чем CRA (мгновенный HMR)
+		// 📦 Поддержка React + TypeScript из коробки
+		// 🔧 Легко настраивается (vite.config.js)
+		// ⁡⁣⁣⁢Минусы:⁡
+		// ❌ Нет встроенного SSR (но можно добавить)
+	}
+	// ⁡⁣⁣⁢Настройка ESLint⁡
+	{
+		// npm install --save-dev eslint
+		// npm install --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
+		// npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser
+		// Создать файл .eslintrc.cjs
+		{
+			module.exports = {
+				root: true,
+				env: {
+					browser: true,
+					es2020: true,
+					node: true,
+				},
+				extends: [
+					"eslint:recommended",
+					"@typescript-eslint/recommended",
+					"plugin:react-hooks/recommended",
+					"plugin:react/recommended",
+					"plugin:prettier/recommended",
+				],
+				ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.js", "vite.config.ts"],
+				parser: "@typescript-eslint/parser",
+				plugins: ["react-refresh", "react", "@typescript-eslint"],
+				rules: {
+					"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+					"react/react-in-jsx-scope": "off",
+					"react/prop-types": "off",
+					"prettier/prettier": "error",
+					"@typescript-eslint/no-unused-vars": "warn",
+					"@typescript-eslint/explicit-function-return-type": "off",
+					"@typescript-eslint/explicit-module-boundary-types": "off",
+					"@typescript-eslint/no-explicit-any": "warn",
+				},
+				settings: {
+					react: {
+						version: "detect",
+					},
+				},
+			};
+		}
+	}
+	// ⁡⁣⁣⁢Настройка Prettier⁡
+	{
+		// npm install --save-dev prettier
+		// npm install --save-dev eslint-config-prettier eslint-plugin-prettier // Для совместимости ESLint и Prettier
+		// Скопировать .prettierrc.json в корень проекта и .prettierignore
+		// Добавить в json
+		{
+			`	"format": "prettier --write .",
+			"format:check": "prettier --check .",
+			"lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+			"lint:fix": "eslint . --ext js,jsx,ts,tsx --fix"	`;
+		}
+		// Добавить в tsconfig.json
+		{
+			`"compilerOptions": {
+				"target": "ES2020",
+				"useDefineForClassFields": true,
+				"lib": ["ES2020", "DOM", "DOM.Iterable"],
+				"module": "ESNext",
+				"skipLibCheck": true,
+				"moduleResolution": "bundler",
+				"resolveJsonModule": true,
+				"isolatedModules": true,
+				"jsx": "react-jsx",
+				"strict": true,
+				"noUnusedLocals": true,
+				"noUnusedParameters": true,
+				"noFallthroughCasesInSwitch": true
+			}`;
+		}
+	}
+	// ⁡⁣⁣⁢Добавление npm-скриптов⁡
+	{
+		// В package.json добавьте:
+		// json
+		`	"scripts": {
+		"lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+		"lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+		"format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md}"
+		}	`;
+	}
+	// ⁡⁣⁣⁢Для игнорирования файлов создайте⁡ .eslintignore:
+	{
+		`	dist
+		node_modules
+		*.config.js    `;
+	}
 }
 // ⁡⁢⁣⁣3. NEXT.JS — ЕСЛИ НУЖЕН SSR/SSG⁡ //
 {
 	// npm create next-app@latest . // Установка в эту папку в которой находишься
 	// ⁡⁣⁣⁢Плюсы:⁡
-	// 🌐 Серверный рендеринг (SSR) и статика (SSG)
+	// 🌐 Серверный рендеринг (SSR) и статика (SSG)☻
 	// 🚀 Оптимизирован для продакшена
 	// ⚡ Быстрый, как Vite (в новых версиях)
 	// ⁡⁣⁣⁢Минусы:⁡
