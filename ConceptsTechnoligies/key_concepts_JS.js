@@ -840,7 +840,6 @@
 		{
 			function createPerson(name) {
 				let age = 0; // Приватная переменная
-
 				return {
 					getName: () => name,
 					getAge: () => age,
@@ -850,7 +849,6 @@
 					},
 				};
 			}
-
 			const john = createPerson("Иван");
 			john.celebrateBirthday(); // С Днем Рождения, Иван Тебе 1 год.
 			john.celebrateBirthday(); // С Днем Рождения, Иван Тебе 2 год.
