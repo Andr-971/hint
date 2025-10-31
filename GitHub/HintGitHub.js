@@ -209,11 +209,11 @@
 		// # ⁡⁢⁢⁢Создаём проект (например, Vite)⁡
 		// npm create vite@latest my-react-app -- --template react-ts
 		// cd my-react-app
-		// # Инициализируем Git
+		// # ⁡⁢⁢⁢Инициализируем Git⁡
 		// git init
 		// git add .
 		// git commit -m "Initial commit"
-		// # Публикуем на GitHub
+		// # ⁡⁢⁢⁢Публикуем на GitHub⁡
 		// gh repo create
 		
 		// gh repo create имя-репозитория --public   # или --private
