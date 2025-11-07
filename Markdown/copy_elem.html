@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Markdown Copier</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .preview {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f4f4f4;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        .wrap__success {
+            width: 200px;
+            height: 20px;
+            position: relative;
+        }
+
+        .successfully {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgb(49, 175, 49);
+            font-size: 12px;
+        }
+
+        .wrap_preview {
+            width: 700px;
+            height: 120px;
+            position: relative;
+        }
+
+        .preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .button {}
+    </style>
+</head>
+
+<body>
+    <h2>Копировать Markdown-элементы</h2>
+
+    <button onclick="copyToClipboard('# Заголовок 1')">Заголовок 1</button>
+    <button onclick="copyToClipboard('## Заголовок 2')">Заголовок 2</button>
+    <button onclick="copyToClipboard('### Заголовок 3')">Заголовок 3</button>
+    <button onclick="copyToClipboard('#### Заголовок 4')">Заголовок 4</button>
+
+    <button onclick="copyToClipboard('**жирный текст**')">Жирный</button>
+    <button onclick="copyToClipboard('*курсив*')">Курсив</button>
+    <button onclick="copyToClipboard('`инлайн-код`')">Инлайн-код</button>
+    <button onclick="copyToClipboard('`инлайн-код`')">Инлайн-код</button>
+    <button onclick="copyToClipboard('*	*  **')">Подчёркивание</button>
+
+    <button onclick="copyToClipboard('```html \n<div></div>\n```')">Блок кода (HTML)</button>
+    <button onclick="copyToClipboard('```css \n.test {\n    color: #fff;\n}\n```')">Блок кода (CSS)</button>
+    <button onclick="copyToClipboard('```js \nconsole.log();\n```')">Блок кода (JS)</button>
+    <button onclick="copyToClipboard('```bash \ncs\n```')">Блок кода (Bash)</button>
+    <button onclick="copyToClipboard('- Элемент списка')">Список</button>
+    <button onclick="copyToClipboard('1. Нумерованный элемент')">Нумерованный список</button>
+
+    <button onclick="copyToClipboard('[Ссылка](https://example.com)')">Ссылка</button>
+    <button onclick="copyToClipboard('![Альтернативный текст](image.jpg)')">Изображение</button>
+
+    <div class="wrap_preview">
+        <div class="preview" id="preview">Сюда будет вставлен скопированный фрагмент (для демонстрации)</div>
+    </div>
+    <div class="wrap__success">
+        <div id="successfully" class="successfully"></div>
+    </div>
+    <button class="button">Скопировать</button>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // const el = document.getElementById('successfully');
+                // el.textContent = 'Скопировано: ✔️';
+                // setTimeout(() => {
+                //     el.textContent = '';
+                // }, 1500);
+                document.getElementById('preview').textContent = text;
+                console.log('Скопировано:', text);
+            }).catch(err => {
+                console.error('Не удалось скопировать: ', err);
+            });
+        }
+        document.querySelector('.button').addEventListener('click', async () => {
+            const previewEl = document.getElementById('preview');
+            const successfullyEl = document.getElementById('successfully');
+
+            try {
+                // Копируем текст из элемента #preview в буфер обмена
+                await navigator.clipboard.writeText(previewEl.textContent);
+                // Показываем уведомление
+                successfullyEl.textContent = 'Скопировано: ✔️';
+                // Через 1500 мс (1.5 секунды) очищаем текст
+                setTimeout(() => {
+                    successfullyEl.textContent = '';
+                }, 1500);
+            } catch (err) {
+                // Обработка ошибки (например, если clipboard недоступен)
+                successfullyEl.textContent = 'Ошибка копирования ❌';
+                setTimeout(() => {
+                    successfullyEl.textContent = '';
+                }, 1500);
+                console.error('Не удалось скопировать текст: ', err);
+            }
+        });
+    </script>
+</body>
+
+</html>
