@@ -100,3 +100,26 @@
 		}
 	}
 }
+//! SVG СПРАЙТ
+{
+	// 🔳 ⁡⁢⁣⁣СПРАЙТ⁡
+	{
+		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+			<symbol id="icon-warning" viewBox="0 0 438.533 438.533"> // viewBox="0 0 438.533 438.533" Обязательно
+				<path d="..."/>
+			</symbol>
+			<symbol id="icon-error" viewBox="0 0 438.533 438.533">
+				<path d="..."/> 
+			</symbol>
+		</svg>
+	}
+	// 🔳 ⁡⁢⁣⁣ПОДКЛЮЧЕНИЕ В HTML⁡
+	{
+		<svg class="icon">
+			<use href="assets/sprite.svg#icon-warning"></use> // sprite в css файле
+		</svg>;
+		<svg class="icon">
+			<use href="#icon-warning"></use> // sprite в html файле
+		</svg>;
+	}
+}
