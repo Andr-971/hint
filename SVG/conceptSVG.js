@@ -115,11 +115,13 @@
 	}
 	// 🔳 ⁡⁢⁣⁣ПОДКЛЮЧЕНИЕ В HTML⁡
 	{
+		// sprite в css файле
 		<svg class="icon">
-			<use href="assets/sprite.svg#icon-warning"></use> // sprite в css файле
+			<use href="assets/sprite.svg#icon-warning"></use>
 		</svg>;
+		// sprite в html файле
 		<svg class="icon">
-			<use href="#icon-warning"></use> // sprite в html файле
+			<use href="#icon-warning"></use>
 		</svg>;
 	}
 }
