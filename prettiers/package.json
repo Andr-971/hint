@@ -1,0 +1,9 @@
+
+{
+    "scripts": {
+        "lint": "eslint src --ext .js,.jsx",
+        "lint:fix": "eslint src --ext .js,.jsx --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    }
+}
