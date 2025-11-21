@@ -17,9 +17,249 @@
 	// ❌ Медленный в больших проектах
 	// ❌ Тяжело кастомизировать
 }
-// ⁡⁢⁣⁣2. VITE — СУПЕРБЫСТРАЯ АЛЬТЕРНАТИВА CRA⁡
+// ⁡⁢⁣⁣2. WEBPACK⁡
 {
-	// ⁡⁣⁣⁢Ппошаговое руководство по настройке React-приложения с TypeScript, TailwindCSS, Prettier и ESLint⁡
+	// ⁡⁣⁣⁢Пошаговое руководство по настройке⁡
+	// ⁡⁣⁣⁢Установка зависимостей⁡
+	{
+		// ⁡⁢⁣⁣# React⁡
+		// npm install react react-dom
+		// npm install --save-dev @types/react @types/react-dom
+		// ⁡⁢⁣⁣# TypeScript⁡
+		// npm install --save-dev typescript
+		// ⁡⁢⁣⁣# Webpack⁡
+		// npm install --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin
+		// ⁡⁢⁣⁣# Babel для транспиляции⁡
+		// npm install --save-dev @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader
+		// ⁡⁢⁣⁣# styled-components⁡
+		// npm install styled-components
+		// npm install --save-dev @types/styled-components
+		// ⁡⁢⁣⁣# Инструменты разработки⁡
+		// npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
+		// ⁡⁢⁣⁣# Дополнительные библиотеки (для будущего использования)⁡
+		// npm install swiper gsap
+		// npm install --save-dev @types/gsap
+	}
+	// ⁡⁣⁣⁢Создадим структуру файлов⁡
+	{
+		// react-project/
+		// ├── public/
+		// │   └── index.html
+		// ├── src/
+		// │   ├── components/
+		// │   │   └── App.tsx
+		// │   ├── styles/
+		// │   │   └── global.ts
+		// │   └── index.tsx
+		// ├── package.json
+		// ├── webpack.config.js
+		// ├── tsconfig.json
+		// ├── .eslintrc.js
+		// ├── .prettierrc
+		// └── .babelrc
+	}
+	// ⁡⁣⁣⁢Настроим конфигурационные файлы⁡
+	{
+		// ⁡⁢⁣⁣webpack.config.js⁡
+		{
+			const path = require("path");
+			const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+			module.exports = {
+				entry: "./src/index.tsx",
+				output: {
+					path: path.resolve(__dirname, "dist"),
+					filename: "bundle.js",
+				},
+				resolve: {
+					extensions: [".tsx", ".ts", ".js"],
+				},
+				module: {
+					rules: [
+						{
+							test: /\.(ts|tsx)$/,
+							use: "babel-loader",
+							exclude: /node_modules/,
+						},
+					],
+				},
+				plugins: [
+					new HtmlWebpackPlugin({
+						template: "./public/index.html",
+					}),
+				],
+				devServer: {
+					port: 3000,
+					open: true,
+					hot: true,
+				},
+				mode: "development",
+			};
+		}
+		// ⁡⁢⁣⁣.babelrc⁡
+		{
+			// json
+			// {
+			// 	"presets": [
+			// 		"@babel/preset-env",
+			// 		"@babel/preset-react",
+			// 		"@babel/preset-typescript"
+			// 	]
+			// }
+		}
+		// ⁡⁢⁣⁣tsconfig.json⁡
+		{
+			// json
+			{
+				// "compilerOptions": {
+				// 	"target": "es5",
+				// 	"lib": ["dom", "dom.iterable", "esnext"],
+				// 	"allowJs": true,
+				// 	"skipLibCheck": true,
+				// 	"esModuleInterop": true,
+				// 	"allowSyntheticDefaultImports": true,
+				// 	"strict": true,
+				// 	"forceConsistentCasingInFileNames": true,
+				// 	"moduleResolution": "node",
+				// 	"resolveJsonModule": true,
+				// 	"isolatedModules": true,
+				// 	"noEmit": true,
+				// 	"jsx": "react-jsx"
+				// },
+				// "include": ["src"]
+			}
+		}
+		// ⁡⁢⁣⁣.eslintrc.js⁡
+		{
+			module.exports = {
+				parser: "@typescript-eslint/parser",
+				extends: [
+					"eslint:recommended",
+					"plugin:@typescript-eslint/recommended",
+					"plugin:react/recommended",
+					"plugin:prettier/recommended",
+				],
+				plugins: ["@typescript-eslint", "react"],
+				env: {
+					browser: true,
+					es2021: true,
+					node: true,
+				},
+				settings: {
+					react: {
+						version: "detect",
+					},
+				},
+			};
+		}
+	}
+	// ⁡⁣⁣⁢Создадим основные React-компоненты:⁡
+	{
+		// ⁡⁢⁣⁣src/index.tsx⁡
+		{
+			// import React from 'react';
+			// import { createRoot } from 'react-dom/client';
+			// import App from './components/App';
+			// import { GlobalStyle } from './styles/global';
+			// const container = document.getElementById('root');
+			// const root = createRoot(container!);
+			// root.render(
+			// <React.StrictMode>
+			// 	<GlobalStyle />
+			// 	<App />
+			// </React.StrictMode>
+			// );
+		}
+		// ⁡⁢⁣⁣src/components/App.tsx⁡
+		{
+			// import React from 'react';
+			// import styled from 'styled-components';
+			// const Container = styled.div`
+			// text-align: center;
+			// padding: 50px;
+			// background-color: #f0f2f5;
+			// min-height: 100vh;
+			// `;
+			// const Title = styled.h1`
+			// color: #1890ff;
+			// font-size: 2.5em;
+			// margin-bottom: 20px;
+			// `;
+			// const Button = styled.button`
+			// background-color: #1890ff;
+			// color: white;
+			// border: none;
+			// padding: 12px 24px;
+			// border-radius: 6px;
+			// font-size: 16px;
+			// cursor: pointer;
+			// transition: background-color 0.3s;
+			// &:hover {
+			// 	background-color: #40a9ff;
+			// }
+			// `;
+			// const App: React.FC = () => {
+			// return (
+			// 	<Container>
+			// 	<Title>Добро пожаловать в React проект</Title>
+			// 	<p>С настроенными TypeScript, Webpack, styled-components и другими инструментами</p>
+			// 	<Button>Начать работу</Button>
+			// 	</Container>
+			// );
+			// };
+			// export default App;
+		}
+		// ⁡⁢⁣⁣src/styles/global.ts⁡
+		{
+			// import { createGlobalStyle } from "styled-components";
+			// export const GlobalStyle = createGlobalStyle`
+			// * {
+			// 	margin: 0;
+			// 	padding: 0;
+			// 	box-sizing: border-box;
+			// }
+			// body {
+			// 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+			// 	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+			// 	sans-serif;
+			// 	-webkit-font-smoothing: antialiased;
+			// 	-moz-osx-font-smoothing: grayscale;
+			// }
+			// code {
+			// 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+			// 	monospace;
+			// }
+			// `;
+		}
+	}
+	// ⁡⁣⁣⁢Добавим скрипты в package.json:⁡
+	{
+		// "scripts": {
+		// 	"dev": "webpack serve",
+		// 	"build": "webpack --mode=production",
+		// 	"lint": "eslint src --ext .ts,.tsx",
+		// 	"lint:fix": "eslint src --ext .ts,.tsx --fix",
+		// 	"format": "prettier --write src/**/*.{ts,tsx}"
+		// }
+	}
+	// ⁡⁣⁣⁢Создадим public/index.html:⁡
+	{
+		// <!DOCTYPE html>
+		// <html lang="en">
+		// <head>
+		// 	<meta charset="UTF-8">
+		// 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		// 	<title>React TypeScript Project</title>
+		// </head>
+		// <body>
+		// 	<div id="root"></div>
+		// </body>
+		// </html>
+	}
+}
+// ⁡⁢⁣⁡⁢⁣⁣3. VITE — СУПЕРБЫСТРАЯ АЛЬТЕРНАТИВА CRA⁡
+{
+	// ⁡⁣⁣⁢Пошаговое руководство по настройке React-приложения с TypeScript, TailwindCSS, Prettier и ESLint⁡
 	{
 		// npm cache clean --force // Очистка кэша
 		// npm create vite@latest -- --template react-ts .
@@ -177,7 +417,7 @@
 		}
 	}
 }
-// ⁡⁢⁣⁣3. NEXT.JS — ЕСЛИ НУЖЕН SSR/SSG⁡ //
+// ⁡⁢⁣⁣4. NEXT.JS — ЕСЛИ НУЖЕН SSR/SSG⁡ //
 {
 	// npm create next-app@latest . // Установка в эту папку в которой находишься
 	// ⁡⁣⁣⁢Плюсы:⁡
@@ -204,7 +444,7 @@
 		}
 	}
 }
-// ⁡⁢⁣⁣4. REMIX — СОВРЕМЕННЫЙ ФУЛЛ-СТЕК ФРЕЙМВОРК ДЛЯ REACT⁡
+// ⁡⁢⁣⁣5. REMIX — СОВРЕМЕННЫЙ ФУЛЛ-СТЕК ФРЕЙМВОРК ДЛЯ REACT⁡
 {
 	// npm create remix@latest . // Установка в эту папку в которой находишься
 	// ⁡⁣⁣⁢Плюсы:⁡
@@ -214,14 +454,14 @@
 	// ⁡⁣⁣⁢Минусы:⁡
 	// ❌ Меньше документации, чем у Next.js
 }
-// ⁡⁢⁣⁣5. ГОТОВЫЕ ШАБЛОНЫ (ДЛЯ УСКОРЕНИЯ РАЗРАБОТКИ)⁡
+// ⁡⁢⁣⁣6. ГОТОВЫЕ ШАБЛОНЫ (ДЛЯ УСКОРЕНИЯ РАЗРАБОТКИ)⁡
 {
 	// Если не хочется настраивать проект вручную:
 	// T3 Stack (Next.js + tRPC + Tailwind)
 	// Chakra UI + Vite
 	// Mantine + Vite
 }
-// ⁡⁢⁣⁣6. БЫСТРЫЙ ДЕПЛОЙ НА ХОСТИНГ⁡
+// ⁡⁢⁣⁣7. БЫСТРЫЙ ДЕПЛОЙ НА ХОСТИНГ⁡
 {
 	// ⁡⁣⁢⁢ХОСТИНГ			КОМАНДА / ДЕЙСТВИЕ							БЕСПЛАТНЫЙ ВАРИАНТ?⁡
 	// Vercel			Просто залить через git push				✅ Да
