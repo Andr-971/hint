@@ -1,0 +1,269 @@
+{
+  "name": "My Dark Theme",
+  "type": "dark",
+  "colors": {
+    ⁡⁢⁣⁣/* === ОСНОВНЫЕ ЦВЕТА ИНТЕРФЕЙСА === */⁡
+    ⁡⁣⁣⁢/* Основной фон редактора */⁡
+    "editor.background": "#0E2931",
+    ⁡⁣⁣⁢/* Основной цвет текста в редакторе */⁡
+    "editor.foreground": "#cde6ecff",
+    ⁡⁣⁣⁢/* Общий цвет переднего плана для сообщений об ошибках */⁡
+    "editor.errorForeground": "#f50b2aff",
+    ⁡⁣⁣⁢/* Фон всей рабочей области */⁡
+    "workbench.background": "#002B36",
+    ⁡⁣⁣⁢/* Фон боковой панели */⁡
+    "sideBar.background": "#00212B",
+    ⁡⁣⁣⁢/* Фон панели активности (иконки слева) */⁡
+    "activityBar.background": "#003847",
+    ⁡⁣⁣⁢/* Фон строки статуса */⁡
+    "statusBar.background": "#00212B",
+    ⁡⁣⁣⁢/* Фон заголовка окна */⁡
+    "titleBar.activeBackground": "#00212B",
+    ⁡⁢⁣⁡⁢⁣⁣/* === ЦВЕТА ТЕКСТА === */⁡
+    ⁡⁣⁣⁡⁣⁣⁢/* Цвет переднего плана для ссылок в тексте при нажатии и наведении курсора. */⁡⁡
+    "textLink.activeForeground": "#4b5eedff",
+    ⁡⁣⁣⁢/* Цвет переднего плана для ссылок в тексте */⁡
+    "editor.textLink.foreground": "#011be5ff",
+    ⁡⁢⁣⁣/* === ЦВЕТА ДЕЙСТВИЙ === */⁡
+    ⁡⁣⁣⁢/* Цвет фона списка действий для выбранного элемента */⁡
+    "editorActionList.focusBackground": "#0e4b56ff",
+    ⁡⁢⁣⁣/* === СПИСКИ И ДРЕВОВИДНЫЕ СТРУКТУРЫ === */⁡
+    ⁡⁣⁣⁡⁣⁣⁢/* Цвет фона списка/дерева для выбранного элемента, когда список/дерево активны */⁡⁡
+    "list.activeSelectionBackground": "#0075a7",
+    ⁡⁢⁣⁣/* === РЕДАКТОР И ТЕКСТ === */⁡
+    ⁡⁣⁣⁢/* Цвет выделения текста */⁡
+    "editor.selectionBackground": "#0d4f56ff",
+    ⁡⁣⁣⁢/* Цвет выделения совпадающего текста */⁡
+    "editor.selectionHighlightBackground": "#14383C",
+    ⁡⁣⁣⁢/* Подсветка текущей строки */⁡
+    "editor.lineHighlightBackground": "#044657ff",
+    ⁡⁣⁣⁢/* Цвет номеров строк */⁡
+    "editorLineNumber.foreground": "#5E8285",
+    ⁡⁣⁣⁢/* Активный номер строки */⁡
+    "editorLineNumber.activeForeground": "#739da0ff",
+    ⁡⁣⁣⁢/* Цвет границы редактора */⁡
+    "editor.border": "#258c77ff",
+    ⁡⁣⁣⁢/* Цвет курсора */⁡
+    "editorCursor.foreground": "#cde6ecff",
+    ⁡⁢⁣⁣/* === СКРОЛЛБАР === */⁡
+    ⁡⁣⁣⁢/* Цвет скроллбара */⁡
+    "scrollbarSlider.background": "#00212B",
+    ⁡⁣⁣⁢/* Цвет скроллбара при наведении */⁡
+    "scrollbarSlider.hoverBackground": "#6e757bff",
+    ⁡⁣⁣⁢/* Цвет активного скроллбара */⁡
+    "scrollbarSlider.activeBackground": "#98a3aeff",
+    ⁡⁢⁣⁣/* === ВКЛАДКИ (TABS) === */⁡
+    ⁡⁣⁣⁢/* Фон активной вкладки */⁡
+    "tab.activeBackground": "#2193a5ff",
+    ⁡⁣⁣⁢/* Фон неактивной вкладки */⁡
+    "tab.inactiveBackground": "#004052",
+    ⁡⁣⁣⁢/* Фон при наведении на вкладку */⁡
+    "tab.hoverBackground": "#015870ff",
+    ⁡⁢⁣⁣/* === ПАНЕЛЬ ИНСТРУМЕНТОВ === */⁡
+    ⁡⁣⁣⁢/* Фон панели инструментов */⁡
+    "toolbar.background": "#003847",
+    ⁡⁣⁣⁢/* Фон выпадающих меню */⁡
+    "dropdown.background": "#00212B",
+    ⁡⁣⁡⁣⁣⁢/* Фон списков (например, в палитре команд) */⁡
+    "list.activeSelectionBackground": "#00212B",
+    ⁡⁣⁣⁢/* Фон списков при наведении */⁡
+    "list.hoverBackground": "#002B36",
+    ⁡⁢⁣⁣/* === INPUT ПОЛЯ === */⁡
+    ⁡⁣⁣⁢/* Фон полей ввода */⁡
+    "input.background": "#003847",
+    ⁡⁣⁣⁢/* Граница полей ввода */⁡
+    "input.border": "#015870ff",
+    ⁡⁢⁣⁣/* === КНОПКИ === */⁡
+    ⁡⁣⁣⁢/* Фон кнопок */⁡
+    "button.background": "#0e639c",
+    ⁡⁣⁣⁢/* Фон кнопок при наведении */⁡
+    "button.hoverBackground": "#1177bb",
+    ⁡⁣⁣⁢/* === ОШИБКИ И ПРЕДУПРЕЖДЕНИЯ === */⁡
+    ⁡⁣⁣⁢/* Цвет подчеркивания ошибок */⁡
+    "editorError.foreground": "#f73711ff",
+    ⁡⁣⁣⁢/* Цвет подчеркивания предупреждений */⁡
+    "editorWarning.foreground": "#eac20cff",
+    ⁡⁣⁣⁢/* Цвет подчеркивания информации */⁡
+    "editorInfo.foreground": "#75beff",
+    ⁡⁢⁣⁣/* === GIT === */⁡
+    ⁡⁣⁣⁢/* Добавленные строки в Git */⁡
+    "gitDecoration.addedResourceForeground": "#81b88b",
+    ⁡⁣⁣⁢/* Измененные строки в Git */⁡
+    "gitDecoration.modifiedResourceForeground": "#e2c08d",
+    ⁡⁣⁣⁢/* Удаленные строки в Git */⁡
+    "gitDecoration.deletedResourceForeground": "#c74e39",
+    ⁡⁢⁣⁣/* === ДЕБАГГИНГ === */⁡
+    ⁡⁣⁣⁢/* Цвет точки останова */⁡
+    "editorBreadcrumb.background": "#1e1e1e",
+    ⁡⁣⁣⁢/* Фон панели дебаггинга */⁡
+    "debugToolBar.background": "#333333",
+    ⁡⁢⁣⁣/* === РАЗДЕЛИТЕЛИ === */⁡
+    ⁡⁣⁣⁢/* Цвет разделителей */⁡
+    "panel.border": "#036770ff",
+    ⁡⁣⁣⁢/* Цвет границ */⁡
+    "contrastBorder": "#052590ff",
+    ⁡⁢⁣⁣/* === FOCUS И ВЫДЕЛЕНИЕ === */⁡
+    ⁡⁣⁣⁢/* Цвет фокуса */⁡
+    "focusBorder": "#007fd4",
+    ⁡⁢⁣⁣/* === ТЕКСТ РАЗЛИЧНЫХ ЭЛЕМЕНТОВ === */⁡
+    ⁡⁣⁣⁢/* Цвет текста в статус баре */⁡
+    "statusBar.foreground": "#ffffff",
+    ⁡⁣⁣⁢/* Цвет текста в заголовке */⁡
+    "titleBar.activeForeground": "#cccccc",
+    ⁡⁣⁣⁢/* Цвет текста в боковой панели */⁡
+    "sideBar.foreground": "#cccccc"
+  },
+  "tokenColors": [
+    ⁡⁢⁣⁣/* === СИНТАКСИЧЕСКАЯ ПОДСВЕТКА === */⁡
+    ⁡⁣⁣⁢/* КОММЕНТАРИИ */⁡
+    {
+      "name": "Comments",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#6a9955"  ⁡⁣⁣⁢/* Зеленый для комментариев */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* СТРОКИ */⁡
+    {
+      "name": "Strings",
+      "scope": [
+        "string",
+        "punctuation.definition.string"
+      ],
+      "settings": {
+        "foreground": "#35a82aff"  ⁡⁣⁣⁢/* Зелёный для строк */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* КЛЮЧЕВЫЕ СЛОВА */⁡
+    {
+      "name": "Keywords",
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#569cd6"  ⁡⁣⁣⁢/* Синий для ключевых слов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* ФУНКЦИИ */⁡
+    {
+      "name": "Functions",
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#3f80f8ff"  ⁡⁣⁣⁢/* Тёмно-синий для функций */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* КЛАССЫ И ТИПЫ */⁡
+    {
+      "name": "Classes and Types",
+      "scope": [
+        "entity.name.type",
+        "entity.name.class",
+        "support.type"
+      ],
+      "settings": {
+        "foreground": "#0c8f74ff"  ⁡⁣⁣⁢/* Бирюзовый для классов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* ПЕРЕМЕННЫЕ */⁡
+    {
+      "name": "Variables",
+      "scope": [
+        "variable",
+        "entity.name.variable"
+      ],
+      "settings": {
+        "foreground": "#9cdcfe"  ⁡⁣⁣⁢/* Светло-синий для переменных */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* ЧИСЛА */⁡
+    {
+      "name": "Numbers",
+      "scope": [
+        "constant.numeric",
+        "constant.language"
+      ],
+      "settings": {
+        "foreground": "#df042cff"  ⁡⁣⁣⁢/* Зеленый для чисел */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* ОПЕРАТОРЫ */⁡
+    {
+      "name": "Operators",
+      "scope": [
+        "keyword.operator"
+      ],
+      "settings": {
+        "foreground": "#d4d4d4"  ⁡⁣⁣⁢/* Белый для операторов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* HTML ТЕГИ */⁡
+    {
+      "name": "HTML Tags",
+      "scope": [
+        "entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#0249ccff"  ⁡⁣⁣⁢/* Синий для тегов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* HTML АТРИБУТЫ */⁡
+    {
+      "name": "HTML Attributes",
+      "scope": [
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#f1ed06ff"  ⁡⁣⁣⁢/* Светло-жёлтый для атрибутов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* CSS СЕЛЕКТОРЫ */⁡
+    {
+      "name": "CSS Selectors",
+      "scope": [
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#eaea04ff"  ⁡⁣⁣⁢/* Золотистый для селекторов */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* CSS СВОЙСТВА */⁡
+    {
+      "name": "CSS Properties",
+      "scope": [
+        "support.type.property-name"
+      ],
+      "settings": {
+        "foreground": "#08b013ff"  ⁡⁣⁣⁢/* Светло-синий для свойств */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* JSON КЛЮЧИ */⁡
+    {
+      "name": "JSON Keys",
+      "scope": [
+        "support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#9cdcfe"  ⁡⁣⁣⁢/* Светло-синий для ключей JSON */⁡
+      }
+    },
+    ⁡⁣⁣⁢/* REGEX */⁡
+    {
+      "name": "Regular Expressions",
+      "scope": [
+        "string.regexp"
+      ],
+      "settings": {
+        "foreground": "#d16969"  ⁡⁣⁣⁢/* Красный для регулярных выражений */⁡
+      }
+    }
+  ]
+}

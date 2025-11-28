@@ -18,6 +18,7 @@ function splitArray(array, n) {
     }
     return chunks;
 }
+function chunkArray(arr, chunk) {}
 
 // const res = chunkArray(array, chunk);
 // console.log(res);
