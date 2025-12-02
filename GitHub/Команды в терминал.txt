@@ -1,0 +1,20 @@
+
+// 🔹 npm init -y ⁡⁢⁣⁣⁡⁢⁣                                                                   # Создать package.json
+// 🔹 npm uninstall -D name                                                         # Удалить плагин
+// 🔹 npm install name-package -D                                                   ⁡⁢⁣⁣⁡⁢⁣# Установить плагин
+// 🔹 npm install                                                                   ⁡⁢⁣⁣⁡⁢⁣# Инициализация package.json
+// 🔹 rm -rf node_modules package-lock.json                                         # Удалить node_modules
+
+// 🔹 git add . ⁡⁢⁣⁣⁡⁢⁣                                                                     # Добавить в index
+// 🔹 git commit -m "Работа с папкой hint"                                          # Дефолтный комментарий
+// 🔹 git remote -v                                                                 # К какому аккаунту поключён
+// 🔹 git remote set-url origin git@github.com-Andr-971:Andr-971/hint.git           # Подключиться к Andr-971/hint
+// 🔹 git remote set-url origin git@github.com-Andr-137:Andr-137/hint.git ⁡⁢⁣       # Подключиться к Andr-137/hint
+// 🔹 git push origin main                                                          # Отправка изменений в ветку main
+// 🔹 git push origin HEAD:master                                                   # На дефолтную ветку master
+
+// 🔹 cs svgsprite -d ./icons -o ./public --prefix -icon --size 24px                # SVG sprite
+// 🔹 npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin                                                   # Инструменты pretter,eslint,ts
+// 🔹 cs projecttext --ignore-dirs &quot;node_modules,dist,media,.git&quot; --ignore-files &quot;*.log,*.md,package-lock.json,LICENSE&quot;                                                                         # Копировать прект в текст
+// 🔹 cs fonts -d ./fonts-source -o ./dist/fonts --css-file query-fonts.css         # Шрифты,создать, подключить
+// 🔹 cs creategif -i hero-video.mp4 -o banner.gif --width 480 --fps 30 --duration 5 ⁣# Создать gif

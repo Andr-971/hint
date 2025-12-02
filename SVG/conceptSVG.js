@@ -118,7 +118,7 @@
 		// sprite в css файле
 		<svg class="icon">
 			<use href="assets/sprite.svg#icon-warning"></use>
-		</svg>;
+		</svg>    ;
 		// sprite в html файле
 		<svg class="icon">
 			<use href="#icon-warning"></use>
