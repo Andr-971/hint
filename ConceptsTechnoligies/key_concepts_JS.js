@@ -254,12 +254,12 @@
 				// ⁡⁢⁣⁣⚡ Методы работы с дескрипторами:⁡
 				// Получение дескриптора
 				const descriptor = Object.getOwnPropertyDescriptor(person, "name");
-				// {
-				// 	value: "Alice",
-				// 	writable: true,
-				// 	enumerable: true,
-				// 	configurable: true
-				// }
+				let ob = {
+					value: "Alice",
+					writable: true,
+					enumerable: true,
+					configurable: true
+				}
 				// Определение свойства с дескриптором
 				Object.defineProperty(person, "id", {
 					value: "12345",
