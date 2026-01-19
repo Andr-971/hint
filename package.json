@@ -2,7 +2,8 @@
   "scripts": {
     "format": "prettier --write \"**/*.js\"",
     "lint:fix": "eslint --fix .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "prettier": "^3.5.3",
