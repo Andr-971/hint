@@ -473,9 +473,9 @@
 		const obj = { a: 2 };
 		console.log(foo(), foo.call(obj));
 		{
-			// 1, 2 ✅ // по умолчанию this = global (в нестрогом режиме); call устанавливает контекст
+			// undefined, 2 ✅ // по умолчанию this = global (в нестрогом режиме); call устанавливает контекст
+			// 1, 2
 			// 2, 2
-			// undefined, 2
 			// Ошибка
 			// ⚠️ В строгом режиме ('use strict') первый вызов вернул бы undefined.
 		}
@@ -483,7 +483,7 @@
 	// ⚠️ ⁡⁣⁡⁣⁣⁢32. Что выведет код?⁡
 	{
 		const obj = {
-			name: "Alice",
+			name: "Анна",
 			greet: function () {
 				return () => console.log(this.name);
 			},
@@ -491,7 +491,7 @@
 		const fn = obj.greet();
 		fn();
 		{
-			// "Alice" ✅ // стрелка наследует this от лексического окружения — т.е. от greet, где this = obj
+			// "Анна" ✅ // стрелка наследует this от лексического окружения — т.е. от greet, где this = obj
 			// undefined
 			// window.name
 			// ReferenceError
@@ -864,8 +864,8 @@
 	{
 		console.log(typeof null);
 		{
-			// "null"
 			// "object" ✅ // историческая ошибка в JS
+			// "null"
 			// "undefined"
 			// "number"
 		}
@@ -874,8 +874,8 @@
 	{
 		console.log(!!"false");
 		{
-			// false
 			// true ✅ // любая непустая строка — truthy
+			// false
 			// "false"
 			// undefined
 		}
@@ -924,8 +924,8 @@
 	{
 		console.log(0.1 + 0.2 === 0.3);
 		{
-			// true
 			// false ✅ // ошибка округления с плавающей точкой
+			// true
 			// undefined
 			// Ошибка
 		}
@@ -934,8 +934,8 @@
 	{
 		console.log(typeof typeof 1);
 		{
-			// "number"
 			// "string" ✅ // typeof 1 → "number" (строка) → typeof "number" → "string"
+			// "number"
 			// "object"
 			// "undefined"
 		}
@@ -944,8 +944,8 @@
 	{
 		console.log(Boolean(0n));
 		{
-			// true
 			// false ✅ // BigInt: 0n — falsy
+			// true
 			// TypeError
 			// undefined
 		}
@@ -983,8 +983,8 @@
 		}
 		foo();
 		{
-			// 1
 			// undefined ✅ // var hoisted
+			// 1
 			// ReferenceError
 			// Ошибка
 		}
@@ -1009,9 +1009,9 @@
 			console.log(this);
 		})();
 		{
+			// undefined ✅ // strict mode: this = undefined. В строгом режиме: this остаётся undefined, если контекст явно не задан.
 			// window
 			// global
-			// undefined ✅ // strict mode: this = undefined. В строгом режиме: this остаётся undefined, если контекст явно не задан.
 			// Ошибка
 		}
 	}
@@ -1028,8 +1028,8 @@
 		};
 		console.log(f());
 		{
-			// 1
 			// 2 ✅ // hoisting функций: последнее определение побеждает
+			// 1
 			// undefined
 			// Ошибка
 		}
@@ -1039,8 +1039,8 @@
 		console.log(typeof bar);
 		var bar = function () { };
 		{
-			// "function"
 			// "undefined" ✅ // var hoisted, но присваивание — нет → bar = undefined
+			// "function"
 			// "object"
 			// Ошибка
 		}
@@ -1077,8 +1077,8 @@
 		console.log(1 < 2 < 3); // первое сравнение даёт true(1) 1 < 3 true
 		console.log(3 > 2 > 1); // первое сравнение даёт true(1) 1 > 1 false 
 		{
-			// true, true
 			// true, false ✅ // 3>2 → true → true > 1 → 1 > 1 → false
+			// true, true
 			// false, false
 			// false, true
 		}
@@ -1127,8 +1127,8 @@
 	{
 		console.log("  ".length); // Три пропуска
 		{
-			// 1
 			// 2 ✅ // Без пропуска 0, с одним — 1, с двумя — 2
+			// 1
 			// 4
 			// Ошибка
 		}
@@ -1178,8 +1178,8 @@
 	{
 		console.log(Symbol("id") == Symbol("id"));
 		{
-			// true
 			// false ✅ // каждый Symbol — уникален
+			// true
 			// undefined
 			// Ошибка
 		}
