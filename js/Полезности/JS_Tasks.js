@@ -13,8 +13,8 @@
 		// ⁡⁢⁢⁢1. Ключи объекта в JavaScript всегда приводятся к строкам. Когда вы пытаетесь использовать объект (a или b) как ключ, JavaScript вызывает его метод toString(), который возвращает строку "[object Object]".⁡
 		// ⁡⁢⁢⁢2. Поскольку оба ключа приводятся к одной и той же строке, они конфликтуют, и последнее присвоение перезаписывает предыдущее.⁡
 		// ⁡⁢⁢⁢3. Значение в объекте c перезаписывается⁡
-        // ⁡⁣⁣⁡⁢⁢⁢-- Сначала c[a] = a записывает a по ключу "[object Object]"⁡
-        // ⁡⁣⁣⁡⁢⁢⁢-- Затем c[b] = b перезаписывает это значение на b.⁡
+		// ⁡⁣⁣⁡⁢⁢⁢-- Сначала c[a] = a записывает a по ключу "[object Object]"⁡
+		// ⁡⁣⁣⁡⁢⁢⁢-- Затем c[b] = b перезаписывает это значение на b.⁡
 		// ⁡⁣⁣⁡⁢⁢⁢4. Что выводит console.log⁡
 		// ⁡⁢⁢⁢-- c[a] → это c["[object Object]"] → { b: "b" }⁡
 		// ⁡⁣⁣⁡⁢⁢⁢- c[a].a → { b: "b" }.a → undefined (свойства a нет)⁡
@@ -201,6 +201,54 @@
 				return [];
 			}
 			return Object.create(Object.getPrototypeOf(value));
+		}
+	}
+	// ⁡⁣⁣⁢Функция преобразование массива в объект⁡
+	{
+		// ⚡ ⁡⁢⁣⁣цикл for⁡
+		{
+			function objectIsArray(arr) {
+				// Генерируем массив ключей (способ из условия)
+				const keys = Array(arr.length)
+					.fill("prop_")
+					.map((el, i) => el + (i + 1));
+				const result = {};
+				for (let i = 0; i < arr.length; i++) {
+					result[keys[i]] = arr[i];
+				}
+				return result;
+			}
+		}
+		// ⚡ ⁡⁢⁣⁣reduce()⁡
+		{
+			let arr = ["яблоко", "груша", "виноград", "апельсин"];
+			function objectIsArray(arr) {
+				const array = Array(arr.length)
+					.fill(`prop_`)
+					.map((el, i) => (el = el + (i + 1)));
+				return array.reduce((acc, el, i) => {
+					acc[el] = arr[i];
+					return acc;
+				}, {});
+			}
+			console.log(objectIsArray(arr)); // {prop_1: 'яблоко', prop_2: 'груша', prop_3: 'виноград', prop_4: 'апельсин'}
+		}
+		// ⚡ ⁡⁢⁣⁣Object.fromEntries и map⁡
+		{
+			function objectIsArray(arr) {
+				const keys = Array(arr.length)
+					.fill("prop_")
+					.map((el, i) => el + (i + 1));
+				// Создаём массив пар [ключ, значение] и превращаем его в объект
+				return Object.fromEntries(keys.map((key, i) => [key, arr[i]]));
+			}
+		}
+		// ⚡ ⁡⁢⁣⁣альтернативная генерация ключей (без создания промежуточного массива)⁡
+		{
+			function objectIsArray(arr) {
+				// Сразу строим объект, используя индекс для формирования ключа
+				return Object.fromEntries(arr.map((value, i) => [`prop_${i + 1}`, value]));
+			}
 		}
 	}
 }
