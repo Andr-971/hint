@@ -401,6 +401,44 @@
 			console.log(fromObjectArray(arr));
 		}
 	}
+	// ⁡⁣⁣⁢Функция сортировки массива по категорям, из массивов категрий и массива сортировки⁡
+	{
+		// ⚡ ⁡⁢⁣⁣reduce⁡
+		{
+			let arrAll = [
+				"Яблоко",
+				"Груша",
+				"Апельсин",
+				"Мандарин",
+				"Помидор",
+				"Огурец",
+				"Лук",
+				"Чеснок",
+				"Капуста",
+				"Клубника",
+			];
+			function sortArray(arrAll) {
+				let arrFruc = ["Яблоко", "Груша", "Апельсин", "Мандарин", "Клубника"];
+				let arrOvosh = ["Помидор", "Огурец", "Лук", "Чеснок", "Капуста"];
+				return arrAll.reduce(
+					(acc, item) => {
+						if (!Array.isArray(arrFruc)) return;
+						if (!Array.isArray(arrOvosh)) return;
+						if (new Set(arrFruc).has(item)) {
+							acc.фрукты.push(item);
+						} else if (new Set(arrOvosh).has(item)) {
+							acc.овощи.push(item);
+						} else {
+							acc.другое.push(item);
+						}
+						return acc;
+					},
+					{ фрукты: [], овощи: [], другое: [] },
+				);
+			}
+			console.log(sortArray(arrAll)); // {фрукты: ["Яблоко", "Груша", "Апельсин", "Мандарин", "Клубника"], овощи: ["Помидор", "Огурец", "Лук", "Чеснок", "Капуста"], другое: []}
+		}
+	}
 }
 // ⁡⁢⁣⁣ОСОБЕННОСТИ ИНТЕРПРЕТАТОРА⁡
 {
