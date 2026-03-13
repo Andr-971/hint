@@ -7,6 +7,192 @@
 		// 🔹 ⁡⁣⁣⁡⁣⁢⁢Обработчик события: Функция(Event Handler), выполняемая при возникновении события.⁡
 		// 🔹 ⁡⁢⁣⁡⁣⁢⁢Целевая область: Элемент, на котором произошло событие.⁡
 		// 🔹 ⁡⁣⁢⁢Поток событий: Порядок обработки событий (всплытие и захват).⁡
+		// 📋 ⁡⁢⁣⁢ОБЪЕКТ EVENT И ВСЕ ЕГО МЕТОДЫ/СВОЙСТВА⁡
+		{
+			// ⭐ ⁡⁣⁣⁢Объект Event — это базовый интерфейс для всех событий в DOM. Вот полный список методов и свойств.⁡
+			// 🔧 ⁡⁢⁣⁣МЕТОДЫ ОБЪЕКТА EVENT⁡
+			{
+				// ⁡⁢⁣⁣МЕТОД						ОПИСАНИЕ⁡
+				// preventDefault() 			⁡⁣⁣⁢Отменяет стандартное поведение события (например, переход по ссылке)⁡
+				// stopPropagation() 			⁡⁣⁣⁢Останавливает всплытие события к родительским элементам⁡
+				// stopImmediatePropagation() 	⁡⁣⁣⁢Останавливает всплытие + остальные обработчики на этом элементе⁡
+				// composedPath() 				⁡⁣⁣⁢Возвращает массив элементов, через которые прошло событие⁡
+				// initEvent() 					⚠️ ⁡⁣⁣⁢Устарел! Инициализирует событие (не рекомендуется)⁡
+			}
+			// 📌 ⁡⁢⁣⁣ОСНОВНЫЕ СВОЙСТВА⁡
+			{
+				// ⁡⁢⁣⁣СВОЙСТВО 		ТИП				ОПИСАНИЕ⁡
+				// ⁡⁣⁣⁢type 			string 			Тип события ("click", "submit" и т.д.)⁡
+				// ⁡⁣⁣⁢target 			Element 		Элемент, который вызвал событие⁡
+				// ⁡⁣⁣⁢currentTarget 	Element 		Элемент, на котором сейчас срабатывает обработчик⁡
+				// ⁡⁣⁣⁢bubbles 			boolean 		Всплывает ли событие⁡
+				// ⁡⁣⁣⁢cancelable 		boolean 		Можно ли отменить событие⁡
+				// ⁡⁣⁣⁢defaultPrevented boolean 		Было ли отменено стандартное поведение⁡
+				// ⁡⁣⁣⁢eventPhase 		number 			Фаза события (1-capture, 2-target, 3-bubble)⁡
+				// ⁡⁣⁡⁣⁣⁢timeStamp 	   	  number 		  Время создания события (мс)⁡
+				// ⁡⁣⁣⁢isTrusted 		boolean 		Создано ли событие пользователем (не скриптом)⁡
+			}
+			// 💡 ⁡⁢⁣⁣ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ⁡
+			{
+				// ☑️ ⁡⁣⁢⁢preventDefault()⁡
+				{
+					document.querySelector("form").addEventListener("submit", (e) => {
+						e.preventDefault(); // Отменяем отправку формы
+						console.log("Форма не отправлена");
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢stopPropagation()⁡
+				{
+					document.querySelector(".child").addEventListener("click", (e) => {
+						e.stopPropagation(); // Останавливаем всплытие
+						console.log("Клик по ребёнку");
+					});
+
+					document.querySelector(".parent").addEventListener("click", () => {
+						console.log("Клик по родителю"); // Не выполнится
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢stopImmediatePropagation()⁡
+				{
+					element.addEventListener("click", (e) => {
+						e.stopImmediatePropagation();
+						console.log("Первый обработчик");
+					});
+
+					element.addEventListener("click", () => {
+						console.log("Второй обработчик"); // Не выполнится
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢composedPath()⁡
+				{
+					document.addEventListener("click", (e) => {
+						console.log(e.composedPath());
+						// [target, parent, body, html, document, window]
+					});
+				}
+			}
+			// 🎯 ⁡⁢⁣⁣ФАЗЫ СОБЫТИЯ (eventPhase)⁡
+			{
+				element.addEventListener(
+					"click",
+					(e) => {
+						switch (e.eventPhase) {
+							case 1:
+								console.log("Capturing");
+								break;
+							case 2:
+								console.log("Target");
+								break;
+							case 3:
+								console.log("Bubbling");
+								break;
+						}
+					},
+					true,
+				); // true = фаза захвата
+				// ⁡⁢⁣⁣ЗНАЧЕНИЕ 			КОНСТАНТА 					ФАЗА⁡
+				// ⁡⁣⁣⁢0 					Event.NONE 					Нет активной фазы⁡
+				// ⁡⁣⁣⁢1 					Event.CAPTURING_PHASE 		Захват⁡
+				// ⁡⁣⁣⁢2 					Event.AT_TARGET 			Цель⁡
+				// ⁡⁣⁣⁢3 					Event.BUBBLING_PHASE 		Всплытие⁡
+			}
+			// 🔥 ⁡⁢⁣⁣СПЕЦИФИЧНЫЕ СВОЙСТВА ДЛЯ ТИПОВ СОБЫТИЙ⁡
+			{
+				// ☑️ ⁡⁣⁢⁢MouseEvent (клик, мышь)⁡
+				{
+					element.addEventListener("click", (e) => {
+						e.clientX; // X относительно окна
+						e.clientY; // Y относительно окна
+						e.pageX; // X относительно документа
+						e.pageY; // Y относительно документа
+						e.button; // Кнопка мыши (0-левая, 1-средняя, 2-правая)
+						e.buttons; // Нажатые кнопки
+						e.altKey; // Нажат ли Alt
+						e.ctrlKey; // Нажат ли Ctrl
+						e.shiftKey; // Нажат ли Shift
+						e.metaKey; // Нажат ли Meta (Cmd/Win)
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢KeyboardEvent (клавиатура)⁡
+				{
+					document.addEventListener("keydown", (e) => {
+						e.key; // Название клавиши ("Enter", "a")
+						e.code; // Код клавиши ("Enter", "KeyA")
+						e.keyCode; // ⚠️ Устарел! Код клавиши (13, 65)
+						e.charCode; // ⚠️ Устарел! Код символа
+						e.repeat; // Зажата ли клавиша
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢InputEvent (ввод)⁡
+				{
+					input.addEventListener("input", (e) => {
+						e.data; // Введённые данные
+						e.inputType; // Тип ввода ("insertText", "deleteContentBackward")
+						e.isComposing; // Идёт ли ввод через IME
+					});
+				}
+				// ☑️ ⁡⁣⁢⁢SubmitEvent (отправка формы)⁡
+				{
+					form.addEventListener("submit", (e) => {
+						e.submitter; // Элемент, который инициировал отправку
+					});
+				}
+			}
+			// ⁡⁢⁣⁣🛠 СОЗДАНИЕ СОБЫТИЙ⁡
+			{
+				// ☑️ ⁡⁣⁢⁢new Event()⁡
+				{
+					const event = new Event("custom", {
+						bubbles: true,
+						cancelable: true,
+					});
+					element.dispatchEvent(event);
+				}
+				// ☑️ ⁡⁣⁢⁢new CustomEvent() (с данными)⁡
+				{
+					const event = new CustomEvent("myEvent", {
+						detail: { name: "Андрей", age: 25 },
+					});
+
+					element.addEventListener("myEvent", (e) => {
+						console.log(e.detail.name); // Андрей
+					});
+
+					element.dispatchEvent(event);
+				}
+			}
+			// ⚠️ ⁡⁢⁣⁣УСТАРЕВШИЕ МЕТОДЫ/СВОЙСТВА⁡
+			{
+				// ⁡⁢⁣⁣УСТАРЕВШЕЕ 					СОВРЕМЕННАЯ ЗАМЕНА⁡
+				// ⁡⁣⁣⁢initEvent() 					new Event()⁡
+				// ⁡⁣⁣⁢keyCode 						key / code⁡
+				// ⁡⁣⁣⁢charCode 					key⁡
+				//⁡⁣⁣⁢ layerX, layerY 				offsetX, offsetY⁡
+				// ⁡⁣⁣⁢returnValue					preventDefault()⁡
+				// ⁡⁣⁣⁢srcElement 					target⁡
+			}
+			// 📊 ⁡⁢⁣⁣СРАВНЕНИЕ target vs currentTarget⁡
+			{
+				`<div id="parent">
+					<button id="child">Click</button>
+				</div>`;
+				parent.addEventListener("click", (e) => {
+					console.log(e.target); // <button> (где кликнули)
+					console.log(e.currentTarget); // <div> (где обработчик)
+				});
+			}
+			// ✅ ⁡⁢⁣⁣ШПАРГАЛКА: ЧТО ИСПОЛЬЗОВАТЬ⁡
+			{
+				// ⁡⁢⁣⁣ЗАДАЧА 								МЕТОД / СВОЙСТВО⁡
+				// ⁡⁣⁣⁢Отменить действие 					preventDefault()⁡
+				// ⁡⁣⁣⁢Остановить всплытие 					stopPropagation()⁡
+				// ⁡⁣⁣⁢Остановить всё 						stopImmediatePropagation()⁡
+				// ⁡⁣⁣⁢Узнать элемент 						target⁡
+				// ⁡⁣⁣⁢Узнать тип события 					type⁡
+				// ⁡⁣⁣⁢Передать данные 						CustomEvent + detail⁡
+				// ⁡⁣⁣⁢Путь события 						composedPath()⁡
+			}
+		}
 	}
 	// 🔳⁡⁢⁣⁣ ЦИКЛ РАБОТЫ СОБЫТИЙ (Фаза захвата, Целевая фаза, Фаза всплытия)⁡
 	{
