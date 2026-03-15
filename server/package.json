@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ser": "json-server --watch db.json",
+    "ser": "json-server --watch db.json --port 3002",
     "start": "npm run ser"
   },
   "author": "",

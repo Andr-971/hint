@@ -9,7 +9,7 @@
 ⁡⁣⁢⁢"scripts":⁡ {
     "start": "react-scripts start", // Запуск React. npm run start
     ⁡⁢⁣⁢"dev": "concurrently \"npm run server\" \"npm run start\""⁡, // Запуск двух серверов. npm run dev
-    ⁡⁢⁣⁣"server": "json-server --watch db.json -p 3001"⁡, // Запуск json-server слежение server/db.json порт 3001. npm run server
+    ⁡⁢⁣⁣"server": "json-server --watch db.json -p 3002"⁡, // Запуск json-server слежение server/db.json порт 3001. npm run server
 }
 // ⁡⁣⁣⁢Для запуска сервера:⁡ npm run server
 ⁡⁣⁣⁢АДРЕС:⁡ http://localhost:3002 // Домашняя страница сервера
@@ -54,6 +54,6 @@
 // 🔳 ⁡⁢⁣⁣ЗАПУСК СЕРВЕРА ДЛЯ ПРОСМИТРА СБОРКИ ПОСЛЕ БИЛДА⁡
 {
     // Если одна страница
-    npx serve dist --single -l 3005 
+    npx serve dist --single -l 3007 
 
 }
