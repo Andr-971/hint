@@ -401,7 +401,7 @@
 		try {
 			// Успешный запрос
 			const posts = await apiRequest("https://jsonplaceholder.typicode.com/posts");
-			console.log("Посты получены:", posts.length);
+			console.log("✅ Посты получены:", posts.length);
 
 			// 404 ошибка
 			await apiRequest("https://jsonplaceholder.typicode.com/posts/999999");
@@ -412,15 +412,14 @@
 				status: error.status,
 				location: error.getErrorLocation?.(),
 			});
-
 			// Пример обработки по типу ошибки
 			if (error instanceof NotFoundError) {
-				alert("Ресурс не найден");
+				alert("⚠️ Ресурс не найден");
 			} else if (error instanceof UnauthorizedError) {
-				alert("Требуется авторизация");
+				alert("⚠️ Требуется авторизация");
 				// window.location.href = '/login';
 			} else if (error instanceof NetworkError) {
-				alert("Проверьте подключение к интернету");
+				alert("🌐 Проверьте подключение к интернету");
 			}
 		}
 	}
