@@ -921,6 +921,530 @@
 			io.observe(element);
 		}
 	}
+	// 🔸 ⁡⁢⁣⁣БРАУЗЕРНЫЕ ОБЪЕКТЫ: РАБОТА С СЕТЬЮ, URL, ФОРМАМИ И ДАННЫМИ⁡
+	{
+		// 🔵⁡ ⁡⁣⁢⁢new URL() — Парсинг и манипуляция URL-адресами.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				const url = new URL("/api/users", "https://example.com"); // base — базовый URL (необязательно)
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства⁡
+			{
+				// ✅ url.href – полный URL // "https://example.com/api/users"
+				// ✅ origin – протокол + домен + порт (только чтение) // 'https:' + '//example.com' + '8080'
+				// ✅ protocol – "https:", "http:" и т.д.
+				// ✅ host – домен + порт
+				// ✅ hostname – домен //example.com
+				// ✅ port – порт // '8080'
+				// ✅ pathname – путь
+				// ✅ search – строка запроса (начинается с "?")
+				// ✅ hash – фрагмент (начинается с "#")
+				// ✅ searchParams – объект URLSearchParams
+			}
+			// ⚡ ⁡⁣⁣⁢Статические методы⁡
+			{
+				// ✅ URL.createObjectURL(blob) – создаёт временный blob: URL
+				// ✅ URL.revokeObjectURL(url) – освобождает ресурс
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Базовое использование
+				const url = new URL("https://example.com:8080/path?q=123#section");
+				console.log(url.hostname); // "example.com"
+				console.log(url.search); // "?q=123"
+				// Относительный URL
+				const rel = new URL("/api/users", "https://site.com");
+				console.log(rel.href); // "https://site.com/api/users"
+				// Работа с параметрами
+				url.searchParams.set("page", "2"); // `page=2` Изменить
+				url.searchParams.append("filter", "active"); // `filter=active`; Добавить
+				console.log(url.href); // "https://example.com:8080/path?q=123&page=2&filter=active#section"
+				// Blob URL
+				const blob = new Blob(["Hello"], { type: "text/plain" });
+				const blobUrl = URL.createObjectURL(blob);
+				// ... использовать blobUrl, затем освободить
+				URL.revokeObjectURL(blobUrl);
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢URLSearchParams() — Работа с параметрами строки запроса.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new URLSearchParams(init); // init: строка, объект, массив пар, или другой URLSearchParams
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ append(name, value) – добавляет параметр
+				// ✅ delete(name) – удаляет все вхождения
+				// ✅ get(name) – первое значение, прочитать по ключу
+				// ✅ getAll(name) – массив всех значений
+				// ✅ has(name) – boolean
+				// ✅ set(name, value) – заменяет все значения на одно
+				// ✅ sort() – сортирует по ключам
+				// ✅ toString() – строка запроса без "?"
+				// ✅ forEach(callback), entries(), keys(), values()
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Из строки
+				const params = new URLSearchParams("?a=1&b=2&a=3");
+				console.log(params.get("a")); // "1"
+				console.log(params.getAll("a")); // ["1", "3"]
+				// Из объекта
+				const params2 = new URLSearchParams({ name: "John", age: 30 });
+				params2.append("hobby", "coding");
+				params2.set("age", "31");
+				console.log(params2.toString()); // "name=John&age=31&hobby=coding"
+				// Итерация
+				for (const [key, value] of params2) {
+					console.log(key, value);
+				}
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢FormData() — Сбор данных формы для отправки через fetch или XMLHttpRequest. Поддерживает файлы.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new FormData(formElement); // formElement – опциональный HTML-элемент <form>
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ append('name', 'value', 'filename.txt'?) – добавить поле (если value — Blob/File, можно указать имя файла)
+				// ✅ delete(name) — удалить все вхождения
+				// ✅ get(name), getAll(name) — строка читать, массив строк читать, прочитать по ключу
+				// ✅ has(name) — true/false
+				// ✅ set(name, value, filename?) – заменяет существующие поля
+				// ✅ entries(), keys(), values(), forEach
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Создание пустого FormData
+				const fd = new FormData();
+				fd.append("username", "alice");
+				fd.append("avatar", fileInput.files[0], "avatar.png");
+				// Отправка через fetch
+				fetch("/upload", {
+					method: "POST",
+					body: fd, // Content-Type автоматически выставится multipart/form-data
+				});
+				// Из существующей формы
+				const form = document.querySelector("form");
+				const formData = new FormData(form);
+				formData.set("extra", "value"); // добавить/изменить поле
+				// Получение значений
+				console.log(formData.get("username"));
+				for (let [name, value] of formData) {
+					console.log(`${name}: ${value}`);
+				}
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢Headers() — Управление HTTP-заголовками запроса/ответа.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new Headers(init); // init: объект, массив пар или другой Headers
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ append(name, value) – добавляет значение к существующему заголовку
+				// ✅ delete(name) — удалить все вхождения
+				// ✅ get(name) – первое значение, прочитать по ключу
+				// ✅ getAll(name) – массив значений
+				// ✅ has(name) — true/false
+				// ✅ set(name, value) – заменяет все значения
+				// ✅ forEach, entries, keys, values
+			}
+			// ⚡ ⁡⁣⁣⁢Особенности⁡
+			{
+				// ✅ Имена заголовков регистронезависимы (но нормализуются при получении)
+				// ✅ Некоторые заголовки запрещены для ручной установки (например, Referer, Host)
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Создание
+				const headers = new Headers({
+					"Content-Type": "application/json",
+					"X-Custom": "hello",
+				});
+				headers.append("Accept", "application/json");
+				headers.set("X-Custom", "world");
+				// Использование в fetch
+				fetch("/api", { headers });
+				// Проверка
+				console.log(headers.get("content-type")); // "application/json"
+				console.log(headers.has("x-custom")); // true
+				// Итерация
+				for (const [key, value] of headers) {
+					console.log(key, value);
+				}
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢Request() — Представляет HTTP-запрос для использования в fetch.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new Request(input, init);
+				// input: URL или другой Request
+				// init: объект с настройками (method, headers, body, mode, cache, credentials, signal, etc.)
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства (только чтение)⁡
+			{
+				// ✅ method, — HTTP‑метод запроса (GET, POST и т. д.).
+				{
+					// 🔳 ⁡⁢⁣⁣GET — Назначение: получение данных с сервера без изменения состояния.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢данные передаются через URL (параметры после ?);⁡
+						// ☑️ ⁡⁣⁢⁢идемпотентный (повторные запросы дают одинаковый результат);⁡
+						// ☑️ ⁡⁣⁢⁢кэшируется браузерами и прокси‑серверами;⁡
+						// ☑️ ⁡⁣⁢⁢имеет ограничение на длину URL (~2048 символов);⁡
+						// ☑️ ⁡⁣⁢⁢не должен содержать тело запроса (body).⁡
+					}
+					// 🔳 ⁡⁢⁣⁣POST — Назначение: отправка данных на сервер для создания нового ресурса.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢данные передаются в теле запроса (body);⁡
+						// ☑️ ⁡⁣⁢⁢не идемпотентный (повторный запрос может создать дубликат);⁡
+						// ☑️ ⁡⁣⁢⁢не кэшируется по умолчанию;⁡
+						// ☑️ ⁡⁣⁢⁢поддерживает большие объёмы данных и файлы;⁡
+						// ☑️ ⁡⁣⁢⁢подходит для конфиденциальной информации.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣PUT — Назначение: полное обновление существующего ресурса или создание нового по указанному URI.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢заменяет ресурс целиком;⁡
+						// ☑️ ⁡⁣⁢⁢идемпотентный (повторные идентичные запросы дают тот же результат);⁡
+						// ☑️ ⁡⁣⁢⁢требует полного представления ресурса;⁡
+						// ☑️ ⁡⁣⁢⁢если ресурс не существует — создаёт его.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣PATCH — Назначение: частичное обновление существующего ресурса.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢изменяет только указанные поля;⁡
+						// ☑️ ⁡⁣⁢⁢не всегда идемпотентный (зависит от реализации);⁡
+						// ☑️ ⁡⁣⁢⁢передаёт только изменённые данные;⁡
+						// ☑️ ⁡⁣⁢⁢более эффективен, чем PUT для мелких изменений.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣DELETE — Назначение: удаление ресурса по указанному URI.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢идемпотентный (повторное удаление несуществующего ресурса не вызывает ошибки);⁡
+						// ☑️ ⁡⁣⁢⁢обычно не содержит тело запроса;⁡
+						// ☑️ ⁡⁣⁢⁢может возвращать 404 Not Found для несуществующих ресурсов.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣HEAD — Назначение: получение заголовков ответа без тела.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢идентичен GET, но без тела ответа;⁡
+						// ☑️ ⁡⁣⁢⁢идемпотентный и кэшируемый;⁡
+						// ☑️ ⁡⁣⁢⁢быстрый способ проверить метаданные ресурса.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣OPTIONS — Назначение: получение информации о поддерживаемых методах и опциях для ресурса.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢возвращает заголовок Allow с разрешёнными методами;⁡
+						// ☑️ ⁡⁣⁢⁢используется для CORS preflight‑запросов;⁡
+						// ☑️ ⁡⁣⁢⁢помогает обнаружить возможности API.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣CONNECT — Назначение: установка туннеля через прокси‑сервер (обычно для HTTPS).⁡
+					{
+						// ☑️ ⁡⁣⁢⁢редко используется напрямую;⁡
+						// ☑️ ⁡⁣⁢⁢важен для HTTPS через прокси;⁡
+						// ☑️ ⁡⁣⁢⁢устанавливает прямое соединение.⁡
+					}
+					// 🔳 ⁡⁢⁣⁣TRACE — Назначение: диагностика — возвращает полученное сервером сообщение.⁡
+					{
+						// ☑️ ⁡⁣⁢⁢может быть опасен (утечка данных);⁡
+						// ☑️ ⁡⁣⁢⁢часто отключён на серверах из соображений безопасности.⁡
+					}
+				}
+				// ✅ url, — URL‑адрес, к которому выполняется запрос.
+				// ✅ headers, — объект с HTTP‑заголовками запроса
+				// ✅ body, — тело запроса (данные, отправляемые на сервер)
+				// ✅ bodyUsed — флаг, показывающий, было ли тело запроса прочитано. true/false
+				// ✅ mode, — режим запроса, влияющий на CORS‑поведение. 'cors' — стандартный CORS‑запрос; 'no-cors' — без CORS (ограниченные возможности); 'same-origin' — только запросы в пределах одного источника.
+				// ✅ credentials, управление отправкой учётных данных (cookies, HTTP‑авторизация). 'include' — отправлять всегда; 'same-origin' — только для запросов того же происхождения; 'omit' — не отправлять.
+				// ✅ cache, — политика кэширования запроса. 'default' — стандартное поведение браузера; 'no-store' — не кэшировать; 'reload' — принудительно перезагружать; 'force-cache' — использовать кэш даже устаревший; 'only-if-cached' — только из кэша (иначе ошибка).
+				// ✅ redirect, — поведение при получении редиректа (301, 302 и т. д.). 'follow' — автоматически следовать редиректам (по умолчанию); 'error' — вызывать ошибку при редиректе; 'manual' — обрабатывать редирект вручную.
+				// ✅ referrer, — значение заголовка Referer (откуда пришёл запрос)
+				// ✅ integrity, — криптографический хеш ресурса для проверки целостности. строка типа 'sha256-abc123...'
+				// ✅ keepalive, — флаг для поддержания соединения после завершения запроса. true/false
+				// ✅ signal — объект AbortSignal для отмены запроса.
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ clone() – создаёт копию запроса (тело можно прочитать только один раз)
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Простой запрос
+				const req = new Request("https://api.example.com/data", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ key: "value" }),
+				});
+				// Клонирование для повторного использования тела
+				const cloned = req.clone();
+				fetch(req).then();
+				fetch(cloned).then();
+				// Использование существующего Request
+				const req2 = new Request(req, { method: "PUT" }); // меняем метод
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢Response() — Объект ответа, возвращаемый fetch, но может быть создан вручную (для моков, Service Workers).⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new Response(body, init);
+				// body: Blob, BufferSource, FormData, URLSearchParams, ReadableStream, строка, null
+				// init: { status, statusText, headers }
+			}
+			// ⚡ ⁡⁣⁣⁢Статические методы⁡
+			{
+				// ✅ Response.error() – возвращает сетевую ошибку
+				// ✅ Response.json(data, init?) – создаёт ответ с JSON-телом
+				// ✅ Response.redirect(url, status?) – редирект (302 по умолчанию)
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства (только чтение)⁡
+			{
+				// ✅ ok – статус 200-299
+				// ✅ status, statusText — конкретно 100...500
+				// ✅ headers, body, bodyUsed, url, redirected, type — объекты, строки
+			}
+			// ⚡ ⁡⁣⁣⁢Методы для чтения тела (возвращают Promise)⁡
+			{
+				// ✅ json() — парсит тело ответа как JSON и возвращает JavaScript‑объект (или массив),
+				// ✅ text() — возвращает тело ответа в виде строки,
+				// ✅ blob() — возвращает тело ответа как объект Blob(Binary Large Object),
+				// ✅ arrayBuffer() — возвращает тело ответа как ArrayBuffer — низкоуровневое представление бинарных данных.,
+				// ✅ formData() — парсит тело ответа как данные формы и возвращает объект FormData
+				// ✅ clone() — создаёт полную копию объекта Response
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Создание ответа
+				const res = new Response(JSON.stringify({ success: true }), {
+					status: 200,
+					headers: { "Content-Type": "application/json" },
+				});
+				// Статические методы
+				const errorRes = Response.error();
+				const redirectRes = Response.redirect("/new-location", 301);
+				const jsonRes = Response.json({ message: "ok" }, { status: 201 });
+				// Чтение из реального fetch
+				fetch("/api")
+					.then((response) => {
+						if (!response.ok) throw new Error("Network error");
+						return response.json(); // парсим JSON
+					})
+					.then((data) => console.log(data));
+			}
+		}
+		// 🔵 ⁡⁣⁢⁢ReadableStream() — интерфейс Streams API, представляющий асинхронный поток данных, который можно читать по частям (чанкам).⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new ReadableStream(underlyingSource, strategy);
+				// underlyingSource: объект с методами start(), pull(), cancel()
+				// strategy: { highWaterMark, size() } — управление буферизацией
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства⁡
+			{
+				// ✅ locked — булево значение, показывает, заблокирован ли поток каким‑либо читателем.
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ getReader() — Создаёт читателя (ReadableStreamDefaultReader) и блокирует поток для него. Свойство read() — метод читателя; done — флаг завершения чтения; value — данные текущего чанка.
+				// ✅ pipeThrough(transformStream) — Передаёт поток через TransformStream (для преобразования данных)
+				// ✅ pipeTo(writableStream) — Передаёт данные в WritableStream
+				// ✅ tee() — Разделяет поток на два независимых потока (клонирование)
+				// ✅ values({ preventCancel }?) — Асинхронная итерация — самый удобный способ чтения (for await...of)
+				// ✅ cancel(reason?) — Принудительная отмена потока и очистка ресурсов
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				const stream = new ReadableStream(
+					{
+						// Вызывается сразу при создании потока
+						start(controller) {
+							console.log("Поток инициализирован");
+							// controller.enqueue(chunk) — добавить чанк в очередь
+							// controller.close() — завершить поток
+							// controller.error(err) — выбросить ошибку
+						},
+						// Вызывается, когда буфер пуст и нужен новый чанк
+						async pull(controller) {
+							const data = await fetchNextChunk(); // ваша асинхронная логика
+							if (data) {
+								controller.enqueue(data);
+							} else {
+								controller.close(); // нет данных → закрываем поток
+							}
+						},
+						// Вызывается при отмене чтения (например, abort())
+						cancel(reason) {
+							console.log("Поток отменён:", reason);
+							// Освобождение ресурсов: отмена запроса, закрытие файла и т.д.
+						},
+					},
+					{
+						highWaterMark: 16, // макс. чанков в буфере до остановки pull()
+						size(chunk) {
+							return 1;
+						}, // "вес" чанка для backpressure
+					},
+				);
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢AbortController() — Отмена асинхронных операций (например, fetch).⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new AbortController();
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства и методы⁡
+			{
+				// ✅ signal – объект AbortSignal, который передаётся в запрос
+				// ✅ abort(reason?) – отменяет операцию (reason опционален)
+			}
+			// ⚡ ⁡⁣⁣⁢Дополнительно: AbortSignal⁡
+			{
+				// ✅ AbortSignal.abort(reason?) – статический метод, создаёт уже отменённый сигнал
+				// ✅ AbortSignal.timeout(ms) – сигнал, отменяющийся по таймауту (экспериментальный)
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Отмена fetch
+				const controller = new AbortController();
+				const signal = controller.signal;
+
+				fetch("/long-request", { signal })
+					.then((response) => response.json())
+					.catch((err) => {
+						if (err.name === "AbortError") {
+							console.log("Запрос отменён");
+						} else {
+							console.error(err);
+						}
+					});
+
+				// Отмена через 5 секунд
+				setTimeout(() => controller.abort(), 5000);
+
+				// Таймаут с помощью AbortSignal.timeout
+				fetch("/api", { signal: AbortSignal.timeout(3000) }).catch((err) =>
+					console.log(err.name),
+				); // "TimeoutError" или "AbortError"
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢Blob() — Бинарные данные (неизменяемые). Основа для файлов, изображений и т.д.⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new Blob(parts, options);
+				// parts: массив строк, BufferSource, Blob
+				// options: { type: MIME-тип, endings: "transparent" или "native" }
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства⁡
+			{
+				// ✅ size – размер в байтах
+				// ✅ type – MIME-тип
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ slice(start, end, contentType?) – частичная копия
+				// ✅ text() – читает как строку (Promise)
+				// ✅ arrayBuffer() – читает как ArrayBuffer (Promise)
+				// ✅ stream() – возвращает ReadableStream
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Текстовый Blob
+				const blob = new Blob(["<div>Hello</div>"], { type: "text/html" });
+				console.log(blob.size, blob.type);
+
+				// Чтение через text()
+				const text = await blob.text(); // "<div>Hello</div>"
+
+				// Склеивание частей
+				const part1 = new Blob(['{ "a": 1 }'], { type: "application/json" });
+				const part2 = new Blob([', { "b": 2 }']);
+				const combined = new Blob([part1, part2], { type: "application/json" });
+
+				// Скачивание Blob как файла
+				const link = document.createElement("a");
+				link.href = URL.createObjectURL(blob);
+				link.download = "file.html";
+				link.click();
+				URL.revokeObjectURL(link.href);
+			}
+		}
+		// 🔵⁡ ⁡⁣⁡⁣⁢⁢File() — Расширение Blob для файлов (имеет имя и дату модификации).⁡⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new File(bits, name, options);
+				// bits: массив данных (Blob, BufferSource, строка)
+				// name: имя файла
+				// options: { type, lastModified }
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства (дополнительно к Blob)⁡
+			{
+				// ✅ name – имя файла
+				// ✅ lastModified – timestamp последнего изменения
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				// Создание файла из строки
+				const file = new File(["content"], "document.txt", { type: "text/plain" });
+				console.log(file.name); // "document.txt"
+				console.log(file.lastModified);
+
+				// Из input type="file"
+				const fileInput = document.querySelector('input[type="file"]');
+				const uploadedFile = fileInput.files[0];
+
+				// Использование в FormData
+				const fd = new FormData();
+				fd.append("avatar", file, "custom-name.png");
+			}
+		}
+		// 🔵⁡ ⁡⁣⁢⁢FileReader() — Асинхронное чтение содержимого Blob или File (старый API, но иногда полезен).⁡
+		{
+			// ⚡ ⁡⁣⁣⁢Конструктор⁡
+			{
+				new FileReader();
+			}
+			// ⚡ ⁡⁣⁣⁢Методы⁡
+			{
+				// ✅ readAsArrayBuffer(blob) — читает данные как ArrayBuffer — низкоуровневое бинарное представление.
+				// ✅ readAsText(blob, encoding?) — читает данные как текстовую строку.
+				// ✅ readAsDataURL(blob) – получает data: URL — читает данные и возвращает Data URL — строку вида data:[<mediatype>][;base64],
+				// ✅ readAsBinaryString(blob) (устаревший) — читает данные как бинарную строку (каждый байт — символ с кодом 0–255).
+				// ✅ abort() — прерывает текущее чтение файла.
+			}
+			// ⚡ ⁡⁣⁣⁢Свойства⁡
+			{
+				// ✅ result – результат чтения
+				// ✅ error – ошибка
+				// ✅ readyState (0 – EMPTY, 1 – LOADING, 2 – DONE)
+			}
+			// ⚡ ⁡⁣⁣⁢События⁡
+			{
+				// ✅ onloadstart — в момент начала чтения файла (сразу после вызова метода чтения: readAsText(), readAsDataURL() и т. д.).
+				// ✅ onprogress — несколько раз во время чтения файла — по мере поступления данных.
+				// ✅ onload — при успешном завершении чтения файла.
+				// ✅ onerror — если во время чтения произошла ошибка (файл недоступен, повреждён, превышен лимит размера и т. д.).
+				// ✅ onloadend — всегда, после завершения операции чтения — независимо от результата (успех или ошибка).
+			}
+			// ⚡ ⁡⁣⁣⁢Примеры⁡
+			{
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					console.log("DataURL:", e.target.result);
+				};
+				reader.onerror = () => console.error(reader.error);
+				reader.readAsDataURL(file); // file из input
+
+				// Альтернатива с Promise (Blob.text() / blob.arrayBuffer() более современные)
+				const text = await blob.text(); // без FileReader
+			}
+		}
+	}
 	// 🔸 ⁡⁢⁣⁣СВОЙСТВА (__proto__)⁡
 	{
 		// 🔵 ⁡⁣⁢⁢Свойство __proto__ — это свойство, которое существует у каждого объекта в JavaScript. Оно содержит ссылку на объект-прототип, который используется как резервный источник свойств и методов, если исходный объект ими не обладает.⁡
