@@ -570,6 +570,47 @@
 		}
 		console.log([array[0](), array[1]()]);
 	}
+	// 🔹 ⁡⁣⁢⁢Эффективный поиск в отсортированной 2D-матрице⁡
+	{
+		// Найти 9, если число есть true, максимально эфективно, поиск нужнов ести по диагонали отбрасывая ненужные числа
+		function searchInSortedMatrix(matrix, target) {
+			if (!matrix.length || !matrix[0].length) return false;
+
+			let row = 0;
+			let col = matrix[0].length - 1; // начинаем с верхнего правого угла
+
+			while (row < matrix.length && col >= 0) {
+				const current = matrix[row][col];
+
+				if (current === target) {
+					return true; // 🎯 Найдено!
+				} else if (current > target) {
+					col--; // ← текущее число слишком большое, отбрасываем весь столбец
+				} else {
+					row++; // ↓ текущее число слишком маленькое, отбрасываем всю строку
+				}
+			}
+			return false; // ❌ Не найдено
+		}
+		// Тест
+		const arr = [
+			[1, 4, 7, 11, 15],
+			[2, 5, 8, 12, 19],
+			[3, 6, 9, 16, 22],
+			[10, 13, 14, 17, 24],
+			[18, 21, 23, 26, 30],
+		];
+		console.log(searchInSortedMatrix(arr, 9)); // true ✅
+		console.log(searchInSortedMatrix(arr, 20)); // false ❌
+		// Старт: [0][4] = 15
+		// 15 > 9  → влево ←
+		// 11 > 9  → влево ←
+		// 7  < 9  → вниз ↓
+		// 8  < 9  → вниз ↓
+		// 9 === 9 → ✅ Найдено!
+
+		// Путь: 15 → 11 → 7 → 8 → 9 (всего 5 шагов вместо 25)
+	}
 }
 // 🔳 ⁡⁢⁣⁣СТРОКИ⁡
 {

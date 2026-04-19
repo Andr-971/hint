@@ -449,17 +449,17 @@
 				// Получение дескриптора
 				const descriptor = Object.getOwnPropertyDescriptor(person, "name");
 				let ob = {
-					value: "Alice",
-					writable: true,
-					enumerable: true,
-					configurable: true,
+					value: "Alice", // — Значение свойств
+					writable: true, // — Запрещает изменение значения свойства
+					enumerable: true, // — Исключает свойство из перечисления
+					configurable: true, // — Блокирует любые изменения конфигурации свойства
 				};
 				// Определение свойства с дескриптором, по умолчанию
 				Object.defineProperty(person, "id", {
-					value: undefined,
-					writable: false,
-					enumerable: false,
-					configurable: false,
+					value: undefined, // — Значение свойств
+					writable: false, // — Запрещает изменение значения свойства
+					enumerable: false, // — Исключает свойство из перечисления
+					configurable: false, // — Блокирует любые изменения конфигурации свойства
 				});
 				// Массовое определение свойств
 				Object.defineProperties(person, {
@@ -1696,6 +1696,7 @@
 				Object.freeze(obj); //* «замораживает» объект: нельзя добавить/удалить свойства, изменить их дескрипторы или значения (если свойство writable: false). Возвращает: тот же объект.
 				Object.getOwnPropertySymbols(); //* Возвращает массив всех символьных свойств, найденных непосредственно в переданном объекте.
 				Object.getPrototypeOf(); //* Возвращает прототип указанного объекта.
+				Object.setPrototypeOf(obj, proto); //* Изменяет или присваивает прототип объекту
 				Object.is(); //* Определяет, являются ли два значения различимыми (то есть, одинаковыми)
 				Object.fromEntries(iterable); //* Что делает: преобразует итерируемый объект пар (например, массив массивов [ключ, значение]) в объект.
 				{
@@ -3004,11 +3005,28 @@
 		{
 			// ⁡⁣⁣⁢Раньше использовались для создания объектов с общим прототипом:⁡
 			function User(name) {
+				// Приватные свойства (через замыкание)
+				const privateId = "Приватная перменная";
+				let privateNotes = '';
+				// Приватный метод
+				const get = function() {
+					console.log("Приватный метод");
+				}
+				// Публичные свойства
 				this.name = name;
+				// Публичный метод
 				this.greet = function () {
 					console.log(`Привет, ${this.name}!`);
 				};
 			}
+			// Методы в прототипе (общие для всех экземпляров)
+			User.prototype.greet = function() {
+				return `Привет, я ${this.name}`;
+			};
+			// Статические методы (принадлежат конструктору, а не экземплярам)
+			User.createAnonymous = function(age) {
+				return new User('Аноним', age);
+			};
 			const andr = new User("Андрей");
 			andr.greet(); // "Привет, Андрей!"
 		}
@@ -3029,8 +3047,15 @@
 	// ⁡⁣⁣⁢Синтаксический сахар над прототипами:⁡
 	{
 		class User {
+			#privat;
 			constructor(name) {
 				this.name = name;
+			}
+			static hello() {
+				return "Привет!";
+			}
+			#checkName(name) {
+				console.log(name);
 			}
 			greet() {
 				console.log(`Привет, ${this.name}!`);
