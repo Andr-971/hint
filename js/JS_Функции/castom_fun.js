@@ -49,6 +49,7 @@
 		};
 		return [get, set, getTypeOf, reset];
 	}
+	// Использование
 	const [arrGet, arrSet] = myState([]);
 	arrSet((arr) => [...arr, "apple"]);
 	arrSet((arr) => [...arr, "banana"]);
@@ -63,4 +64,40 @@
 	const [boGet, boSet] = myState(true);
 	boSet(false);
 	console.log(boGet());
+}
+// ⁡⁢⁣⁡⁢⁣⁣Кастомная функция изменения и чтение объекта⁡
+{
+	const createCache = () => {
+		const cache = {};
+		return {
+			get: (key) => cache[key],
+			setA: (key, val) => (cache[key] = val),
+			setB: (fn, key) => {
+				// Передаём в функцию текущий кэш и ключ
+				const result = fn(cache, key);
+				// Если функция вернула значение, записываем его по ключу
+				if (result !== undefined) {
+					cache[key] = result;
+				}
+				return cache;
+			},
+		};
+	};
+	const c = createCache();
+	c.setA("a", 1);
+	// const { setB } = createCache()
+	// Используем setB: функция принимает кэш и ключ, возвращает значение для записи
+	c.setB((data, k) => {
+		// Здесь можно выполнять любую логику
+		//   return data["a"] + 10; // например, берём значение "a" и прибавляем 10
+		return 10; // например, берём значение "a" и прибавляем 10
+	}, "b");
+	c.setB((data, k) => {
+		// Здесь можно выполнять любую логику
+		return 2; // например, берём значение "a" и прибавляем 10
+	}, "c");
+	// Использование
+	console.log(c.get("a"));
+	console.log(c.get("b"));
+	console.log(c.get("c"));
 }

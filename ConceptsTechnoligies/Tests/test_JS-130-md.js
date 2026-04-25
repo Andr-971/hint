@@ -1,3 +1,4 @@
+"use strict";
 // 📝 ⁡⁢⁣⁢JAVASCRIPT TEST: MIDDLE-SENIOR (130 ВОПРОСОВ)⁡
 // ⁡⁣⁣⁢Темы: Объекты и массивы • Работа с сетью • Наследование и замыкания⁡
 // Формат: вопрос → варианты → ✅ правильный ответ + комментарий
@@ -770,9 +771,9 @@
 	{
 		const headers = new Headers({ "X-Custom-Header": "a=1" });
 		headers.append("X-Custom-Header", "b=2");
-		console.log(headers.getAll());
+		console.log([...headers.values()][0]);
 		{
-			// ✅ ['a=1', 'b=2'] (getAll() возвращает массив для мультизаголовков)
+			// ✅ 'a=1', 'b=2' 
 			// 'a=1, b=2'
 			// 'b=2'
 			// Ошибка
@@ -783,7 +784,7 @@
 		const res = new Response(null, { status: 204 });
 		console.log(await res.text());
 		{
-			// ✅ '' (204 No Content → пустое тело, text() вернёт пустую строку)
+			// ✅ '' — (204 No Content → пустое тело, text() вернёт пустую строку)
 			// null
 			// undefined
 			// Ошибка
@@ -860,7 +861,7 @@
 	{
 		fetch("/api/data", { method: "HEAD" }).then((res) => console.log(res.body));
 		{
-			// ✅ null (HEAD-запросы не имеют тела, body = null)
+			// ✅ ReadableStream {locked: false}
 			// ReadableStream
 			// undefined
 			// Ошибка
@@ -1417,10 +1418,10 @@
 		};
 		console.log(obj.getX());
 		{
-			// ✅ undefined (Стрелочная функция берёт this из лексической области, не из obj)
+			// undefined (Стрелочная функция берёт this из лексической области, не из obj)
 			// 1
 			// null
-			// Ошибка
+			// ✅ Ошибка // Uncaught TypeError: Cannot read properties of undefined (reading 'x')
 		}
 	}
 	// ⚠️ ⁡⁣⁣⁢111. Что вернёт выражение?⁡

@@ -109,9 +109,9 @@
     ⁡⁣⁣⁢/* Цвет текста в статус баре */⁡
     "statusBar.foreground": "#ffffff",
     ⁡⁣⁣⁢/* Цвет текста в заголовке */⁡
-    "titleBar.activeForeground": "#cccccc",
+    "titleBar.activeForeground": "#ece9e9",
     ⁡⁣⁣⁢/* Цвет текста в боковой панели */⁡
-    "sideBar.foreground": "#cccccc"
+    "sideBar.foreground": "#ece9e9"
   },
   "tokenColors": [
     ⁡⁢⁣⁣/* === СИНТАКСИЧЕСКАЯ ПОДСВЕТКА === */⁡
