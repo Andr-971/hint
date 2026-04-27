@@ -192,7 +192,7 @@
         "constant.language"
       ],
       "settings": {
-        "foreground": "#df042cff"  ⁡⁣⁣⁢/* Зеленый для чисел */⁡
+        "foreground": "#df042cff"  ⁡⁣⁣⁢/* Кирпичный */⁡
       }
     },
     ⁡⁣⁣⁢/* ОПЕРАТОРЫ */⁡
