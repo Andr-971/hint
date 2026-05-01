@@ -3,11 +3,11 @@
 // ⁡⁣⁣⁢Добавляйте свои команды и остальные полезности через Pull request.⁡
 // 💬 ⁡⁣⁢⁢НАСТРОЙКИ⁡
 {
-	// git config user.name "username" // Заменить на новое имя
-	// git config credential.username "username" // Заменить на новое имя
+	// git config user.name "username" // ⁡⁢⁢⁢Заменить на новое имя⁡
+	// git config credential.username "username" // ⁡⁢⁢⁢Заменить на новое имя⁡
 
-	// git config user.email "username" // Заменить на новое почту
-	// git config credential.email "username" // Заменить на новое почту
+	// git config user.email "username" // ⁡⁢⁢⁢Заменить на новое почту⁡
+	// git config credential.email "username" // ⁡⁢⁢⁢Заменить на новое почту⁡
 }
 // 🔳 ⁡⁢⁣⁣ОБЩЕЕ ОПРЕДЕЛЕНИЕ⁡
 {
