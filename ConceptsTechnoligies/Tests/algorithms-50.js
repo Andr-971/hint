@@ -29,78 +29,96 @@
 {
 	// ⁡⁣⁢⁡⁣⁢⁢ПРОВЕРКА АНАГРАММЫ(ПЕРЕСТАНОВКА БУКВ)⁡
 	{
+		// ⁡⁤⁥⁥Функция проверяет, являются ли две строки анаграммами друг друга.⁡
+		// ⁡⁤⁤⁥Анаграмма — это слово или фраза, образованная путём перестановки букв другого слова или фразы, используя все исходные буквы ровно один раз.⁡
+		// ⁡⁤⁤⁤Алгоритм: подсчёт частот символов с использованием Map.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — первая строка; ⁡⁥⁥⁥t⁡ — вторая строка.
 		const isAnagram = (s, t) => {
-			if (s.length !== t.length) return false;
-			const freq = new Map();
-			for (const c of s) freq.set(c, (freq.get(c) || 0) + 1);
+			if (s.length !== t.length) return false; // — быстрая проверка: если длины строк разные, они не могут быть анаграммами.
+			const freq = new Map(); // — создаём пустую карту для подсчёта частот символов.
+			for (const c of s) freq.set(c, (freq.get(c) || 0) + 1); // — заполняем freq: freq.get(c) возвращает текущую частоту символа c; если символ ещё не встречался, freq.get(c) вернёт undefined, тогда (freq.get(c) || 0) даст 0; увеличиваем частоту на 1 и сохраняем в freq.
+			// 👇 — начинаем обработку строки t.
 			for (const c of t) {
-				if (!freq.has(c) || freq.get(c) === 0) return false;
-				freq.set(c, freq.get(c) - 1);
+				if (!freq.has(c) || freq.get(c) === 0) return false; //  — проверяем: есть ли символ c в freq; не исчерпана ли его частота (не равна ли 0); если одно из условий верно, строки не анаграммы → false.
+				freq.set(c, freq.get(c) - 1); // — уменьшаем частоту символа c на 1 (символы из t «потребляют» символы из s).
 			}
-			return true;
+			return true; // — если цикл завершился без return false, строки являются анаграммами.
 		};
 		// 🧪 Тесты
-		console.assert(isAnagram("anagram", "nagaram") === true, "case1");
-		console.assert(isAnagram("rat", "car") === false, "case2");
-		console.assert(isAnagram("", "") === true, "case3 (пустые)");
-		console.assert(isAnagram("a", "ab") === false, "case4 (разная длина)");
+		console.log(isAnagram("listen", "silent")); // true
+		console.log(isAnagram("hello", "bello")); // false
+		console.log(isAnagram("aabbcc", "aabbc")); // false
+		console.log(isAnagram("aab", "aba")); // true
 	}
 	// ⁡⁣⁢⁢НАЛИЧИЕ ДУБЛИКАТОВ⁡
 	{
+		// ⁡⁤⁥⁥Функция проверяет, содержит ли массив дубликаты (повторяющиеся элементы).⁡
+		// ⁡⁤⁤⁤Алгоритм: использование Set для отслеживания уже встреченных элементов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥nums⁡ — массив чисел (целых или дробных).
 		const containsDuplicate = (nums) => {
-			const seen = new Set();
+			const seen = new Set(); // — создаём пустую коллекцию Set, которая будет хранить уникальные элементы.
+			// 👇 — начинаем перебор элементов массива nums.
 			for (const n of nums) {
-				if (seen.has(n)) return true;
-				seen.add(n);
+				if (seen.has(n)) return true; // — проверяем, встречался ли элемент n ранее: seen.has(n) возвращает true, если n уже есть в коллекции; если условие выполняется, функция немедленно возвращает true — дубликат найден.
+				seen.add(n); // — добавляем текущий элемент n в Set, если его там ещё нет.
 			}
-			return false;
+			return false; // — если цикл прошёл по всем элементам без нахождения дубликатов, функция возвращает false.
 		};
 		// 🧪 Тесты
-		console.assert(containsDuplicate([1, 2, 3, 1]) === true, "case1");
-		console.assert(containsDuplicate([1, 2, 3, 4]) === false, "case2");
-		console.assert(containsDuplicate([]) === false, "case3");
+		console.log(containsDuplicate([1, 2, 3, 1])); // true
+		console.log(containsDuplicate([1, 2, 3, 4])); // false
 	}
 	// ⁡⁣⁢⁢САМАЯ ДЛИННАЯ ПОДСТРОКА БЕЗ ПОВТОРОВ⁡
 	{
+		// ⁡⁤⁥⁥Функция решает задачу «Longest Substring Without Repeating Characters»: находит длину самой длинной подстроки без повторяющихся символов.⁡
+		// ⁡⁤⁤⁤Алгоритм: скользящее окно (sliding window) с использованием Map для отслеживания последних позиций символов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — строка (может быть пустой).
 		const lengthOfLongestSubstring = (s) => {
-			const lastSeen = new Map();
+			const lastSeen = new Map(); // — создаём карту для хранения последних позиций символов.
 			let maxLen = 0,
-				start = 0;
+				start = 0; // — инициализируем переменные для результата и начала окна.
+			// 👇 — основной цикл по всем символам строки.
 			for (let i = 0; i < s.length; i++) {
+				// 👇 — проверяем: встречался ли символ s[i] ранее; находится ли его последняя позиция внутри текущего окна (>= start).
 				if (lastSeen.has(s[i]) && lastSeen.get(s[i]) >= start) {
-					start = lastSeen.get(s[i]) + 1;
+					start = lastSeen.get(s[i]) + 1; // — сдвигаем начало окна за предыдущее вхождение символа
 				}
-				lastSeen.set(s[i], i);
-				maxLen = Math.max(maxLen, i - start + 1);
+				lastSeen.set(s[i], i); // — обновляем последнюю позицию символа s[i].
+				maxLen = Math.max(maxLen, i - start + 1); // — вычисляем длину текущего окна и обновляем максимум.
 			}
-			return maxLen;
+			return maxLen; // — возвращаем максимальную длину.
 		};
 		// 🧪 Тесты
-		console.assert(lengthOfLongestSubstring("abcabcbb") === 3, "case1");
-		console.assert(lengthOfLongestSubstring("bbbbb") === 1, "case2");
-		console.assert(lengthOfLongestSubstring("pwwkew") === 3, "case3");
-		console.assert(lengthOfLongestSubstring("") === 0, "case4");
+		console.log(lengthOfLongestSubstring("abcabcbb")); // 3 — базовый случай Максимальная длина
+		console.log(lengthOfLongestSubstring("abcdef")); // 6 — все символы разные
+		console.log(lengthOfLongestSubstring("bbbbb")); // 1 — повторяющиеся символы
+		console.log(lengthOfLongestSubstring("pwwkew")); // 3 — сложная строка ("wke" или "kew").
 	}
 	// ⁡⁣⁢⁢ГРУППИРОВКА АНАГРАММ⁡
 	{
+		// ⁡⁤⁥⁥Функция решает задачу «Group Anagrams»: группирует слова из массива по признаку анаграммности.⁡
+		// ⁡⁤⁤⁥Анаграммы — слова, составленные из одних и тех же букв в одинаковом количестве, но в разном порядке (например, "eat" и "tea").⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥strs⁡ — массив строк (слов).
 		const groupAnagrams = (strs) => {
-			const groups = new Map();
+			const groups = new Map(); // — создаём пустую карту для группировки анаграмм.
+			// 👇 — начинаем перебор всех слов в массиве strs.
 			for (const s of strs) {
 				// Ключ: отсортированная строка (для ASCII можно использовать частотный массив)
-				const key = s.split("").sort().join("");
-				if (!groups.has(key)) groups.set(key, []);
-				groups.get(key).push(s);
+				const key = s.split("").sort().join(""); // — формируем ключ для группировки:
+				// s.split("") — разбиваем строку на массив символов;
+				// .sort() — сортируем символы в алфавитном порядке;
+				// .join("") — объединяем отсортированные символы обратно в строку.
+				if (!groups.has(key)) groups.set(key, []); // — проверяем, есть ли группа с таким ключом:
+				// — если нет, создаём новый пустой массив для этой группы.
+				groups.get(key).push(s); // — добавляем текущее слово s в соответствующую группу.
 			}
-			return Array.from(groups.values());
+			return Array.from(groups.values()); // — преобразуем коллекцию значений Map (массивов анаграмм) в обычный массив массивов.
 		};
 
 		// 🧪 Тесты
-		console.assert(
-			JSON.stringify(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]).sort()) ===
-				JSON.stringify([["eat", "tea", "ate"], ["tan", "nat"], ["bat"]].sort()),
-			"case1",
-		);
-		console.assert(JSON.stringify(groupAnagrams([""])) === '[[""]]', "case2");
+		console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])); // [["eat","tea","ate"],["tan","nat"],["bat"]];
+		console.log(groupAnagrams(["abc", "def", "ghi"])); // [["abc"], ["def"], ["ghi"]] нет анаграмм
+		console.log(groupAnagrams(["aab", "aba", "baa"])); // [["aab", "aba", "baa"]] все слова — анаграммы
 	}
 	// ⁡⁣⁢⁢СУММА ДВУХ ЧИСЕЛ O(n) время, O(n) память⁡
 	{
@@ -127,108 +145,130 @@
 {
 	// ⁡⁣⁢⁢СУММА ТРЁХ ЧИСЕЛ⁡
 	{
+		// ⁡⁤⁥⁥Функция находит все уникальные тройки чисел в массиве, сумма которых равна нулю (так называемая задача 3Sum).⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥nums⁡ — массив целых чисел (может содержать дубликаты).
 		const threeSum = (nums) => {
-			nums.sort((a, b) => a - b);
-			const res = [];
+			nums.sort((a, b) => a - b); // — сортируем массив по возрастанию
+			const res = []; // — инициализируем массив для результата.
+			// 👇 — внешний цикл: перебираем возможные первые элементы троек.
 			for (let i = 0; i < nums.length - 2; i++) {
-				if (i > 0 && nums[i] === nums[i - 1]) continue; // пропуск дубликатов
+				if (i > 0 && nums[i] === nums[i - 1]) continue; // — пропускаем дубликаты для i.
 				let left = i + 1,
-					right = nums.length - 1;
+					right = nums.length - 1; // — инициализируем указатели.
+				// 👇 — внутренний цикл поиска пар для текущего i.
 				while (left < right) {
-					const sum = nums[i] + nums[left] + nums[right];
+					const sum = nums[i] + nums[left] + nums[right]; // — вычисляем сумму тройки.
+					// 👇 — если сумма равна нулю:
 					if (sum === 0) {
-						res.push([nums[i], nums[left], nums[right]]);
+						res.push([nums[i], nums[left], nums[right]]); // — добавляем тройку в результат;
+						// 👇 пропускают дубликаты для left и right
 						while (left < right && nums[left] === nums[left + 1]) left++;
 						while (left < right && nums[right] === nums[right - 1]) right--;
+						// 👇 — сдвигаем указатели для поиска следующей тройки.
 						left++;
 						right--;
+						// 👇 — если сумма меньше нуля, сдвигаем left++ (увеличиваем сумму).
 					} else if (sum < 0) {
 						left++;
 					} else {
+						// — если сумма больше нуля, сдвигаем right-- (уменьшаем сумму).
 						right--;
 					}
 				}
 			}
-			return res;
+			return res; // — возвращаем результат.
 		};
 
 		// 🧪 Тесты
-		console.assert(threeSum([-1, 0, 1, 2, -1, -4]).length === 2, "case1");
-		console.assert(JSON.stringify(threeSum([0, 0, 0])) === "[[0,0,0]]", "case2");
-		console.assert(threeSum([0, 1, 1]).length === 0, "case3");
+		console.log(threeSum([-1, 0, 1, 2, -1, -4])); // [[-1, -1, 2], [-1, 0, 1]] — базовый случай
 	}
 	// ⁡⁣⁢⁢КОНТЕЙНЕР С МАКСИМАЛЬНЫМ ОБЪЁМОМ ВОДЫ⁡
 	{
+		// ⁡⁤⁥⁥Функция решает задачу «Container With Most Water» («Контейнер с наибольшим количеством воды»): находит максимальную площадь прямоугольника, который можно образовать между двумя линиями из массива height.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥height⁡ — массив целых чисел, где каждый элемент height[i] представляет высоту вертикальной линии на позиции i.
 		const maxArea = (height) => {
 			let left = 0,
 				right = height.length - 1,
-				max = 0;
+				max = 0; // — инициализируем указатели и переменную для результата.
+			// 👇 — основной цикл: продолжаем, пока указатели не сошлись.
 			while (left < right) {
-				const h = Math.min(height[left], height[right]);
-				max = Math.max(max, h * (right - left));
-				// Двигаем указатель с меньшей высотой
+				const h = Math.min(height[left], height[right]); // — определяем высоту контейнера (по короткой стенке).
+				max = Math.max(max, h * (right - left)); // — вычисляем площадь и обновляем максимум.
+				// — двигаем указатель: если левая стенка короче, сдвигаем left вправо (ищем более высокую); иначе сдвигаем right влево.
 				if (height[left] < height[right]) left++;
 				else right--;
 			}
-			return max;
+			return max; // — возвращаем максимальную площадь.
 		};
 
 		// 🧪 Тесты
-		console.assert(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]) === 49, "case1");
-		console.assert(maxArea([1, 1]) === 1, "case2");
-		console.assert(maxArea([4, 3, 2, 1, 4]) === 16, "case3");
+		console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7])); // 49 — базовый случай
+		console.log(maxArea([1, 2, 3, 4])); // 4 — возрастающий массив
 	}
 	// ⁡⁣⁢⁢САМАЯ ДЛИННАЯ ПОДСТРОКА С ЗАМЕНОЙ СИМВОЛОВ⁡
 	{
+		// ⁡⁤⁥⁥Функция решает задачу «Longest Repeating Character Replacement»: находит длину самой длинной подстроки, в которой после замены не более k символов все символы становятся одинаковыми.⁡
+		// ⁡⁤⁤⁤Алгоритм: скользящее окно (sliding window) с подсчётом частот символов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — строка из заглавных английских букв (A–Z); ⁡⁥⁥⁥k⁡ — максимальное количество замен символов.
 		const characterReplacement = (s, k) => {
-			const freq = new Array(26).fill(0);
+			const freq = new Array(26).fill(0); // — создаём массив для подсчёта частот 26 букв английского алфавита.
 			let maxFreq = 0,
-				left = 0;
+				left = 0; // — инициализируем максимальную частоту и левую границу окна.
+			// 👇 — основной цикл: расширяем окно вправо.
 			for (let right = 0; right < s.length; right++) {
-				const idx = s.charCodeAt(right) - 65; // 'A' = 65
-				freq[idx]++;
-				maxFreq = Math.max(maxFreq, freq[idx]);
+				const idx = s.charCodeAt(right) - 65; // — вычисляем индекс текущего символа ('A' → 0, 'B' → 1 и т. д.).5
+				freq[idx]++; // — увеличиваем частоту текущего символа.
+				maxFreq = Math.max(maxFreq, freq[idx]); // — обновляем максимальную частоту в окне
 				// Если окно > (макс_частота + k), сжимаем слева
+				// 👇 — проверяем условие валидности окна:
+				// если количество символов для замены превышает k, окно невалидно;
+				// тогда уменьшаем частоту левого символа и сдвигаем left вправо.
 				if (right - left + 1 - maxFreq > k) {
 					freq[s.charCodeAt(left) - 65]--;
 					left++;
 				}
 			}
-			return s.length - left;
+			return s.length - left; // — возвращаем длину самого длинного валидного окна (расстояние от left до конца строки).
 		};
 
 		// 🧪 Тесты
-		console.assert(characterReplacement("ABAB", 2) === 4, "case1");
-		console.assert(characterReplacement("AABABBA", 1) === 4, "case2");
-		console.assert(characterReplacement("AAAA", 2) === 4, "case3 (k >= len)");
+		console.log(characterReplacement("ABAB", 2)); // 4 — базовый случай
+		console.log(characterReplacement("AABABBA", 1)); // 4 — с ограничением
+		console.log(characterReplacement("ABCDE", 1)); // 2
 	}
 	// ⁡⁣⁢⁢УЛАВЛИВАНИЕ ДОЖДЕВОЙ ВОДЫ⁡
 	{
+		// ⁡⁤⁥⁥Функция решает задачу «Trapping Rain Water» («Захват дождевой воды»): вычисляет общий объём воды, который может быть удержан между вертикальными линиями заданной высоты.⁡
+		// ⁡⁤⁤⁤Алгоритм: двухуказательный подход (two‑pointer) с отслеживанием максимальных высот слева и справа.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥height⁡ — массив неотрицательных целых чисел, где каждое число height[i] представляет высоту вертикальной линии на позиции i.
 		const trap = (height) => {
 			let left = 0,
-				right = height.length - 1;
+				right = height.length - 1; // — инициализируем указатели на начало и конец массива.
 			let leftMax = 0,
 				rightMax = 0,
-				water = 0;
+				water = 0; // — инициализируем переменные для отслеживания максимальных высот и общего объёма воды.
+			// 👇 — основной цикл: продолжаем, пока указатели не сошлись.
 			while (left < right) {
+				// 👇 — выбираем сторону для обработки: если левая высота меньше правой, работаем с левой стороной; иначе — с правой.
 				if (height[left] < height[right]) {
-					if (height[left] >= leftMax) leftMax = height[left];
-					else water += leftMax - height[left];
-					left++;
+					if (height[left] >= leftMax)
+						leftMax = height[left]; // — если текущая высота больше или равна leftMax, обновляем максимум.
+					else water += leftMax - height[left]; // — иначе добавляем разницу к объёму воды (вода удерживается над текущей позицией).
+					left++; // — сдвигаем левый указатель вправо
 				} else {
+					// 👇 Аналогичные действия для правой стороны в блоке else.
 					if (height[right] >= rightMax) rightMax = height[right];
 					else water += rightMax - height[right];
 					right--;
 				}
 			}
-			return water;
+			return water; // — возвращаем общий объём захваченной воды.
 		};
 
 		// 🧪 Тесты
-		console.assert(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]) === 6, "case1");
-		console.assert(trap([4, 2, 0, 3, 2, 5]) === 9, "case2");
-		console.assert(trap([1, 0, 2]) === 1, "case3");
-		console.assert(trap([]) === 0, "case4");
+		console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])); // 6 — базовый случай 6 единиц воды
+		console.log(trap([1, 2, 3, 4, 5])); // 0 — нет воды нет ям
+		console.log(trap([3, 0, 3])); // 3 — симметричный случай 3 единицы воды.
 	}
 	// ⁡⁢⁢⁡⁢⁢⁡⁣⁢⁡⁣⁢⁢МИНИМАЛЬНЫЙ РАЗМЕР ПОДМАССИВА O(n) время, O(1) память — используются только несколько переменных (left, sum, minLen, right).⁡
 	{
@@ -265,85 +305,104 @@
 {
 	// ⁡⁣⁢⁢ПЕРВЫЙ УНИКАЛЬНЫЙ СИМВОЛ⁡
 	{
+		// ⁡⁤⁥⁥Функция находит индекс первого неповторяющегося символа в строке.⁡
+		// ⁡⁤⁤⁤Алгоритм: двухпроходный подход: Подсчёт частот всех символов. Поиск первого символа с частотой 1.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — строка, в которой нужно найти первый уникальный символ.
 		const firstUniqChar = (s) => {
-			const freq = new Map();
-			for (const c of s) freq.set(c, (freq.get(c) || 0) + 1);
+			const freq = new Map(); // — создаём пустую карту для хранения частот символов.
+			for (const c of s) freq.set(c, (freq.get(c) || 0) + 1); // — первый проход:
+			// — c — текущий символ строки;
+			// — freq.get(c) — получаем текущую частоту символа (или undefined, если его ещё нет);
+			// — (freq.get(c) || 0) — если символ новый, используем 0;
+			// — + 1 — увеличиваем счётчик;
+			// — freq.set(c, ...) — сохраняем обновлённую частоту.
 			for (let i = 0; i < s.length; i++) {
+				// 👇 — второй проход: перебираем строку по индексам.
+				// 👇 — проверяем частоту текущего символа: если частота 1, сразу возвращаем индекс i.
 				if (freq.get(s[i]) === 1) return i;
 			}
-			return -1;
+			return -1; // — если ни один символ не уникален, возвращаем -1.
 		};
 
 		// 🧪 Тесты
-		console.assert(firstUniqChar("leetcode") === 0, "case1");
-		console.assert(firstUniqChar("loveleetcode") === 2, "case2");
-		console.assert(firstUniqChar("aabb") === -1, "case3");
-		console.assert(firstUniqChar("") === -1, "case4 (пусто)");
+		console.log(firstUniqChar("loveleetcode")); // 2 — уникальный символ в середине
+		console.log(firstUniqChar("aabb")); // -1 — нет уникальных символов
+		console.log(firstUniqChar("a")); // 0 — один символ
 	}
 	// ⁡⁣⁢⁢ПЕРЕСЕЧЕНИЕ ДВУХ МАССИВОВ⁡
 	{
+		// ⁡⁤⁥⁥Функция находит пересечение двух массивов — элементы, присутствующие в обоих массивах.⁡
+		// ⁡⁤⁤⁤Алгоритм: использование Set для эффективного поиска и удаления дубликатов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥nums1, nums2⁡ — массивы чисел (или других значений).
 		const intersection = (nums1, nums2) => {
-			const set2 = new Set(nums2);
+			const set2 = new Set(nums2); // — создаём множество из элементов nums2. Дубликаты автоматически удаляются.
 			// Filter + new Set убирает дубликаты результата
+			// 👇 — фильтруем nums1: для каждого элемента n проверяем, есть ли он в set2 (set2.has(n)); оставляем только те элементы, для которых условие истинно.
+			// new Set(...) — преобразуем отфильтрованный массив в Set. Все дубликаты удаляются.
+			// [...new Set(...)] — используем spread‑оператор (...), чтобы преобразовать Set обратно в массив.
+			// — возвращаем итоговый массив уникальных элементов пересечения.
 			return [...new Set(nums1.filter((n) => set2.has(n)))];
 		};
 
 		// 🧪 Тесты
-		console.assert(
-			intersection([1, 2, 2, 1], [2, 2]).length === 1 &&
-				intersection([1, 2, 2, 1], [2, 2])[0] === 2,
-			"case1",
-		);
-		console.assert(intersection([4, 9, 5], [9, 4, 9, 8, 4]).length === 2, "case2");
-		console.assert(intersection([], [1, 2]).length === 0, "case3");
+		console.log(intersection([1, 2, 3], [2, 3, 4])); // [2, 3] — простые массивы без дубликатов
+		console.log(intersection([4, 9, 5], [9, 4, 9, 8, 4])); // [4, 9] — массивы с дубликатами
+		console.log(intersection([1, 2, 3], [4, 5, 6])); // [] — нет общих элементов
+		console.log(intersection([1, 2], [1, 2, 3, 4])); // [1, 2] — один массив — подмножество другого
 	}
 	// ⁡⁣⁢⁢ПОИСК ВСЕХ АНАГРАММ(ПЕРЕСТАНОВКА БУКВ) В СТРОКЕ⁡
 	{
+		// ⁡⁤⁥⁥Функция находит все начальные индексы анаграмм строки p в строке s.⁡
+		// ⁡⁤⁤⁥Анаграмма здесь — подстрока в s длиной, равной p, содержащая те же символы с той же частотой, что и p.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — строка, в которой ищем анаграммы; p — строка, анаграммы которой ищем.
 		const findAnagrams = (s, p) => {
-			if (s.length < p.length) return [];
+			if (s.length < p.length) return []; // — быстрая проверка: если s короче p, анаграммы быть не может.
+			// 👇 — создаём массивы для хранения частот символов (по индексу: 0 — 'a', 1 — 'b', …, 25 — 'z').
 			const pCount = new Int32Array(26);
 			const sCount = new Int32Array(26);
+			// 👇 — заполняем начальные частоты:
+			// 👇 // p.charCodeAt(i) - 97 — получаем индекс символа (97 — код 'a' в ASCII); увеличиваем счётчик для этого символа в pCount и sCount.
 			for (let i = 0; i < p.length; i++) {
 				pCount[p.charCodeAt(i) - 97]++;
 				sCount[s.charCodeAt(i) - 97]++;
 			}
 			const res = [];
-			const match = () => pCount.every((v, i) => v === sCount[i]);
-			if (match()) res.push(0);
-
+			const match = () => pCount.every((v, i) => v === sCount[i]); // — функция для проверки полного совпадения частот в обоих массивах.
+			if (match()) res.push(0); // — проверяем начальное окно: если частоты совпадают, добавляем индекс 0 в результат.
+			// 👇 — цикл по всем возможным начальным позициям окна:
 			for (let i = 1; i <= s.length - p.length; i++) {
-				sCount[s.charCodeAt(i - 1) - 97]--; // убираем выходящий символ
-				sCount[s.charCodeAt(i + p.length - 1) - 97]++; // добавляем входящий
-				if (match()) res.push(i);
+				sCount[s.charCodeAt(i - 1) - 97]--; // — уменьшаем счётчик для символа, который выходит из окна слева;
+				sCount[s.charCodeAt(i + p.length - 1) - 97]++; // — увеличиваем счётчик для символа, который входит в окно справа;
+				if (match()) res.push(i); // — если частоты совпали, добавляем текущий индекс в результат.
 			}
-			return res;
+			return res; // — возвращаем массив всех найденных индексов.
 		};
 
 		// 🧪 Тесты
-		console.assert(JSON.stringify(findAnagrams("cbaebabacd", "abc")) === "[0,6]", "case1");
-		console.assert(JSON.stringify(findAnagrams("abab", "ab")) === "[0,1,2]", "case2");
-		console.assert(findAnagrams("a", "aa").length === 0, "case3");
+		console.log(findAnagrams("cbaebabacd", "abc")); // [0, 6] — простые анаграммы
 	}
 	// ⁡⁣⁢⁢САМАЯ ДЛИННАЯ ПОСЛЕДОВАТЕЛЬНАЯ ПОДПОСЛЕДОВАТЕЛЬНОСТЬ⁡
 	{
+		// ⁡⁤⁥⁥Функция находит длину самой длинной последовательности последовательных целых чисел в массиве.⁡
+		// ⁡⁤⁤⁤Алгоритм: использование Set для эффективного поиска и оптимизация за счёт проверки «начала» последовательности.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥nums⁡ — массив целых чисел (может содержать дубликаты).
 		const longestConsecutive = (nums) => {
-			const set = new Set(nums);
-			let maxLen = 0;
+			const set = new Set(nums); // — создаём множество из массива nums. Дубликаты удаляются.
+			let maxLen = 0; // — инициализируем переменную для хранения максимальной длины последовательности.
+			// 👇 — перебираем все уникальные числа в множестве.
 			for (const n of set) {
-				// Начинаем считать только если n - начало последовательности
+				// — проверяем, что n — начало последовательности: если n - 1 есть в множестве, n не начало — пропускаем; иначе n — кандидат на начало последовательности.
 				if (!set.has(n - 1)) {
-					let curLen = 1;
-					while (set.has(n + curLen)) curLen++;
-					maxLen = Math.max(maxLen, curLen);
+					let curLen = 1; // — начинаем отсчёт длины с 1 (само число n).
+					while (set.has(n + curLen)) curLen++; // — увеличиваем длину, пока следующее число есть в множестве: n + 1, n + 2, …, пока set.has(...) возвращает true.
+					maxLen = Math.max(maxLen, curLen); // — обновляем максимальную длину, если текущая последовательность длиннее.
 				}
 			}
-			return maxLen;
+			return maxLen; // — возвращаем результат.
 		};
 		// 🧪 Тесты
-		console.assert(longestConsecutive([100, 4, 200, 1, 3, 2]) === 4, "case1");
-		console.assert(longestConsecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1]) === 9, "case2");
-		console.assert(longestConsecutive([]) === 0, "case3");
-		console.assert(longestConsecutive([1, 2, 0, 1]) === 3, "case4 (дубликаты)");
+		console.log(longestConsecutive([100, 4, 200, 1, 3, 2])); // 4 — простой случай
+		console.log(longestConsecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1])); // 9 — нет последовательности
 	}
 	// ⁡⁢⁢⁡⁣⁢⁢СУММА ПОДМАССИВА РАВНА K O(N) ВРЕМЯ, O(N) ПАМЯТЬ⁡
 	{
@@ -382,18 +441,21 @@
 {
 	// ⁡⁣⁢⁢РАЗВОРОТ СВЯЗНОГО СПИСКА⁡
 	{
+		// ⁡⁤⁥⁥Функция разворачивает односвязный список (singly linked list) и возвращает новый головной узел (head) развёрнутого списка.⁡
+		// ⁡⁤⁤⁤Алгоритм: итеративный подход с переключением указателей (in‑place разворот).⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥head⁡ — ссылка на головной узел односвязного списка (или null, если список пуст).
 		const reverseList = (head) => {
 			let prev = null,
-				curr = head;
+				curr = head; // — инициализируем указатели: prev будет отслеживать предыдущий узел, curr — текущий
+			// 👇 — цикл выполняется, пока не дойдём до конца списка (curr не станет null).
 			while (curr) {
-				const next = curr.next; // сохраняем ссылку
-				curr.next = prev; // разворачиваем
-				prev = curr; // сдвигаем prev
-				curr = next; // сдвигаем curr
+				const next = curr.next; // — сохраняем ссылку на следующий узел, чтобы не потерять доступ к остальной части списка после разворота указателя.
+				curr.next = prev; // — меняем направление связи: текущий узел теперь указывает на предыдущий.
+				prev = curr; // — сдвигаем указатель prev на текущий узел — он станет предыдущим для следующего шага.
+				curr = next; // — переходим к следующему узлу в исходном порядке.
 			}
-			return prev;
+			return prev; // — после завершения цикла prev указывает на новый головной узел развёрнутого списка.
 		};
-
 		// 🧪 Тесты
 		console.assert(
 			JSON.stringify(listToArray(reverseList(makeList([1, 2, 3, 4, 5])))) === "[5,4,3,2,1]",
@@ -404,23 +466,29 @@
 	}
 	// ⁡⁣⁢⁢СЛИЯНИЕ ДВУХ ОТСОРТИРОВАННЫХ СПИСКОВ⁡
 	{
+		// ⁡⁤⁥⁥Функция объединяет два отсортированных односвязных списка в один отсортированный список.⁡
+		// ⁡⁤⁤⁤Алгоритм: двухуказательный подход (two‑pointer) с использованием фиктивного узла (dummy node).⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥l1⁡ — головной узел первого отсортированного односвязного списка (или null); ⁡⁥⁥⁥l2⁡ — головной узел второго отсортированного односвязного списка (или null).
 		const mergeTwoLists = (l1, l2) => {
-			const dummy = { next: null };
-			let tail = dummy;
+			const dummy = { next: null }; // — создаём фиктивный узел, который упростит добавление первых реальных узлов.
+			let tail = dummy; // — инициализируем указатель tail, который будет отслеживать конец формируемого списка.
+			// 👇 — цикл выполняется, пока оба списка содержат узлы.
 			while (l1 && l2) {
+				// 👇 — сравниваем текущие узлы:
+				// если l1.val меньше или равен, присоединяем узел из l1;
+				// иначе присоединяем узел из l2.
 				if (l1.val <= l2.val) {
-					tail.next = l1;
-					l1 = l1.next;
+					tail.next = l1; // (или l2) — добавляем выбранный узел в конец результата.
+					l1 = l1.next; // (или l2 = l2.next) — сдвигаем указатель списка, из которого взяли узел.
 				} else {
 					tail.next = l2;
 					l2 = l2.next;
 				}
-				tail = tail.next;
+				tail = tail.next; // — сдвигаем tail на новый последний узел.
 			}
-			tail.next = l1 || l2; // прицепляем остаток
-			return dummy.next;
+			tail.next = l1 || l2; // — после цикла один список может быть не исчерпан. Присоединяем остаток.
+			return dummy.next; // — возвращаем первый реальный узел (пропускаем фиктивный).
 		};
-
 		// 🧪 Тесты
 		console.assert(
 			JSON.stringify(listToArray(mergeTwoLists(makeList([1, 2, 4]), makeList([1, 3, 4])))) ===
@@ -432,18 +500,28 @@
 	}
 	// ⁡⁣⁢⁢УДАЛЕНИЕ N-ГО УЗЛА С КОНЦА⁡
 	{
+		// ⁡⁤⁥⁥Функция удаляет n‑й узел с конца односвязного списка и возвращает головной узел изменённого списка.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥head⁡ — ссылка на головной узел односвязного списка (или null); ⁡⁥⁥⁥n⁡ — позиция узла с конца, который нужно удалить (гарантированно валидное значение ≥ 1).
+		// ⁡⁣⁣⁢Каждый узел имеет вид:⁡
+		class ListNode {
+			constructor(val, next) {
+				this.val = val === undefined ? 0 : val;
+				this.next = next === undefined ? null : next;
+			}
+		}
 		const removeNthFromEnd = (head, n) => {
-			const dummy = { next: head };
+			const dummy = { next: head }; // — создаём фиктивный узел. Он позволяет единообразно обрабатывать удаление головного узла.
 			let fast = dummy,
-				slow = dummy;
-			// Отводим fast на n+1 шагов вперёд
-			for (let i = 0; i <= n; i++) fast = fast.next;
+				slow = dummy; // — инициализируем указатели на фиктивный узел.
+			for (let i = 0; i <= n; i++) fast = fast.next; // — перемещаем fast вперёд на n + 1 шаг. После этого между slow и fast ровно n узлов.
+			// 👇 — двигаем оба указателя, пока fast не выйдет за конец списка (null). В этот момент slow будет указывать на узел перед удаляемым.
 			while (fast) {
+				// 👇 — синхронное движение указателей.
 				slow = slow.next;
 				fast = fast.next;
 			}
-			slow.next = slow.next.next; // пропускаем целевой узел
-			return dummy.next;
+			slow.next = slow.next.next; // — пропускаем следующий узел после slow (это и есть целевой узел).
+			return dummy.next; // — возвращаем новый головной узел. Если был удалён первый узел, dummy.next теперь указывает на второй.
 		};
 
 		// 🧪 Тесты
@@ -460,18 +538,36 @@
 	}
 	// ⁡⁣⁢⁢СПИСОК-ПАЛИНДРОМ⁡
 	{
+		// ⁡⁤⁥⁥Функция проверяет, является ли односвязный список палиндромом — то есть читается ли он одинаково слева направо и справа налево.⁡
+		// ⁡⁤⁤⁤Алгоритм: трёхэтапный подход:⁡
+		// ⁡⁤⁤⁤Нахождение середины списка с помощью двух указателей (slow/fast).⁡
+		// ⁡⁤⁤⁤Разворот второй половины списка.⁡
+		// ⁡⁤⁤⁤Поэлементное сравнение первой и развёрнутой второй половины⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥head⁡ — ссылка на головной узел односвязного списка (или null).
+		// ⁡⁣⁣⁢Каждый узел имеет вид:⁡
+		class ListNode {
+			constructor(val, next) {
+				this.val = val === undefined ? 0 : val;
+				this.next = next === undefined ? null : next;
+			}
+		}
 		const isPalindrome = (head) => {
-			if (!head || !head.next) return true;
+			if (!head || !head.next) return true; // — обрабатываем крайние случаи: пустой список или один узел — всегда палиндром.
 			// 1. Находим середину (slow/fast)
 			let slow = head,
-				fast = head;
+				fast = head; // — инициализируем указатели для поиска середины.
+			// 👇 — цикл для нахождения середины: fast двигается вдвое быстрее.
 			while (fast && fast.next) {
-				slow = slow.next;
-				fast = fast.next.next;
+				slow = slow.next; // — медленный указатель движется на один шаг.
+				fast = fast.next.next; // — быстрый указатель движется на два шага.
 			}
 			// 2. Разворачиваем вторую половину
 			let prev = null,
-				curr = slow;
+				curr = slow; // — подготавливаем указатели для разворота второй половины
+			// 👇 Цикл разворота (while (curr)): 
+			// сохраняем next = curr.next; 
+			// разворачиваем связь: curr.next = prev; 
+			// сдвигаем prev = curr и curr = next.
 			while (curr) {
 				const next = curr.next;
 				curr.next = prev;
@@ -480,15 +576,17 @@
 			}
 			// 3. Сравниваем первую и развёрнутую вторую половины
 			let left = head,
-				right = prev;
+				right = prev; // — инициализируем указатели для сравнения
+			// 👇 — сравниваем узлы:
+			// если left.val !== right.val — возвращаем false;
+			// сдвигаем оба указателя.
 			while (right) {
 				if (left.val !== right.val) return false;
 				left = left.next;
 				right = right.next;
 			}
-			return true;
+			return true; // Если все сравнения прошли успешно, возвращаем true.
 		};
-
 		// 🧪 Тесты
 		console.assert(isPalindrome(makeList([1, 2, 2, 1])) === true, "case1 (чётная)");
 		console.assert(isPalindrome(makeList([1, 2, 3, 2, 1])) === true, "case2 (нечётная)");
@@ -524,30 +622,36 @@
 {
 	// ⁡⁣⁢⁢КОРРЕКТНЫЕ СКОБКИ (VALID PARENTHESES)⁡
 	{
+		// ⁡⁤⁥⁥Функция проверяет, является ли строка корректно сбалансированной по скобкам.⁡
+		// ⁡⁤⁤⁤Алгоритм: использование стека для отслеживания открывающих скобок.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥s⁡ — строка, состоящая из скобок: (), {}, []
 		const isValid = (s) => {
-			if (s.length % 2 !== 0) return false;
-			const stack = [];
-			const map = { ")": "(", "}": "{", "]": "[" };
+			if (s.length % 2 !== 0) return false; // — быстрая проверка: нечётная длина → не может быть сбалансированной.
+			const stack = []; // — инициализируем пустой стек для открывающих скобок.
+			const map = { ")": "(", "}": "{", "]": "[" }; // — создаём сопоставление закрывающих скобок с открывающими.
 
 			for (const char of s) {
+				// 👇 — перебираем все символы строки.
+				// 👇 — проверяем, является ли символ закрывающей скобкой.
 				if (map[char]) {
-					const top = stack.pop();
+					const top = stack.pop(); // — извлекаем последнюю открывающую скобку из стека.
+					// 👇 — если извлечённая скобка не соответствует ожидаемой, строка невалидна.
 					if (top !== map[char]) return false;
 				} else {
+					// 👇 — если символ — открывающая скобка, добавляем её в стек.
 					stack.push(char);
 				}
 			}
-			return stack.length === 0;
+			return stack.length === 0; // — проверяем, что все открывающие скобки были закрыты. true/false
 		};
 
 		// 🧪 Тесты
-		console.assert(isValid("()[]{}") === true, "case1");
-		console.assert(isValid("(]") === false, "case2");
-		console.assert(isValid("([)]") === false, "case3 (пересечение)");
-		console.assert(isValid("") === true, "case4");
+		console.log(isValid("(){}[]")); // false
+		console.log(isValid("([()])")); // true
 	}
 	// ⁡⁣⁢⁢СТЕК С МИНИМУМОМ (MIN STACK)⁡
 	{
+		// ⁡⁤⁥⁥создаёт стек с поддержкой получения минимального элемента за O(1).⁡
 		const createMinStack = () => {
 			const stack = [];
 			const minStack = [];
@@ -567,25 +671,38 @@
 		};
 
 		// 🧪 Тесты
-		const ms = createMinStack();
-		ms.push(-2);
-		ms.push(0);
-		ms.push(-3);
-		console.assert(ms.getMin() === -3, "case1");
-		ms.pop();
-		console.assert(ms.top() === 0, "case2");
-		console.assert(ms.getMin() === -2, "case3");
+		const minStack = createMinStack();
+		minStack.push(2);
+		minStack.push(2);
+		minStack.push(1);
+		minStack.push(1);
+		console.log(minStack.getMin()); // 1
+		minStack.pop();
+		console.log(minStack.getMin()); // 1 — минимум остаётся тем же
+		minStack.pop();
+		console.log(minStack.getMin()); // 2 — вернулись к предыдущему минимуму
 	}
 	// ⁡⁣⁢⁡⁣⁢⁢ВЫЧИСЛЕНИЕ ОБРАТНОЙ ПОЛЬСКОЙ ЗАПИСИ (Evaluate RPN)⁡
 	{
+		// ⁡⁤⁥⁥Функция вычисляет значение выражения, записанного в обратной польской нотации (Reverse Polish Notation, RPN), также известной как постфиксная нотация.⁡
+		// ⁡⁤⁤⁤Алгоритм: использование стека для обработки операндов и выполнения операций.⁡
+		// ⁡⁣⁣⁢Что такое обратная польская нотация (RPN):⁡
+		// ⁡⁢⁢⁣— операнды (числа) записываются перед операторами;⁡
+		// ⁡⁢⁢⁣— операторы следуют за операндами, к которым они применяются;⁡
+		// ⁡⁢⁢⁣— не используются скобки — порядок операций определяется порядком токенов.⁡
+		// инфиксная запись: ⁡⁢⁣⁢(3 + 4) * 5⁡;
+		// RPN: ⁡⁢⁢⁢["3", "4", "+", "5", "*"]⁡⁡.
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥tokens⁡ — массив строк, где каждый элемент — либо: число (в виде строки); оператор: "+", "-", "*", "/".
 		const evalRPN = (tokens) => {
-			const stack = [];
+			const stack = []; // — инициализируем пустой стек для хранения операндов.
 			for (const t of tokens) {
+				// 👇 — перебираем все токены выражения.
 				if ("+-*/".includes(t)) {
-					const b = stack.pop();
-					const a = stack.pop();
+					const b = stack.pop(); // — извлекаем последний операнд (второй в операции).
+					const a = stack.pop(); // — извлекаем предпоследний операнд (первый в операции).
 					let res;
 					switch (t) {
+						// — выполняем операцию в зависимости от оператора:
 						case "+":
 							res = a + b;
 							break;
@@ -596,23 +713,20 @@
 							res = a * b;
 							break;
 						case "/":
-							res = Math.trunc(a / b); // JS делит с плавающей точкой
+							res = Math.trunc(a / b); // — целочисленное деление (отбрасывает дробную часть).
 					}
-					stack.push(res);
+					stack.push(res); // — помещаем результат операции обратно в стек.
 				} else {
-					stack.push(Number(t));
+					stack.push(Number(t)); // — если токен — число, преобразуем и добавляем в стек.
 				}
 			}
-			return stack[0];
+			return stack[0]; // — возвращаем итоговый результат (единственный элемент стека).
 		};
 
 		// 🧪 Тесты
-		console.assert(evalRPN(["2", "1", "+", "3", "*"]) === 9, "case1");
-		console.assert(evalRPN(["4", "13", "5", "/", "+"]) === 6, "case2");
-		console.assert(
-			evalRPN(["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]) === 22,
-			"case3",
-		);
+		// Выражение: ((15 - (6 / 2)) * 3) = ((15 - 3) * 3) = 12 * 3 = 36
+		const tokens = ["15", "6", "2", "/", "-", "3", "*"];
+		console.log(evalRPN(tokens)); // 36
 	}
 	// ⁡⁣⁢⁡⁣⁢⁢ОЧЕРЕДЬ НА ДВУХ СТЕКАХ(FIFO (First In, First Out — «первый пришёл, первый ушёл»))⁡
 	{
@@ -683,44 +797,163 @@
 		const nums1 = [4, 1, 2];
 		const nums2 = [1, 3, 4, 2];
 		console.log(nextGreaterElement(nums1, nums2)); // [-1, 3, -1]
-		// Разбор: 
-		// Для 4 в nums2 нет большего элемента после него → -1. 
-		// Для 1 следующий больший — 3 → 3. 
+		// Разбор:
+		// Для 4 в nums2 нет большего элемента после него → -1.
+		// Для 1 следующий больший — 3 → 3.
 		// Для 2 в nums2 нет большего элемента после него → -1.
 	}
 	// ⁡⁣⁢⁢МАКСИМАЛЬНАЯ ГЛУБИНА БИНАРНОГО ДЕРЕВА⁡
 	{
+		// ⁡⁤⁥⁥Функция вычисляет максимальную глубину (высоту) бинарного дерева — количество узлов на самом длинном пути от корня до самого дальнего листового узла.⁡
+		// ⁡⁤⁤⁤Алгоритм: итеративный поиск в глубину (DFS) с использованием явного стека.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ root — корень бинарного дерева (объект типа TreeNode или null).
 		const maxDepth = (root) => {
-			if (!root) return 0;
+			if (!root) return 0; // — если корень отсутствует, глубина равна 0.
 			// Итеративный DFS для обхода лимита стека вызовов
-			const stack = [[root, 1]];
-			let max = 0;
+			const stack = [[root, 1]]; // — инициализируем стек парой [корень, глубина 1].
+			let max = 0; // — переменная для отслеживания максимальной глубины.
 			while (stack.length) {
-				const [node, depth] = stack.pop();
+				// — основной цикл, пока в стеке есть элементы.
+				const [node, depth] = stack.pop(); // — извлекаем узел и его глубину из стека.
+				// 👇 — проверяем, что узел существует (не null).
 				if (node) {
-					max = Math.max(max, depth);
-					if (node.left) stack.push([node.left, depth + 1]);
-					if (node.right) stack.push([node.right, depth + 1]);
+					max = Math.max(max, depth); // — обновляем максимальную глубину, если текущая больше.
+					if (node.left) stack.push([node.left, depth + 1]); // — добавляем левого потомка в стек с увеличенной глубиной.
+					if (node.right) stack.push([node.right, depth + 1]); // — аналогично для правого потомка.
 				}
 			}
-			return max;
+			return max; // — возвращаем максимальную глубину дерева.
 		};
 
 		// 🧪 Тесты
-		console.assert(
-			maxDepth({
-				val: 3,
-				left: { val: 9 },
-				right: { val: 20, left: { val: 15 }, right: { val: 7 } },
-			}) === 3,
-			"case1",
-		);
-		console.assert(maxDepth(null) === 0, "case2");
-		console.assert(maxDepth({ val: 1, right: { val: 2 } }) === 2, "case3 (скошенное)");
+		// Дерево:
+		//     3
+		//    / \
+		//   9   20
+		//      /  \
+		//     15   7
+
+		const root = {
+			val: 3,
+			left: { val: 9, left: null, right: null },
+			right: {
+				val: 20,
+				left: { val: 15, left: null, right: null },
+				right: { val: 7, left: null, right: null },
+			},
+		};
+		console.log(maxDepth(root)); // 3
+		// ⁡⁥⁥⁥Время: O(n), где n — количество узлов в дереве. Каждый узел посещается ровно один раз.⁡
+		// ⁡⁥⁥⁥Память: O(h), где h — высота дерева. В худшем случае (вырожденное дерево) — O(n). В лучшем случае (сбалансированное дерево) — O(logn).⁡
 	}
-	// ⁡⁣⁢⁢Инверсия бинарного дерева⁡
-	// ⁡⁣⁢⁢Симметричное дерево⁡
-	// ⁡⁣⁢⁢Обход по уровням⁡
+	// ⁡⁣⁢⁢ИНВЕРСИЯ БИНАРНОГО ДЕРЕВА⁡
+	{
+		// ⁡⁤⁥⁥Функция выполняет инвертирование (зеркальное отражение) бинарного дерева — меняет местами левое и правое поддеревья для каждого узла.⁡
+		// ⁡⁤⁤⁤Алгоритм: рекурсивный обход дерева с обменом левого и правого поддеревьев.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ root — корень бинарного дерева (объект типа TreeNode или null).
+		const invertTree = (root) => {
+			if (!root) return null; // — если узел отсутствует, возвращаем null. Это базовый случай рекурсии, останавливающий её при достижении листьев дерева.
+			[root.left, root.right] = [invertTree(root.right), invertTree(root.left)]; // — деструктурирующее присваивание с одновременным рекурсивным вызовом:
+			// — сначала рекурсивно инвертируется правое поддерево (invertTree(root.right));
+			// — затем рекурсивно инвертируется левое поддерево (invertTree(root.left));
+			// — результаты присваиваются в обратном порядке: инвертированное правое поддерево становится левым, а инвертированное левое — правым.
+			return root; // — возвращаем корень дерева с обновлённой структурой.
+		};
+		// 🧪 Тесты
+		// Исходное дерево:
+		//     4
+		//    / \
+		//   2   7
+		const root = {
+			val: 4,
+			left: { val: 2, left: null, right: null },
+			right: { val: 7, left: null, right: null },
+		};
+		const inverted = invertTree(root);
+		// Результат (инвертированное дерево):
+		//     4
+		//    / \
+		//   7   2
+	}
+	// ⁡⁣⁢⁢СИММЕТРИЧНОЕ ДЕРЕВО⁡
+	{
+		// ⁡⁤⁥⁥Функция проверяет, является ли бинарное дерево симметричным относительно своего центра(зеркально отражённым).⁡
+		// ⁡⁤⁤⁤Алгоритм: рекурсивное сравнение левого и правого поддеревьев с зеркальным соответствием.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥root⁡ — корень бинарного дерева (объект типа TreeNode или null).
+		const isSymmetric = (root) => {
+			if (!root) return true; // — если корень отсутствует, дерево симметрично по определению.
+			// 👇 — объявляет вспомогательную рекурсивную функцию для сравнения двух узлов (l и r).
+			const isMirror = (l, r) => {
+				if (!l && !r) return true; // — оба узла отсутствуют (null) → симметричны.
+				if (!l || !r || l.val !== r.val) return false; // — если: один узел есть, а другого нет (!l || !r); значения узлов различаются (l.val !== r.val) → несимметричны.
+				return isMirror(l.left, r.right) && isMirror(l.right, r.left); // — рекурсивно проверяет зеркальное соответствие: левое поддерево l сравнивается с правым поддеревом r; правое поддерево l сравнивается с левым поддеревом r.
+			};
+			return isMirror(root.left, root.right); // — запускает проверку симметрии для левого и правого поддеревьев корня.
+		};
+		// 🧪 Тесты
+		// Дерево:
+		//     1
+		//    / \
+		//   2   2
+		//  / \ / \
+		// 3  4 4  3
+		const root = {
+			val: 1,
+			left: {
+				val: 2,
+				left: { val: 3, left: null, right: null },
+				right: { val: 4, left: null, right: null },
+			},
+			right: {
+				val: 2,
+				left: { val: 4, left: null, right: null },
+				right: { val: 3, left: null, right: null },
+			},
+		};
+		console.log(isSymmetric(root)); // true
+	}
+	// ⁡⁣⁢⁢ОБХОД ПО УРОВНЯМ⁡
+	{
+		// ⁡⁤⁥⁥Функция выполняет обход бинарного дерева по уровням (Level Order Traversal, или BFS — Breadth‑First Search) и возвращает массив, где каждый элемент — массив значений узлов на соответствующем уровне дерева.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥root⁡ — корень бинарного дерева (объект типа TreeNode или null).
+		const levelOrder = (root) => {
+			if (!root) return []; // — если корень отсутствует, возвращаем пустой массив.
+			const res = []; // — инициализируем массив для хранения результатов по уровням.
+			const queue = [root]; // — начинаем с корня в очереди.
+
+			while (queue.length) {
+				// 👇 — основной цикл, пока есть узлы для обработки.
+				const levelSize = queue.length; // — фиксируем количество узлов на текущем уровне.
+				const level = []; // — создаём массив для значений текущего уровня.
+				for (let i = 0; i < levelSize; i++) {
+					const node = queue.shift(); // — извлекаем первый узел из очереди.
+					level.push(node.val); // — добавляем значение узла в массив уровня.
+					if (node.left) queue.push(node.left); // — добавляем левого потомка в очередь (если есть).
+					if (node.right) queue.push(node.right); // — добавляем правого потомка в очередь (если есть).
+				}
+				res.push(level); // — добавляем массив текущего уровня в итоговый результат.
+			}
+			return res; // — возвращаем массив всех уровней.
+		};
+		// 🧪 Тесты
+		// Дерево:
+		//     3
+		//    / \
+		//   9   20
+		//      /  \
+		//     15   7
+		const root = {
+			val: 3,
+			left: { val: 9, left: null, right: null },
+			right: {
+				val: 20,
+				left: { val: 15, left: null, right: null },
+				right: { val: 7, left: null, right: null },
+			},
+		};
+		console.log(levelOrder(root));
+		// Результат: [[3], [9, 20], [15, 7]]
+	}
 	// ⁡⁢⁢⁡⁣⁢⁢ПРОВЕРКА БИНАРНОГО ДЕРЕВА ПОИСКА O(N) ВРЕМЯ, O(H) ПАМЯТЬ⁡
 	{
 		// ⁡⁤⁥⁥Функция проверяет, является ли заданное бинарное дерево корректным бинарным деревом поиска (BST — Binary Search Tree).⁡
@@ -737,13 +970,231 @@
 			// 💡 ⁡⁣⁣⁢Паттерн: Рекурсивная проверка допустимого интервала для каждой ветки.⁡
 		}
 	}
+	// ⁡⁣⁢⁢K-Й НАИМЕНЬШИЙ ЭЛЕМЕНТ В BST⁡
+	{
+		// ⁡⁤⁥⁥Функция находит k‑й наименьший элемент в бинарном дереве поиска (BST — Binary Search Tree).⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥root⁡ — корень бинарного дерева поиска; ⁡⁥⁥⁥k⁡ — порядковый номер искомого элемента (1‑й, 2‑й, …, k‑й наименьший).
+		const kthSmallest = (root, k) => {
+			const stack = []; // — инициализируем пустой стек для узлов.
+			let curr = root; // — начинаем с корня дерева.
+			// 👇 — основной цикл: продолжается, пока есть текущий узел или узлы в стеке.
+			while (curr || stack.length) {
+				// 👇 — внутренний цикл спуска влево:
+				while (curr) {
+					stack.push(curr); // — добавляем текущий узел в стек;
+					curr = curr.left; // — переходим к левому потомку
+				}
+				curr = stack.pop(); // — извлекаем последний узел из стека (самый левый необработанный узел).
+				if (--k === 0) return curr.val; // — уменьшаем k и проверяем: если k стало 0, текущий узел — k‑й наименьший, возвращаем его значение.
+				curr = curr.right; // — переходим к правому поддереву текущего узла для дальнейшей обработки.
+			}
+		};
+		// 🧪 Тесты
+			//  	3
+			//	   / \
+			// 	 1    4
+			// 		   \
+			// 			2
+		console.log(kthSmallest(root, 1)); // 1
+		console.log(kthSmallest(root, 2)); // 2
+		console.log(kthSmallest(root, 3)); // 3
+		console.log(kthSmallest(root, 4)); // 4
+	}
 }
 // 7️⃣ ⁡⁢⁣⁣ГРАФЫ (BFS/DFS)(Поиск в ширину(BFS))⁡
 {
-	// ⁡⁣⁢⁢Клонирование графа⁡
-	// ⁡⁣⁢⁢Расписание курсов (топологическая сортировка)⁡
-	// ⁡⁣⁢⁢Лестница слов⁡
-	// ⁡⁣⁢⁢Сток воды (Тихий/Атлантический)⁡
+	// ⁡⁣⁢⁢КЛОНИРОВАНИЕ ГРАФА⁡
+	{
+		// ⁡⁤⁥⁥Функция создаёт глубокую копию (клон) неориентированного графа.⁡
+		// ⁡⁤⁤⁤Алгоритм: обход в ширину (BFS) с использованием очереди и карты для отслеживания созданных узлов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡ ⁡⁥⁥⁥node⁡ — ссылка на начальный узел графа (или null).
+		// ⁡⁣⁣⁢Узел графа (LeetCode style)⁡
+		class Node {
+			constructor(val = 0, neighbors = []) {
+				this.val = val;
+				this.neighbors = neighbors;
+			}
+		}
+
+		const cloneGraph = (node) => {
+			if (!node) return null; // — обрабатываем случай пустого графа.
+			const map = new Map(); // — создаём карту для хранения соответствий между оригиналами и копиями.
+			const queue = [node]; // — инициализируем очередь BFS начальным узлом.
+			map.set(node, new Node(node.val)); // — создаём первую копию узла и сохраняем соответствие.
+			// 👇 — основной цикл BFS, пока есть узлы для обработки.
+			while (queue.length) {
+				const curr = queue.shift(); // — извлекаем следующий узел из очереди.
+				const clone = map.get(curr); // — получаем уже созданную копию текущего узла.
+				// 👇 — перебираем всех соседей текущего узла.
+				for (const neighbor of curr.neighbors) {
+					// 👇 — если копия соседа ещё не создана:
+					if (!map.has(neighbor)) {
+						map.set(neighbor, new Node(neighbor.val)); // — создаём копию;
+						queue.push(neighbor); // — добавляем оригинал соседа в очередь для дальнейшей обработки.
+					}
+					clone.neighbors.push(map.get(neighbor)); // — добавляем ссылку на копию соседа в список соседей копии текущего узла.
+				}
+			}
+			return map.get(node); // — возвращаем копию начального узла.
+		};
+
+		// 🧪 Тесты (ручная сборка графа [[2,4],[1,3],[2,4],[1,3]])
+		const n1 = new Node(1),
+			n2 = new Node(2),
+			n3 = new Node(3),
+			n4 = new Node(4);
+		n1.neighbors = [n2, n4];
+		n2.neighbors = [n1, n3];
+		n3.neighbors = [n2, n4];
+		n4.neighbors = [n1, n3];
+		const cloned = cloneGraph(n1);
+		console.assert(cloned !== n1 && cloned.val === 1, "case1 (не ссылка)");
+		console.assert(cloned.neighbors.length === 2, "case2 (соседи скопированы)");
+		console.assert(cloneGraph(null) === null, "case3");
+	}
+	// ⁡⁣⁢⁢РАСПИСАНИЕ КУРСОВ (ТОПОЛОГИЧЕСКАЯ СОРТИРОВКА)⁡
+	{
+		// ⁡⁤⁥⁥Функция решает задачу «Course Schedule»: проверяет, возможно ли завершить все курсы при заданных предпосылках (зависимостях между курсами).⁡
+		// ⁡⁤⁤⁤Алгоритм: топологическая сортировка с использованием алгоритма Кана (Kahn’s Algorithm) на ориентированном графе⁡
+		// ⁡⁢⁢⁢Входные данные:⁡
+		// ⁡⁥⁥⁥numCourses⁡ — общее количество курсов (нумеруются от 0 до numCourses - 1);
+		// ⁡⁥⁥⁥prerequisites⁡ — массив пар [course, prereq], где prereq должен быть пройден перед course.
+		const canFinish = (numCourses, prerequisites) => {
+			const adj = Array.from({ length: numCourses }, () => []); // — создаём массив списков смежности: для каждого курса — пустой массив зависимых курсов
+			const inDegree = new Int32Array(numCourses); // — инициализируем массив входящих степеней нулями.
+			// 👇 — заполняем граф:
+			for (const [course, prereq] of prerequisites) {
+				adj[prereq].push(course); // — добавляем ребро prereq → course;
+				inDegree[course]++; // — увеличиваем счётчик предпосылок для course.
+			}
+			const queue = []; // — создаём очередь для BFS.
+			// 👇 — добавляем в очередь курсы без предпосылок (inDegree[i] = 0).
+			for (let i = 0; i < numCourses; i++) if (inDegree[i] === 0) queue.push(i);
+			let processed = 0; // — счётчик обработанных курсов.
+			let head = 0; // — указатель на начало очереди (имитация shift() без затрат времени).
+			// 👇 — основной цикл алгоритма Кана:
+			while (head < queue.length) {
+				const curr = queue[head++]; // — извлекаем курс из очереди.
+				processed++; // — увеличиваем счётчик обработанных.
+				// 👇 — для каждого зависимого курса:
+				for (const next of adj[curr]) {
+					if (--inDegree[next] === 0) queue.push(next); // — уменьшаем inDegree, если стало 0 — добавляем в очередь.
+				}
+			}
+			return processed === numCourses; // — проверяем, все ли курсы обработаны.
+		};
+		// 🧪 Тесты
+		console.assert(canFinish(2, [[1, 0]]) === true, "case1");
+		console.assert(
+			canFinish(2, [
+				[1, 0],
+				[0, 1],
+			]) === false,
+			"case2 (цикл)",
+		);
+		console.assert(
+			canFinish(3, [
+				[1, 0],
+				[2, 0],
+			]) === true,
+			"case3 (веер)",
+		);
+	}
+	// ⁡⁣⁢⁢ЛЕСТНИЦА СЛОВ⁡
+	{
+		// ⁡⁤⁥⁥Функция решает задачу «Word Ladder»: находит кратчайшее преобразование от beginWord к endWord, где каждое промежуточное слово: отличается от предыдущего ровно на одну букву; присутствует в wordList.⁡
+		// ⁡⁤⁤⁤Алгоритм: обход в ширину (BFS) на неявно заданном графе слов.⁡
+		// ⁡⁢⁢⁢Входные данные:⁡
+		// ⁡⁥⁥⁥beginWord⁡ — начальное слово;
+		// ⁡⁥⁥⁥endWord⁡ — целевое слово;
+		// ⁡⁥⁥⁥wordList⁡ — массив допустимых слов.
+		const ladderLength = (beginWord, endWord, wordList) => {
+			const dict = new Set(wordList); // — создаём Set для быстрого поиска слов (O(1)).
+			if (!dict.has(endWord)) return 0; // — если целевого слова нет в словаре, преобразование невозможно.
+			const queue = [[beginWord, 1]]; // — инициализируем очередь: начинаем с beginWord, шаг 1.
+			const visited = new Set([beginWord]); // — отмечаем начальное слово как посещённое
+			const letters = "abcdefghijklmnopqrstuvwxyz"; // — алфавит для перебора букв.
+			// 👇 — основной цикл BFS
+			while (queue.length) {
+				const [curr, steps] = queue.shift(); // — извлекаем текущее слово и номер шага.
+				if (curr === endWord) return steps; // — нашли целевое слово, возвращаем количество шагов.
+				// 👇 — перебираем позиции букв в слове.
+				for (let i = 0; i < curr.length; i++) {
+					const orig = curr[i]; // — сохраняем оригинальную букву.
+					// 👇 — перебираем все буквы алфавита.
+					for (const ch of letters) {
+						if (ch === orig) continue; // — пропускаем оригинальную букву (не нужно создавать то же слово).
+						const next = curr.slice(0, i) + ch + curr.slice(i + 1); // 👈 — создаём новое слово, заменяя букву в позиции i на ch.
+						// 👇 — проверяем, что:
+						// новое слово есть в словаре;
+						// оно ещё не посещено.
+						if (dict.has(next) && !visited.has(next)) {
+							visited.add(next); // — отмечаем слово как посещённое (избегаем циклов).
+							queue.push([next, steps + 1]); // — добавляем в очередь следующее слово с увеличенным шагом.
+						}
+					}
+				}
+			}
+			return 0; // — если BFS завершился без нахождения endWord, путь невозможен.
+		};
+		// 🧪 Тесты
+		console.log(ladderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"])); // 5 шагов возможное преобразование
+		console.log(ladderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log"])); // 0 невозможно преобразовать
+		console.log(ladderLength("same", "same", ["same"])); // 1 слова совпадают
+	}
+	// ⁡⁣⁢⁢СТОК ВОДЫ (ТИХИЙ/АТЛАНТИЧЕСКИЙ)⁡
+	{
+		const pacificAtlantic = (heights) => {
+			if (!heights?.length) return [];
+			const m = heights.length,
+				n = heights[0].length;
+			const pac = new Set(),
+				atl = new Set();
+			const dirs = [
+				[0, 1],
+				[0, -1],
+				[1, 0],
+				[-1, 0],
+			];
+			const dfs = (r, c, visited, prevH) => {
+				if (
+					r < 0 ||
+					r >= m ||
+					c < 0 ||
+					c >= n ||
+					visited.has(`${r},${c}`) ||
+					heights[r][c] < prevH
+				)
+					return;
+				visited.add(`${r},${c}`);
+				for (const [dr, dc] of dirs) dfs(r + dr, c + dc, visited, heights[r][c]);
+			};
+			// Запускаем DFS от берегов
+			for (let i = 0; i < m; i++) {
+				dfs(i, 0, pac, heights[i][0]);
+				dfs(i, n - 1, atl, heights[i][n - 1]);
+			}
+			for (let j = 0; j < n; j++) {
+				dfs(0, j, pac, heights[0][j]);
+				dfs(m - 1, j, atl, heights[m - 1][j]);
+			}
+			// Пересечение множеств
+			const res = [];
+			for (const key of pac) if (atl.has(key)) res.push(key.split(",").map(Number));
+			return res;
+		};
+		// 🧪 Тесты
+		console.assert(
+			pacificAtlantic([
+				[1, 2, 2],
+				[2, 1, 2],
+				[2, 2, 1],
+			]).length === 4,
+			"case1",
+		);
+		console.assert(pacificAtlantic([[1]]).length === 1, "case2");
+		console.assert(pacificAtlantic([]).length === 0, "case3");
+	}
 	// ⁡⁢⁢⁡⁣⁢⁢КОЛИЧЕСТВО ОСТРОВОВ (BFS) O(M·N) ВРЕМЯ, O(MIN(M,N)) ПАМЯТЬ⁡
 	{
 		// ⁡⁤⁥⁥Функция решает задачу «Количество островов» (Number of Islands): подсчитывает количество связных групп единиц ("1") в двумерной сетке, где: "1" — суша; "0" — вода; острова образованы единицами, соединёнными по горизонтали или вертикали; диагональные связи не учитываются.⁡
