@@ -135,8 +135,18 @@
         "punctuation.definition.string"
       ],
       "settings": {
-        "foreground": "#35a82aff"  ⁡⁣⁣⁢/* Зелёный для строк */⁡
+        "foreground": "#01A252"  ⁡⁣⁣⁢/* Зелёный для строк */⁡
       }
+    },
+    ⁡⁣⁣⁢/* БУЛЛЕВЫЕ ЗНАЧЕНИЯ и null */⁡
+    {
+        "name": "Булевы значения и null",
+        "scope": [
+            "constant.language"
+        ],
+        "settings": {
+            "foreground": "#97567C"
+        }
     },
     ⁡⁣⁣⁢/* КЛЮЧЕВЫЕ СЛОВА */⁡
     {
@@ -222,7 +232,7 @@
         "entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#f1ed06ff"  ⁡⁣⁣⁢/* Светло-жёлтый для атрибутов */⁡
+        "foreground": "#FDED01"  ⁡⁣⁣⁢/* Светло-жёлтый для атрибутов */⁡
       }
     },
     ⁡⁣⁣⁢/* CSS СЕЛЕКТОРЫ */⁡
@@ -232,7 +242,7 @@
         "entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#eaea04ff"  ⁡⁣⁣⁢/* Золотистый для селекторов */⁡
+        "foreground": "#FDED01"  ⁡⁣⁣⁢/* Золотистый для селекторов */⁡
       }
     },
     ⁡⁣⁣⁢/* CSS СВОЙСТВА */⁡

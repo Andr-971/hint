@@ -59,12 +59,18 @@
 	}
 	// Код из тела цикла выполняется, пока условие condition истинно.
 	// Например, цикл ниже выводит i, пока i < 3:
-	let ind = 0;
-	while (ind < 3) {
+	let i = 0;
+	while (i < 3) {
 		// выводит 0, затем 1, затем 2
-		alert(ind);
+		console.log(i); // 0 1 2
 		i++;
 	}
+	const arr = [1, 2, 3, 4, 5];
+	const array = [];
+	while (arr.length) {
+		array.push(arr.pop());
+	}
+	console.log(array); // [5, 4, 3, 2, 1]
 }
 //! ⁡⁢⁣⁢ЦИКЛ «DO…WHILE»⁡
 {
