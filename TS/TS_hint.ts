@@ -3,7 +3,7 @@
 {
     // tsc --init tsconfig.json - создание файла конфигурации
     // tsc main.ts - компиляция файла main.ts.
-    let string_var:string = "string"; // Строчные данные
+    let string_var: string = "string"; // Строчные данные
     let number_var: number = 137 // Цифровые данные
     let boolean_var: boolean = true // Булевые значения
     let null_var: null = null // Пустое значение
@@ -28,7 +28,7 @@
 	// import * as Types from "./TypeTodoList";
 	// Type.Todo Type.TodoItemProps
 }
-//! ⁡⁣⁣⁡⁢⁣⁡⁢⁣⁢ОПРЕДЕЛЕНИЕ СВОИХ ТИПОВ ДАННЫХ
+// ⁡⁢⁣⁢ОПРЕДЕЛЕНИЕ СВОИХ ТИПОВ ДАННЫХ⁡
 {
 	// ⁡⁣⁢⁢Для объектов⁡
 	type TypeUser = {

@@ -112,6 +112,75 @@
     "titleBar.activeForeground": "#ece9e9",
     ⁡⁣⁣⁢/* Цвет текста в боковой панели */⁡
     "sideBar.foreground": "#ece9e9"
+    ⁡⁢⁣⁣/* === СКОБКИ === */⁡
+    ⁡⁣⁣⁢/* управляют, включена ли раскрашение пары кронштейнов или нет. Используйте «workbench.colorcustomization», чтобы переопределить цвета кронштейна. */⁡
+    "editor.bracketPairColorization.enabled": true,
+    ⁡⁣⁣⁡⁣⁣⁢/* контролирует, должен ли редактор оформить направляющие отступа. */⁡
+    "editor.guides.indentation": true,
+    ⁡⁣⁣⁢/* Контроль независимо от того, включено ли руководство пары скобок или нет. */⁡
+    /⁡⁣⁣⁢* - True: includes guides of a pair of brackets. */ 
+    /* - Active: includes guides of pairs of brackets only for a pair of active brackets. */
+    /* - incorrect: disconnects guides of a pair of brackets. */⁡
+    "editor.guides.bracketPairs": "active",
+    ⁡⁣⁣⁢/* управляют, включены ли горизонтальные пары кронштейнов или нет. */
+    /* - true: позволяет горизонтальным направляющим в качестве дополнения к вертикальным паре кронштейна. */
+    /* - Active: включает горизонтальные руководства только для пары активных кронштейнов. */
+    /* - Неверно: отключает планы с горизонтальными кронштейнами. */⁡
+    "editor.guides.bracketPairsHorizontal": "active",
+    ⁡⁣⁣⁢/* контролирует, должен ли редактор выделить руководство Active Add. */⁡
+    "editor.guides.highlightActiveIndentation": true,
+    ⁡⁣⁣⁢/* управляют независимо от того, включены ли руководства пары кронштейнов или нет. */⁡
+    "editor.guides.highlightActiveBracketPair": true,
+    ⁡⁣⁣⁢/* определяет символы кронштейна, которые увеличивают или уменьшают отступ. */⁡
+    "editor.language.brackets": [["[", "]" ],["(",")"],["{","}"]],
+    ⁡⁣⁣⁢/* Определяет пары кронштейнов, которые раскрашиваются по уровню гнездования, если включена раскраска пары кронштейнов. */⁡
+    "editor.language.colorizedBracketPairs": [["[","]"],["(",")"],["{","}"]],
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#fac928",
+        "editorBracketHighlight.foreground2": "#c122e9",
+        "editorBracketHighlight.foreground3": "#057aff",
+        "editorBracketHighlight.foreground4": "#00e74d",
+        "editorBracketHighlight.foreground5": "#f51384",
+        "editorBracketHighlight.foreground6": "#19f9d8",
+        "editorBracketPairGuide.background1": "#fac9289E",
+        "editorBracketPairGuide.background2": "#c122e99E",
+        "editorBracketPairGuide.background3": "#057aff9E",
+        "editorBracketPairGuide.background4": "#00e74d9E",
+        "editorBracketPairGuide.background5": "#f513849E",
+        "editorBracketPairGuide.background6": "#19f9d89E",
+        "editorBracketPairGuide.activeBackground1": "#FAC9289E",
+        "editorBracketPairGuide.activeBackground2": "#C122E99E",
+        "editorBracketPairGuide.activeBackground3": "#057AFF9E",
+        "editorBracketPairGuide.activeBackground4": "#00E7499E",
+        "editorBracketPairGuide.activeBackground5": "#F513849E",
+        "editorBracketPairGuide.activeBackground6": "#19F9D89E",
+    },
+    ⁡⁢⁣⁣/* === ТЕРМИНАЛ === */⁡
+    "workbench.colorCustomizations": {
+        "terminal.background": "#090300",
+        "terminal.foreground": "#A5A2A2",
+        "terminalCursor.background": "#A5A2A2",
+        "terminalCursor.foreground": "#A5A2A2",
+        "terminal.ansiBlack": "#090300",
+        "terminal.ansiBlue": "#01A0E4",
+        "terminal.ansiBrightBlack": "#5C5855",
+        "terminal.ansiBrightBlue": "#01A0E4",
+        "terminal.ansiBrightCyan": "#B5E4F4",
+        "terminal.ansiBrightGreen": "#01A252",
+        "terminal.ansiBrightMagenta": "#A16A94",
+        "terminal.ansiBrightRed": "#DB2D20",
+        "terminal.ansiBrightWhite": "#F7F7F7",
+        "terminal.ansiBrightYellow": "#FDED02",
+        "terminal.ansiCyan": "#B5E4F4",
+        "terminal.ansiGreen": "#01A252",
+        "terminal.ansiMagenta": "#A16A94",
+        "terminal.ansiRed": "#DB2D20",
+        "terminal.ansiWhite": "#A5A2A2",
+        "terminal.ansiYellow": "#FDED02",
+        "editorActionList.focusBackground": "#A5A2A2",
+        "button.background": "#01A0E4",
+        "list.activeSelectionBackground": "#38a0cd",
+    }
   },
   "tokenColors": [
     ⁡⁢⁣⁣/* === СИНТАКСИЧЕСКАЯ ПОДСВЕТКА === */⁡
