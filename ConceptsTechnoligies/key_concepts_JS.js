@@ -151,12 +151,6 @@
 					return target[property];
 				},
 				set(target, property, value) {
-					if (property === 'price' && value < 0) {
-					throw new Error('Цена не может быть отрицательной');
-					}
-					if (property === 'quantity' && value < 0) {
-					throw new Error('Количество не может быть отрицательным');
-					}
 					target[property] = value;
 					console.log(`Свойство "${property}" обновлено до ${value}`);
 					return true; // Обязательно вернуть true при успешном set
